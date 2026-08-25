@@ -1,0 +1,254 @@
+import { AthkarCategory } from '../../types';
+
+export const eveningAthkar: AthkarCategory = {
+  id: 'evening',
+  titleAr: 'أذكار المساء كاملاً',
+  titleEn: 'Complete Evening Remembrances',
+  descriptionAr: 'حصن المسلم كاملاً في المساء، الحفظ، السكينة والطمأنينة بعد مغيب الشمس',
+  descriptionEn: 'Complete nightly protection, peace, divine fortification, and evening gratitude',
+  iconName: 'Moon',
+  items: [
+    {
+      id: 'e-ayat-kursi',
+      textAr: 'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ.',
+      textEn: 'Allah! There is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep...',
+      transliteration: "Allahu la ilaha illa Huwal-Hayyul-Qayyooma, la ta'khudhuhu sinatun wa la nawm...",
+      count: 1,
+      referenceAr: 'آية الكرسي - سورة البقرة (255)',
+      referenceEn: 'Ayat al-Kursi - Al-Baqarah:255',
+      fadlAr: 'من قالها حين يمسي أُجير من الجن والشياطين حتى يصبح.',
+      fadlEn: 'Protected from jinn and demons until morning.'
+    },
+    {
+      id: 'e-ikhlas',
+      textAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ ۞ اللَّهُ الصَّمَدُ ۞ لَمْ يَلِدْ وَلَمْ يُولَدْ ۞ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ.',
+      textEn: 'Say, He is Allah, [who is] One, Allah, the Eternal Refuge...',
+      transliteration: "Qul Huwallahu Ahad, Allahus-Samad, Lam yalid wa lam yoolad, Wa lam yakun lahu kufuwan ahad.",
+      count: 3,
+      referenceAr: 'سورة الإخلاص (3 مرات)',
+      referenceEn: 'Surah Al-Ikhlas (3 times)',
+      fadlAr: 'من قالها حين يصبح وحين يمسي ثلاث مرات تكفيه من كل شيء.',
+      fadlEn: 'Suffices the reciter against all harms.'
+    },
+    {
+      id: 'e-falaq',
+      textAr: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۞ مِن شَرِّ مَا خَلَقَ ۞ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۞ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۞ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ.',
+      textEn: 'Say, I seek refuge in the Lord of daybreak from the evil of that which He created...',
+      transliteration: "Qul a'oodhu bi-Rabbil-falaq, min sharri ma khalaq, wa min sharri ghasiqin idha waqab, wa min sharrin-naffathati fil-'uqad, wa min sharri hasidin idha hasad.",
+      count: 3,
+      referenceAr: 'سورة الفلق (3 مرات)',
+      referenceEn: 'Surah Al-Falaq (3 times)',
+      fadlAr: 'وقاية من السحر والحسد وشرور الليل وظلمته.',
+      fadlEn: 'Protection from night harms, envy, and evil.'
+    },
+    {
+      id: 'e-nas',
+      textAr: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۞ مَلِكِ النَّاسِ ۞ إِلَٰهِ النَّاسِ ۞ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۞ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۞ مِنَ الْجِنَّةِ وَالنَّاسِ.',
+      textEn: 'Say, I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind...',
+      transliteration: "Qul a'oodhu bi-Rabbin-nas, Malikin-nas, Ilahin-nas, min sharril-waswasil-khannas, alladhi yuwaswisu fee sudoorin-nas, minal-jinnati wan-nas.",
+      count: 3,
+      referenceAr: 'سورة الناس (3 مرات)',
+      referenceEn: 'Surah An-Nas (3 times)',
+      fadlAr: 'حفظ وسلامة من الوساوس والهواجس الشيطانية طوال الليل.',
+      fadlEn: 'Protection against evil whisperings throughout the night.'
+    },
+    {
+      id: 'e-1',
+      textAr: 'أَمْسَيْنَا وَأَمْسَى المُلْكُ لِلَّهِ، وَالحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.',
+      textEn: 'We have reached the evening and with it all dominion belongs to Allah. Praise be to Allah. None has the right to be worshipped except Allah alone...',
+      transliteration: "Amsayna wa-amsal-mulku lillah, wal-hamdu lillah, la ilaha illallahu wahdahu la shareeka lah...",
+      count: 1,
+      referenceAr: 'صحيح مسلم (2723)',
+      referenceEn: 'Sahih Muslim',
+      fadlAr: 'حمد وشكر لله على تمام اليوم واستعاذة من شرور الليل وظلمته.',
+      fadlEn: 'Protection and thanksgiving at sunset and nightfall.'
+    },
+    {
+      id: 'e-bi-ka-amsayna',
+      textAr: 'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ المَصِيرُ.',
+      textEn: 'O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and to You is the final return.',
+      transliteration: "Allahumma bika amsayna, wa bika asbahna, wa bika nahya, wa bika namootu, wa ilaykal-maseer.",
+      count: 1,
+      referenceAr: 'جامع الترمذي (3391)',
+      referenceEn: 'Jami at-Tirmidhi',
+      fadlAr: 'استشعار تدبير الله وحياته وتوكله في كل أوقات اليوم والليلة.',
+      fadlEn: 'Mindful remembrance of Allah’s continuous preservation.'
+    },
+    {
+      id: 'e-sayyid-istighfar',
+      textAr: 'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.',
+      textEn: 'O Allah, You are my Lord, none has the right to be worshipped except You. You created me and I am Your servant...',
+      transliteration: "Allahumma anta Rabbi la ilaha illa Anta, khalaqtani wa ana 'abduka, wa ana 'ala 'ahdika wa wa'dika mastata'tu...",
+      count: 1,
+      referenceAr: 'سيد الاستغفار - صحيح البخاري (6306)',
+      referenceEn: 'The Master of Forgiveness - Sahih Al-Bukhari',
+      fadlAr: 'من قالها موقناً بها حين يمسي فمات من ليلته دخل الجنة.',
+      fadlEn: 'Whoever recites it with firm conviction and dies that night enters Paradise.'
+    },
+    {
+      id: 'e-ushhiduka',
+      textAr: 'اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَهُ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.',
+      textEn: 'O Allah, I have entered the evening calling You to witness, and calling the bearers of Your Throne, Your angels and all Your creation...',
+      transliteration: "Allahumma inni amsaytu ushhiduka, wa ushhidu hamalata 'arshika, wa mala'ikataka, wa jamee'a khalqika...",
+      count: 4,
+      referenceAr: 'سنن أبي داود (5069)',
+      referenceEn: 'Sunan Abi Dawud',
+      fadlAr: 'من قالها أربع مرات حين يمسي أعتقه الله من النار.',
+      fadlEn: 'Reciting it 4 times saves the reciter from Hellfire.'
+    },
+    {
+      id: 'e-ma-amsaa-bi',
+      textAr: 'اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَهُ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.',
+      textEn: 'O Allah, whatever blessing has been received by me or any of Your creation this evening, it is from You alone without partner...',
+      transliteration: "Allahumma ma amsaa bi min ni'matin aw bi-ahadin min khalqika fa-minka wahdaka la shareeka lak, fa-lakal-hamdu wa lakash-shukr.",
+      count: 1,
+      referenceAr: 'سنن أبي داود (5073)',
+      referenceEn: 'Sunan Abi Dawud',
+      fadlAr: 'من قالها حين يمسي فقد أدى شكر ليلته.',
+      fadlEn: 'Fulfills the night gratitude required.'
+    },
+    {
+      id: 'e-afini-fi-badani',
+      textAr: 'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الكُفْرِ وَالفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ القَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.',
+      textEn: 'O Allah, grant well-being to my body. O Allah, grant well-being to my hearing. O Allah, grant well-being to my sight...',
+      transliteration: "Allahumma 'afini fi badani, Allahumma 'afini fi sam'i, Allahumma 'afini fi basari, la ilaha illa Ant...",
+      count: 3,
+      referenceAr: 'سنن أبي داود (5090)',
+      referenceEn: 'Sunan Abi Dawud',
+      fadlAr: 'سؤال الله دوام الصحة والعافية في الجسد والحواس والسلامة في الدين.',
+      fadlEn: 'Daily supplication for complete physical and spiritual vitality.'
+    },
+    {
+      id: 'e-hasbiyallah',
+      textAr: 'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ العَرْشِ العَظِيمِ.',
+      textEn: 'Allah is sufficient for me. There is no deity except Him. On Him I have relied, and He is the Lord of the Great Throne.',
+      transliteration: "Hasbiyallahu la ilaha illa Huwa 'alayhi tawakkaltu wa Huwa Rabbul-'Arshil-'Azeem.",
+      count: 7,
+      referenceAr: 'سنن أبي داود (5081)',
+      referenceEn: 'Sunan Abi Dawud',
+      fadlAr: 'من قالها سبع مرات كفاه الله ما أهمه من أمر الدنيا والآخرة.',
+      fadlEn: 'Recited 7 times; Allah suffices him against all concerns.'
+    },
+    {
+      id: 'e-afwa-wal-afiyah',
+      textAr: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.',
+      textEn: 'O Allah, I ask You for forgiveness and well-being in this world and the Hereafter. O Allah, I ask You for forgiveness and well-being in my religion, worldly affairs, family, and wealth...',
+      transliteration: "Allahumma inni as'alukal-'afwa wal-'afiyata fid-dunya wal-akhirah, Allahumma inni as'alukal-'afwa wal-'afiyata fi deeni wa dunyaya...",
+      count: 1,
+      referenceAr: 'سنن ابن ماجه (3871)',
+      referenceEn: 'Sunan Ibn Majah',
+      fadlAr: 'الدعاء الذي لم يكن يدعه النبي ﷺ إذا أصبح وإذا أمسى للحفظ التام.',
+      fadlEn: 'Comprehensive prophetic supplication for ultimate safety.'
+    },
+    {
+      id: 'e-alim-al-ghayb',
+      textAr: 'اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ.',
+      textEn: 'O Allah, Knower of the unseen and the witnessed, Creator of the heavens and the earth, Lord of everything and its Possessor...',
+      transliteration: "Allahumma 'Alimal-ghaybi wash-shahadati Fatiras-samawati wal-ard, Rabba kulli shay'in wa maleekah...",
+      count: 1,
+      referenceAr: 'سنن الترمذي (3529)',
+      referenceEn: 'Sunan At-Tirmidhi',
+      fadlAr: 'استعاذة جامعة من شر النفس والشيطان والذنوب.',
+      fadlEn: 'Protection from self-sabotage and Satanic whispers.'
+    },
+    {
+      id: 'e-bismillah-illadhi',
+      textAr: 'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ العَلِيمُ.',
+      textEn: 'In the name of Allah, with whose name nothing on earth or in the heavens can cause harm, and He is the All-Hearing, the All-Knowing.',
+      transliteration: "Bismillahil-ladhi la yadurru ma'as-mihi shay'un fil-ardi wa la fis-sama'i wa Huwas-Sami'ul-'Aleem.",
+      count: 3,
+      referenceAr: 'سنن أبي داود والترمذي',
+      referenceEn: 'Sunan Abi Dawud & At-Tirmidhi',
+      fadlAr: 'من قالها ثلاثاً إذا أصبح وثلاثاً إذا أمسى لم يضره شيء.',
+      fadlEn: 'Recited 3 times; nothing can cause harm to the reciter.'
+    },
+    {
+      id: 'e-radeetu-billah',
+      textAr: 'رَضِيتُ بِاللَّهِ رَبّاً، وَبِالإِسْلَامِ دِيناً، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيّاً وَرَسُولاً.',
+      textEn: 'I am pleased with Allah as my Lord, with Islam as my religion, and with Muhammad (pbuh) as my Prophet and Messenger.',
+      transliteration: "Radeetu billahi Rabba, wa bil-Islami deena, wa bi Muhammadin sallallahu 'alayhi wa sallama Nabiyya wa Rasoola.",
+      count: 3,
+      referenceAr: 'سنن أبي داود (5072)',
+      referenceEn: 'Sunan Abi Dawud',
+      fadlAr: 'كان حقاً على الله أن يرضيه يوم القيامة.',
+      fadlEn: 'Allah undertakes to satisfy and please him on the Day of Judgment.'
+    },
+    {
+      id: 'e-ya-hayyu',
+      textAr: 'يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.',
+      textEn: 'O Ever-Living, O Sustainer of all existence, by Your mercy I seek aid. Rectify all my affairs and do not leave me to myself even for the blink of an eye.',
+      transliteration: "Ya Hayyu Ya Qayyoom, bi-rahmatika astagheeth, aslih li sha'ni kullahu wa la takilni ila nafsi tarfata 'ayn.",
+      count: 1,
+      referenceAr: 'المستدرك للحاكم والنسائي',
+      referenceEn: 'Al-Mustadrak & An-Nasa’i',
+      fadlAr: 'تفويض كامل لله في تيسير كل أمور الحياة وحفظ من الزلل.',
+      fadlEn: 'Complete surrender to divine guidance in all life matters.'
+    },
+    {
+      id: 'e-fitratil-islam',
+      textAr: 'أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.',
+      textEn: 'We have entered the evening upon the natural religion of Islam, the word of sincere faith, the religion of our Prophet Muhammad (pbuh)...',
+      transliteration: "Amsayna 'ala fitratil-Islam, wa 'ala kalimatil-ikhlas, wa 'ala deeni Nabiyyina Muhammadin sallallahu 'alayhi wa sallam...",
+      count: 1,
+      referenceAr: 'مسند أحمد (15360)',
+      referenceEn: 'Musnad Ahmad',
+      fadlAr: 'الثبات على التوحيد ودين الإسلام والتأسي بالنبي ﷺ.',
+      fadlEn: 'Steadfastness upon pure faith and prophetic tradition.'
+    },
+    {
+      id: 'e-aoodhu-bi-kalimatillah',
+      textAr: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.',
+      textEn: 'I seek refuge in the perfect words of Allah from the evil of what He has created.',
+      transliteration: "A'oodhu bi-kalimatil-lahit-tammati min sharri ma khalaq.",
+      count: 3,
+      referenceAr: 'صحيح مسلم (2709)',
+      referenceEn: 'Sahih Muslim',
+      fadlAr: 'من قالها ثلاثاً إذا أمسى لم يضره سمّ ولا لدغة دابة ولا شر في تلك الليلة.',
+      fadlEn: 'Safe from poisonous stings, pests, and overnight harm.'
+    },
+    {
+      id: 'e-subhanallah-bihamdih-100',
+      textAr: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.',
+      textEn: 'Glory be to Allah and praise be to Him.',
+      transliteration: 'Subhanallahi wa bihamdih.',
+      count: 100,
+      referenceAr: 'صحيح مسلم (2692)',
+      referenceEn: 'Sahih Muslim',
+      fadlAr: 'حُطت خطاياه وإن كانت مثل زبد البحر، ولم يأتِ أحد يوم القيامة بأفضل مما جاء به إلا من قال مثله أو زاد.',
+      fadlEn: 'All sins forgiven and supreme status on Resurrection Day.'
+    },
+    {
+      id: 'e-la-ilaha-illallah-100',
+      textAr: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ المُلْكُ وَلَهُ الحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.',
+      textEn: 'There is no deity except Allah alone, without partner. To Him belongs all sovereignty and praise, and He is over all things competent.',
+      transliteration: "La ilaha illallahu wahdahu la shareeka lah, lahul-mulku wa lahul-hamdu, wa Huwa 'ala kulli shay'in qadeer.",
+      count: 10,
+      referenceAr: 'صحيح البخاري ومسلم',
+      referenceEn: 'Sahih Al-Bukhari & Muslim',
+      fadlAr: 'كانت له حرزاً من الشيطان طوال الليل وكُتبت له مائة حسنة ومُحيت عنه مائة سيئة.',
+      fadlEn: 'Shield against Satan overnight and 100 good deeds recorded.'
+    },
+    {
+      id: 'e-astaghfirullah-100',
+      textAr: 'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.',
+      textEn: 'I seek the forgiveness of Allah and repent to Him.',
+      transliteration: 'Astaghfirullaha wa atoobu ilayh.',
+      count: 100,
+      referenceAr: 'صحيح البخاري (6307)',
+      referenceEn: 'Sahih Al-Bukhari',
+      fadlAr: 'تفريج الهموم ومحو الذنوب والسكينة والراحة عند النوم.',
+      fadlEn: 'Relieves distress and cleanses sins before rest.'
+    },
+    {
+      id: 'e-salawat-10',
+      textAr: 'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ.',
+      textEn: 'O Allah, send peace and blessings upon our Prophet Muhammad.',
+      transliteration: 'Allahumma salli wa sallim ala Nabiyyina Muhammad.',
+      count: 10,
+      referenceAr: 'مجمع الزوائد للطبراني',
+      referenceEn: 'At-Tabarani',
+      fadlAr: 'من صلى عليّ حين يصبح عشراً وحين يمسي عشراً أدركته شفاعتي يوم القيامة.',
+      fadlEn: 'Ensures the intercession of the Prophet on the Day of Judgment.'
+    }
+  ]
+};

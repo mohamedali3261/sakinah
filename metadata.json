@@ -1,0 +1,6 @@
+{
+  "name": "سَكِينَة - Sakīnah",
+  "description": "منصة إسلامية زجاجية شاملة للمصحف الشريف كاملاً (114 سورة بتلاوات مشاهير القراء)، أذكار المسلم المقسمة، فهرس مبوب، ومكتبة إسلامية مع قراءة ليلية وبحث ذكي وتخزين أوفلاين.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
