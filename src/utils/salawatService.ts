@@ -219,6 +219,7 @@ class SalawatService {
         const audio = new Audio();
         audio.preload = 'auto';
         audio.volume = 0.95;
+        audio.crossOrigin = 'anonymous'; // Handle CORS
         this.activeAudio = audio;
 
         let hasResolved = false;
@@ -227,9 +228,15 @@ class SalawatService {
           audio.onplay = null;
           audio.onerror = null;
           audio.onended = null;
+          audio.oncanplay = null;
+        };
+
+        audio.oncanplay = () => {
+          console.log('[Salawat] Audio can play:', url);
         };
 
         audio.onplay = () => {
+          console.log('[Salawat] Audio playing:', url);
           if (!hasResolved) {
             hasResolved = true;
             this.isPlaying = true;
@@ -239,6 +246,7 @@ class SalawatService {
         };
 
         audio.onended = () => {
+          console.log('[Salawat] Audio ended:', url);
           cleanup();
           this.isPlaying = false;
           this.activeAudio = null;
@@ -246,7 +254,8 @@ class SalawatService {
           if (onEnd) onEnd();
         };
 
-        audio.onerror = () => {
+        audio.onerror = (e) => {
+          console.error('[Salawat] Audio error:', url, e);
           cleanup();
           if (!hasResolved) {
             hasResolved = true;
@@ -255,9 +264,11 @@ class SalawatService {
         };
 
         audio.src = url;
+        console.log('[Salawat] Attempting to play:', url);
         const playPromise = audio.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => {
+          playPromise.catch((err) => {
+            console.error('[Salawat] Play promise rejected:', url, err);
             cleanup();
             if (!hasResolved) {
               hasResolved = true;
@@ -265,7 +276,8 @@ class SalawatService {
             }
           });
         }
-      } catch {
+      } catch (err) {
+        console.error('[Salawat] Exception in tryPlayAudio:', err);
         resolve(false);
       }
     });
@@ -288,6 +300,7 @@ class SalawatService {
 
     // Try playing genuine Quranic Salawat verse audio files FIRST
     const urlsToTry = [selectedVoice.audioUrl, ...(selectedVoice.backupUrls || [])].filter(Boolean);
+    console.log('[Salawat] URLs to try:', urlsToTry);
 
     for (const url of urlsToTry) {
       const success = await this.tryPlayAudio(url, onEnd);
@@ -298,6 +311,7 @@ class SalawatService {
       }
     }
 
+    console.log('[Salawat] All audio URLs failed, trying Web Speech API');
     // Only use Web Speech API as last resort fallback
     const speechSuccess = await this.speakSalawatViaSpeech(
       'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا وَنَبِيِّنَا مُحَمَّدٍ'
@@ -309,6 +323,7 @@ class SalawatService {
       return true;
     }
 
+    console.log('[Salawat] All methods failed');
     this.isPlaying = false;
     this.notify();
     if (onEnd) onEnd();
