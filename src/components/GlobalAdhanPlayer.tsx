@@ -123,7 +123,7 @@ export const GlobalAdhanPlayer: React.FC = () => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="fixed bottom-20 sm:bottom-24 left-3 right-3 sm:left-auto sm:right-6 sm:max-w-md z-50 pointer-events-auto"
+        className="fixed bottom-20 sm:bottom-24 left-3 right-3 sm:left-auto sm:right-6 sm:max-w-md z-40 pointer-events-auto"
       >
         <div
           className={`p-4 rounded-3xl border-2 shadow-2xl backdrop-blur-2xl transition-all ${

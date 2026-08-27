@@ -264,7 +264,7 @@ export const HomeView: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-5 sm:space-y-6 pb-24">
+    <div className="w-full max-w-4xl mx-auto space-y-5 sm:space-y-6 pb-24 relative z-10">
       {/* Hero Welcome Glass Card */}
       <div
         className={`relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-3xl border backdrop-blur-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 ${
@@ -455,7 +455,7 @@ export const HomeView: React.FC = () => {
           if (vibrationEnabled) triggerHaptic(10);
           setIsSearchOpen(true);
         }}
-        className={`w-full p-3 sm:p-4 rounded-2xl sm:rounded-3xl border cursor-pointer transition-all hover:scale-[1.01] flex items-center justify-between gap-3 shadow-md hover:shadow-lg ${
+        className={`w-full p-3 sm:p-4 rounded-2xl sm:rounded-3xl border cursor-pointer transition-all hover:scale-[1.01] flex items-center justify-between gap-3 shadow-md hover:shadow-lg relative z-10 ${
           theme === 'light'
             ? 'bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border-emerald-500/30 text-slate-800 hover:border-emerald-500/60'
             : theme === 'sepia'

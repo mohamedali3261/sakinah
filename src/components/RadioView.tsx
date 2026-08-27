@@ -131,7 +131,7 @@ export const RadioView: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center text-center gap-2 mt-2 sm:mt-4"
+        className="flex flex-col items-center text-center gap-2 mt-2 sm:mt-4 relative z-10"
       >
         <div className="p-3 sm:p-4 rounded-full bg-teal-500/20 text-teal-600 dark:text-teal-400 mb-2">
           <Radio size={30} strokeWidth={1.5} className="sm:w-9 sm:h-9" />
@@ -150,7 +150,7 @@ export const RadioView: React.FC = () => {
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex overflow-x-auto hide-scrollbar gap-2 px-1 py-2 mt-2 -mx-4 sm:mx-0 sm:px-0"
+        className="flex overflow-x-auto hide-scrollbar gap-2 px-1 py-2 mt-2 -mx-4 sm:mx-0 sm:px-0 relative z-10"
       >
         {/* Adds padding to start and end for mobile scroll */}
         <div className="w-2 shrink-0 sm:hidden"></div>

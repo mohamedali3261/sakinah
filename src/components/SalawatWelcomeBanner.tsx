@@ -115,7 +115,7 @@ export const SalawatWelcomeBanner: React.FC = () => {
   const currentVoice = SALAWAT_VOICES.find((v) => v.id === selectedVoiceId) || SALAWAT_VOICES[0];
 
   return (
-    <div className="w-full mb-1.5 max-w-xl mx-auto px-1">
+    <div className="w-full mb-2 max-w-4xl mx-auto px-1">
       {/* Salawat Golden Welcome Banner */}
       {!isDismissed && (
         <motion.div
