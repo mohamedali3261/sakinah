@@ -126,6 +126,12 @@ export const PrayerTimesWidget: React.FC = () => {
       : { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 };
   });
 
+  // Global time offset in minutes (for timezone correction)
+  const [globalTimeOffset, setGlobalTimeOffset] = useState<number>(() => {
+    const saved = localStorage.getItem('sakinah_global_time_offset');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
   // Daily Prayer Checklist tracker (Today)
   const todayKey = new Date().toISOString().slice(0, 10);
   const [completedPrayers, setCompletedPrayers] = useState<{ [key: string]: boolean }>(() => {
@@ -144,7 +150,7 @@ export const PrayerTimesWidget: React.FC = () => {
   }>(() => {
     const lat = selectedCity.latitude || 30.0444;
     const lng = selectedCity.longitude || 31.2357;
-    return calculateAstronomicalPrayers(lat, lng, new Date(), selectedMethodId, asrMethod);
+    return calculateAstronomicalPrayers(lat, lng, new Date(), selectedMethodId, asrMethod, undefined, globalTimeOffset);
   });
 
   // Dynamic status & Modals
@@ -176,7 +182,7 @@ export const PrayerTimesWidget: React.FC = () => {
   useEffect(() => {
     const lat = selectedCity.latitude || 30.0444;
     const lng = selectedCity.longitude || 31.2357;
-    const calculated = calculateAstronomicalPrayers(lat, lng, new Date(), selectedMethodId, asrMethod);
+    const calculated = calculateAstronomicalPrayers(lat, lng, new Date(), selectedMethodId, asrMethod, undefined, globalTimeOffset);
     setComputedTimes(calculated);
 
     // Asynchronously try live API sync for exact municipal alignment
@@ -197,7 +203,7 @@ export const PrayerTimesWidget: React.FC = () => {
       })
       .catch(() => {})
       .finally(() => setIsLiveSyncing(false));
-  }, [selectedCity, selectedMethodId, asrMethod]);
+  }, [selectedCity, selectedMethodId, asrMethod, globalTimeOffset]);
 
   // Persist settings
   useEffect(() => {
@@ -235,6 +241,10 @@ export const PrayerTimesWidget: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('sakinah_prayer_offsets', JSON.stringify(minuteOffsets));
   }, [minuteOffsets]);
+
+  useEffect(() => {
+    localStorage.setItem('sakinah_global_time_offset', globalTimeOffset.toString());
+  }, [globalTimeOffset]);
 
   useEffect(() => {
     localStorage.setItem(`sakinah_prayers_done_${todayKey}`, JSON.stringify(completedPrayers));
@@ -1179,7 +1189,68 @@ export const PrayerTimesWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* 3. Calculation Method Authority */}
+          {/* 3. Global Time Offset (Timezone Correction) */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-emerald-300 font-cairo block">
+              {language === 'ar' ? 'الفرق الزمني العام (تصحيح التوقيت المحلي):' : 'Global Time Offset (Timezone Correction):'}
+            </label>
+            <div className="p-3.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="font-bold text-xs block text-slate-100 font-cairo">
+                    {language === 'ar' ? 'تعديل التوقيت' : 'Time Adjustment'}
+                  </span>
+                  <span className="text-[10px] text-emerald-300/80 block font-cairo">
+                    {globalTimeOffset === 0 
+                      ? (language === 'ar' ? 'بدون تعديل' : 'No adjustment') 
+                      : `${globalTimeOffset > 0 ? '+' : ''}${globalTimeOffset} ${language === 'ar' ? 'دقيقة' : 'min'}`}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setGlobalTimeOffset(Math.max(-120, globalTimeOffset - 5))}
+                  className="w-8 h-8 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold cursor-pointer text-slate-200"
+                >
+                  -5
+                </button>
+                <button
+                  onClick={() => setGlobalTimeOffset(Math.max(-120, globalTimeOffset - 1))}
+                  className="w-8 h-8 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold cursor-pointer text-slate-200"
+                >
+                  -1
+                </button>
+                <button
+                  onClick={() => setGlobalTimeOffset(0)}
+                  className="w-8 h-8 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-xs font-bold cursor-pointer text-emerald-300"
+                >
+                  0
+                </button>
+                <button
+                  onClick={() => setGlobalTimeOffset(Math.min(120, globalTimeOffset + 1))}
+                  className="w-8 h-8 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold cursor-pointer text-slate-200"
+                >
+                  +1
+                </button>
+                <button
+                  onClick={() => setGlobalTimeOffset(Math.min(120, globalTimeOffset + 5))}
+                  className="w-8 h-8 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold cursor-pointer text-slate-200"
+                >
+                  +5
+                </button>
+              </div>
+            </div>
+            <p className="text-[10px] text-slate-400 font-cairo">
+              {language === 'ar' 
+                ? 'استخدم هذا الخيار إذا كان التوقيت المحلي لجهازك غير دقيق بالنسبة لمدينتك.' 
+                : 'Use this option if your device local time is inaccurate for your city.'}
+            </p>
+          </div>
+
+          {/* 4. Calculation Method Authority */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-amber-300 font-cairo block">
               {language === 'ar' ? 'طريقة الحساب الفلكية المعتمدة (زوايا الفجر والعشاء):' : 'Astronomical Calculation Method:'}

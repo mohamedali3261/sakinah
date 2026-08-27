@@ -133,13 +133,17 @@ export function calculateAstronomicalPrayers(
   date: Date = new Date(),
   methodKey: string = 'egypt',
   asrJuristic: 'standard' | 'hanafi' = 'standard',
-  timezoneOffsetHours?: number
+  timezoneOffsetHours?: number,
+  manualOffsetMinutes: number = 0
 ): ComputedPrayers {
   const params = CALCULATION_PRESETS[methodKey] || CALCULATION_PRESETS.egypt;
   const asrFactor = asrJuristic === 'hanafi' ? 2 : (params.asrFactor || 1);
 
   // Timezone in hours from UTC (if not provided, derive from date)
   const tz = timezoneOffsetHours !== undefined ? timezoneOffsetHours : -date.getTimezoneOffset() / 60;
+  
+  // Apply manual offset in minutes (converted to hours)
+  const manualOffsetHours = manualOffsetMinutes / 60;
 
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -148,8 +152,8 @@ export function calculateAstronomicalPrayers(
   const jd = getJulianDate(year, month, day);
   const { declination, equationOfTime } = getSunPosition(jd);
 
-  // Dhuhr is mid-day (solar transit)
-  const dhuhrTime = fixHour(12 + tz - longitude / 15.0 - equationOfTime);
+  // Dhuhr is mid-day (solar transit) with manual offset
+  const dhuhrTime = fixHour(12 + tz - longitude / 15.0 - equationOfTime + manualOffsetHours);
 
   // Function to compute hour angle for a given sun angle
   const getHourAngle = (angle: number): number => {

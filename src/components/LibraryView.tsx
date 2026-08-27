@@ -79,7 +79,7 @@ export const LibraryView: React.FC = () => {
             <span>{language === 'ar' ? 'فهرس الكتاب' : 'Back to Chapters'}</span>
           </button>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             {/* Bookmark Chapter */}
             <button
               onClick={() =>
@@ -93,30 +93,33 @@ export const LibraryView: React.FC = () => {
                   parentId: selectedBook.id
                 })
               }
-              className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-amber-400 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 hover:border-amber-500/30 text-slate-400 hover:text-amber-400 transition-all font-cairo text-xs font-bold"
               title={language === 'ar' ? 'حفظ في المفضلة' : 'Bookmark'}
             >
               <Bookmark
                 className={`w-4 h-4 ${isBookmarked(selectedChapter.id) ? 'fill-amber-400 text-amber-400' : ''}`}
               />
+              <span>{language === 'ar' ? 'حفظ' : 'Save'}</span>
             </button>
 
             {/* Copy Button */}
             <button
               onClick={handleCopy}
-              className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-emerald-400 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-400 transition-all font-cairo text-xs font-bold"
               title={language === 'ar' ? 'نسخ' : 'Copy'}
             >
               <Copy className="w-4 h-4" />
+              <span>{language === 'ar' ? 'نسخ' : 'Copy'}</span>
             </button>
 
             {/* Font & Display Settings */}
             <button
               onClick={() => setIsFontSettingsOpen(true)}
-              className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-teal-300 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-teal-500/20 border border-white/10 hover:border-teal-500/30 text-slate-400 hover:text-teal-300 transition-all font-cairo text-xs font-bold"
               title={language === 'ar' ? 'حجم الخط' : 'Font Settings'}
             >
               <Type className="w-4 h-4" />
+              <span>{language === 'ar' ? 'الخط' : 'Font'}</span>
             </button>
           </div>
         </div>
@@ -189,9 +192,9 @@ export const LibraryView: React.FC = () => {
             {prevChapter ? (
               <button
                 onClick={() => setSelectedChapter(prevChapter)}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-cairo font-bold transition-all"
+                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-300 text-xs font-cairo font-bold transition-all group"
               >
-                {language === 'ar' ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+                {language === 'ar' ? <ChevronRight className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> : <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />}
                 <span className="truncate max-w-[120px] md:max-w-[200px]">
                   {language === 'ar' ? prevChapter.titleAr : prevChapter.titleEn}
                 </span>
@@ -203,12 +206,12 @@ export const LibraryView: React.FC = () => {
             {nextChapter ? (
               <button
                 onClick={() => setSelectedChapter(nextChapter)}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 text-xs font-cairo font-bold transition-all"
+                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 hover:border-emerald-400/50 text-emerald-300 text-xs font-cairo font-bold transition-all group"
               >
                 <span className="truncate max-w-[120px] md:max-w-[200px]">
                   {language === 'ar' ? nextChapter.titleAr : nextChapter.titleEn}
                 </span>
-                {language === 'ar' ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                {language === 'ar' ? <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform" /> : <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
               </button>
             ) : (
               <div />
@@ -255,7 +258,7 @@ export const LibraryView: React.FC = () => {
 
         {/* Chapters Grid */}
         <div className="space-y-3">
-          <h3 className="text-base font-bold font-cairo px-1">
+          <h3 className="relative z-10 text-base font-bold font-cairo px-1">
             {language === 'ar' ? 'فهرس الأبواب والفصول' : 'Chapters Index'} ({selectedBook.chapters.length})
           </h3>
 
@@ -263,13 +266,13 @@ export const LibraryView: React.FC = () => {
             <div
               key={chapter.id}
               onClick={() => setSelectedChapter(chapter)}
-              className="p-4 rounded-2xl border border-white/10 hover:border-emerald-500/40 bg-white/5 hover:bg-emerald-500/10 transition-all cursor-pointer group flex items-center justify-between gap-3"
+              className="relative z-10 p-4 rounded-2xl border border-white/10 hover:border-emerald-500/40 bg-white/5 hover:bg-emerald-500/10 transition-all cursor-pointer group flex items-center justify-between gap-3"
             >
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-white/10 group-hover:bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs font-bold shrink-0">
+                <span className="w-10 h-10 rounded-xl bg-emerald-500/20 group-hover:bg-emerald-500/30 text-emerald-400 flex items-center justify-center font-mono text-sm font-bold shrink-0 border border-emerald-500/30">
                   {idx + 1}
                 </span>
-                <div>
+                <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-bold font-cairo group-hover:text-emerald-300 transition-colors">
                     {language === 'ar' ? chapter.titleAr : chapter.titleEn}
                   </h4>
@@ -279,9 +282,10 @@ export const LibraryView: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-2 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 text-slate-400 group-hover:text-emerald-300 transition-colors shrink-0">
+              <button className="relative z-10 flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 text-xs font-cairo font-bold transition-all shrink-0">
+                <span>{language === 'ar' ? 'اقرأ' : 'Read'}</span>
                 {language === 'ar' ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-              </div>
+              </button>
             </div>
           ))}
         </div>
@@ -295,8 +299,18 @@ export const LibraryView: React.FC = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6 pb-24">
+      {/* Page Header */}
+      <div className="relative z-10 text-center space-y-2">
+        <h1 className="text-2xl md:text-3xl font-bold font-cairo text-emerald-400">
+          {language === 'ar' ? 'المكتبة الإسلامية' : 'Islamic Library'}
+        </h1>
+        <p className="text-sm opacity-70 font-cairo">
+          {language === 'ar' ? 'مجموعة مختارة من كتب الحديث والقرآن والسيرة والتزكية' : 'A curated collection of Hadith, Quran, Seerah, and Tazkiyah books'}
+        </p>
+      </div>
+
       {/* Category Filter Chips */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+      <div className="relative z-10 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
         {[
           { id: 'all', labelAr: 'جميع الكتب', labelEn: 'All Books' },
           { id: 'hadith', labelAr: 'الحديث الشريف', labelEn: 'Noble Hadith' },
@@ -306,8 +320,11 @@ export const LibraryView: React.FC = () => {
         ].map((chip) => (
           <button
             key={chip.id}
-            onClick={() => setCategoryFilter(chip.id as typeof categoryFilter)}
-            className={`px-4 py-2.5 rounded-2xl border text-xs font-cairo font-bold whitespace-nowrap transition-all cursor-pointer ${
+            onClick={(e) => {
+              e.stopPropagation();
+              setCategoryFilter(chip.id as typeof categoryFilter);
+            }}
+            className={`relative z-10 px-4 py-2.5 rounded-2xl border text-xs font-cairo font-bold whitespace-nowrap transition-all cursor-pointer ${
               categoryFilter === chip.id
                 ? 'border-emerald-400 bg-emerald-500/20 text-emerald-300 shadow-md'
                 : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
@@ -326,7 +343,7 @@ export const LibraryView: React.FC = () => {
               key={book.id}
               whileHover={{ y: -4 }}
               onClick={() => setSelectedBook(book)}
-              className={`p-6 rounded-3xl border backdrop-blur-xl shadow-xl transition-all cursor-pointer flex flex-col justify-between group ${
+              className={`relative z-10 p-6 rounded-3xl border backdrop-blur-xl shadow-xl transition-all cursor-pointer flex flex-col justify-between group ${
                 theme === 'light'
                   ? 'bg-white/85 border-slate-200 text-slate-800 hover:border-emerald-400/60'
                   : theme === 'sepia'
@@ -358,10 +375,10 @@ export const LibraryView: React.FC = () => {
                   {book.chapters.length} {language === 'ar' ? 'أبواب وفصول' : 'Chapters'}
                 </span>
 
-                <div className="flex items-center gap-1 text-xs font-cairo font-bold text-emerald-400 group-hover:translate-x-[-4px] transition-transform">
+                <button className="relative z-10 flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 text-xs font-cairo font-bold transition-all group-hover:translate-x-[-4px]">
                   <span>{language === 'ar' ? 'تصفح وقراءة' : 'Read Now'}</span>
                   {language === 'ar' ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                </div>
+                </button>
               </div>
             </motion.div>
           );
