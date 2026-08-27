@@ -337,6 +337,7 @@ class SalawatService {
 
   /**
    * Auto-Welcome Salawat when site loads
+   * Waits for first user interaction to avoid browser autoplay restrictions
    */
   public armAutoWelcomeSalawat(voiceId?: string, onTrigger?: () => void) {
     const isEnabled = localStorage.getItem('sakinah_salawat_on_open') !== 'false';
@@ -345,33 +346,20 @@ class SalawatService {
     this.isAutoPlayArmed = true;
     const targetId = voiceId || this.currentVoiceId;
 
-    const setupFirstInteraction = () => {
-      const handleFirstInteraction = () => {
-        this.playSalawat(targetId, onTrigger);
-        this.isAutoPlayArmed = false;
-        window.removeEventListener('click', handleFirstInteraction, true);
-        window.removeEventListener('touchstart', handleFirstInteraction, true);
-        window.removeEventListener('keydown', handleFirstInteraction, true);
-        window.removeEventListener('scroll', handleFirstInteraction, true);
-      };
-
-      window.addEventListener('click', handleFirstInteraction, { once: true, capture: true });
-      window.addEventListener('touchstart', handleFirstInteraction, { once: true, capture: true });
-      window.addEventListener('keydown', handleFirstInteraction, { once: true, capture: true });
-      window.addEventListener('scroll', handleFirstInteraction, { once: true, capture: true });
+    const handleFirstInteraction = () => {
+      this.playSalawat(targetId, onTrigger);
+      this.isAutoPlayArmed = false;
+      window.removeEventListener('click', handleFirstInteraction, true);
+      window.removeEventListener('touchstart', handleFirstInteraction, true);
+      window.removeEventListener('keydown', handleFirstInteraction, true);
+      window.removeEventListener('scroll', handleFirstInteraction, true);
     };
 
-    this.playSalawat(targetId, onTrigger)
-      .then((success) => {
-        if (success) {
-          this.isAutoPlayArmed = false;
-        } else {
-          setupFirstInteraction();
-        }
-      })
-      .catch(() => {
-        setupFirstInteraction();
-      });
+    // Wait for first user interaction before playing
+    window.addEventListener('click', handleFirstInteraction, { once: true, capture: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { once: true, capture: true });
+    window.addEventListener('keydown', handleFirstInteraction, { once: true, capture: true });
+    window.addEventListener('scroll', handleFirstInteraction, { once: true, capture: true });
   }
 }
 
