@@ -24,7 +24,7 @@ export const BottomNav: React.FC = () => {
     { id: 'home', labelAr: 'الرئيسية', labelEn: 'Home', icon: <Home className="w-4 h-4 sm:w-5 sm:h-5" /> },
     { id: 'quran', labelAr: 'المصحف', labelEn: 'Qur’an', icon: <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" /> },
     { id: 'athkar', labelAr: 'الأذكار', labelEn: 'Athkar', icon: <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" /> },
-    { id: 'tasbih', labelAr: 'السبحة', labelEn: 'Tasbih', icon: <CircleDot className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 animate-pulse" /> },
+    { id: 'sebha', labelAr: 'السبحة', labelEn: 'Tasbih', icon: <CircleDot className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 animate-pulse" /> },
     { id: 'library', labelAr: 'المكتبة', labelEn: 'Library', icon: <Compass className="w-4 h-4 sm:w-5 sm:h-5" /> }
   ];
 

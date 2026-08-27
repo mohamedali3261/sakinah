@@ -526,6 +526,7 @@ export async function fetchFullSurah(surahNumber: number): Promise<QuranSurah> {
       return {
         id: ayah.number,
         verseNumber: ayah.numberInSurah,
+        surahNumber: surahNumber,
         textAr: text || ayah.text,
         textEn: enData.ayahs[index]?.text || '',
         juz: ayah.juz,
@@ -546,7 +547,19 @@ export async function fetchFullSurah(surahNumber: number): Promise<QuranSurah> {
       verses
     };
   } catch (err) {
-    // Fallback if offline or API blocked
+    // Fallback if offline or API blocked: generate all verses so selectors never break
+    const fallbackVerses = Array.from({ length: meta.versesCount }).map((_, i) => ({
+      id: i + 1,
+      verseNumber: i + 1,
+      surahNumber: surahNumber,
+      textAr: i === 0 
+        ? `سُورَةُ ${meta.nameAr} - الآية رقم ١`
+        : `الآية رقم ${i + 1} من سورة ${meta.nameAr}`,
+      textEn: `Surah ${meta.nameEn} - Verse ${i + 1}`,
+      juz: meta.juzStart,
+      page: 1
+    }));
+
     return {
       number: meta.number,
       nameAr: meta.nameAr,
@@ -557,16 +570,7 @@ export async function fetchFullSurah(surahNumber: number): Promise<QuranSurah> {
       revelationOrder: meta.revelationOrder,
       juzStart: meta.juzStart,
       bismillahPre: meta.number !== 9,
-      verses: [
-        {
-          id: 1,
-          verseNumber: 1,
-          textAr: `سُورَةُ ${meta.nameAr} - ${meta.revelationType === 'Meccan' ? 'مكية' : 'مدنية'} وعدد آياتها ${meta.versesCount} آية.`,
-          textEn: `Surah ${meta.nameEn} (${meta.englishMeaning}) - ${meta.versesCount} Verses.`,
-          juz: meta.juzStart,
-          page: 1
-        }
-      ]
+      verses: fallbackVerses
     };
   }
 }

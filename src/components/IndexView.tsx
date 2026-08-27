@@ -6,7 +6,12 @@ import {
   BookOpen,
   Search,
   ArrowUpRight,
-  Layers
+  Layers,
+  Bookmark,
+  Repeat,
+  Sliders,
+  Play,
+  Star
 } from 'lucide-react';
 import { soundEngine, triggerHaptic } from '../utils/audio';
 
@@ -16,7 +21,10 @@ export const IndexView: React.FC = () => {
     theme,
     setActiveTab,
     soundEnabled,
-    vibrationEnabled
+    vibrationEnabled,
+    isBookmarked,
+    addBookmark,
+    removeBookmark
   } = useApp();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,6 +39,24 @@ export const IndexView: React.FC = () => {
     setActiveTab('quran');
   };
 
+  const toggleBookmark = (e: React.MouseEvent, surahNum: number, surahNameAr: string) => {
+    e.stopPropagation();
+    if (soundEnabled) soundEngine.playClick();
+    if (vibrationEnabled) triggerHaptic(10);
+    const bookmarkId = `quran_${surahNum}`;
+    if (isBookmarked(bookmarkId)) {
+      removeBookmark(bookmarkId);
+    } else {
+      addBookmark({
+        id: bookmarkId,
+        targetId: bookmarkId,
+        type: 'quran',
+        title: language === 'ar' ? `سورة ${surahNameAr}` : `Surah ${surahNameAr}`,
+        dateAdded: new Date().toISOString()
+      });
+    }
+  };
+
   const query = searchQuery.trim().toLowerCase();
 
   const filteredSurahs = SURAHS_METADATA.filter(
@@ -43,7 +69,7 @@ export const IndexView: React.FC = () => {
   return (
     <div id="index-view" className="space-y-6 pb-20 pt-4">
       {/* Page Title */}
-      <div className="text-center">
+      <div className="text-center relative z-10">
         <h1 className="text-2xl sm:text-3xl font-extrabold font-cairo text-slate-100 mb-2">
           {language === 'ar' ? 'فهرس سور المصحف الشريف' : 'Holy Quran Surahs Index'}
         </h1>
@@ -81,21 +107,35 @@ export const IndexView: React.FC = () => {
               }`}
             >
               {/* 1. Surah Number and Icon (🕋/🕌) at the top */}
-              <div className="flex items-center justify-between w-full text-slate-400 text-xs mb-3 select-none">
+              <div className="flex items-center justify-between w-full text-slate-400 text-xs mb-2 select-none">
                 <span className="font-bold px-2 py-0.5 rounded bg-teal-500/10 text-teal-400">
                   #{s.number}
                 </span>
-                <span className="text-3xl leading-none filter drop-shadow-sm" title={s.revelationType === 'Meccan' ? (language === 'ar' ? 'مكية' : 'Meccan') : (language === 'ar' ? 'مدنية' : 'Medinan')}>
+                <button
+                  onClick={(e) => toggleBookmark(e, s.number, s.nameAr)}
+                  className={`p-1 rounded-lg transition-all ${
+                    isBookmarked(`quran_${s.number}`)
+                      ? 'text-amber-400 bg-amber-500/20'
+                      : 'text-slate-500 hover:text-amber-400 hover:bg-amber-500/10'
+                  }`}
+                >
+                  <Bookmark className={`w-4 h-4 ${isBookmarked(`quran_${s.number}`) ? 'fill-current' : ''}`} />
+                </button>
+              </div>
+
+              {/* 2. Surah Name - Enlarged and centered */}
+              <span className="font-quran font-extrabold text-2xl sm:text-3xl text-slate-100 block my-2">
+                {s.nameAr}
+              </span>
+
+              {/* 3. Revelation Type Icon */}
+              <div className="mb-2">
+                <span className="text-3xl leading-none" title={s.revelationType === 'Meccan' ? (language === 'ar' ? 'مكية' : 'Meccan') : (language === 'ar' ? 'مدنية' : 'Medinan')}>
                   {s.revelationType === 'Meccan' ? '🕋' : '🕌'}
                 </span>
               </div>
 
-              {/* 2. Surah Name - Enlarged and centered */}
-              <span className="font-quran font-extrabold text-2xl sm:text-3xl text-slate-100 block my-1">
-                {s.nameAr}
-              </span>
-
-              {/* 3. Number of Verses at the bottom */}
+              {/* 4. Number of Verses at the bottom */}
               <span className="text-[11px] font-bold font-cairo bg-slate-800 text-amber-300 px-3 py-1 rounded-full border border-slate-700/50">
                 {s.versesCount} {language === 'ar' ? 'آية' : 'Ayahs'}
               </span>

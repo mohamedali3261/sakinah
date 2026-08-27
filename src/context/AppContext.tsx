@@ -62,6 +62,8 @@ interface AppContextType {
   isNotificationSettingsOpen: boolean;
   setIsNotificationSettingsOpen: (val: boolean) => void;
   isPaperThemeModalOpen: boolean;
+  isRepeatPageOpen: boolean;
+  setIsRepeatPageOpen: (val: boolean) => void;
   setIsPaperThemeModalOpen: (val: boolean) => void;
   
   // Notifications
@@ -178,6 +180,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isFontSettingsOpen, setIsFontSettingsOpen] = useState(false);
   const [isNotificationSettingsOpen, setIsNotificationSettingsOpen] = useState(false);
   const [isPaperThemeModalOpen, setIsPaperThemeModalOpen] = useState(false);
+  const [isRepeatPageOpen, setIsRepeatPageOpen] = useState(false);
 
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<{ title: string; body: string } | null>(null);
@@ -336,6 +339,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsNotificationSettingsOpen,
         isPaperThemeModalOpen,
         setIsPaperThemeModalOpen,
+        isRepeatPageOpen,
+        setIsRepeatPageOpen,
         reminders,
         toggleReminder,
         toastMessage,

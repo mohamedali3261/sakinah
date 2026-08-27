@@ -13,6 +13,7 @@ export type ActiveTab = 'home' | 'quran' | 'athkar' | 'library' | 'index' | 'pra
 export interface QuranVerse {
   id: number;
   verseNumber: number;
+  surahNumber?: number;
   textAr: string;
   textEn: string;
   translationAr?: string;

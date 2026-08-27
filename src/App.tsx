@@ -16,12 +16,13 @@ import { FontSettingsModal } from './components/FontSettingsModal';
 import { NotificationSettingsModal } from './components/NotificationSettingsModal';
 import { ToastNotification } from './components/ToastNotification';
 import { GlobalAdhanPlayer } from './components/GlobalAdhanPlayer';
+import { QuranRepeatPage } from './components/QuranRepeatPage';
 import { motion, AnimatePresence } from 'motion/react';
 // @ts-ignore
 import bgImage from './assets/Ghh.jpg';
 
 const MainContent: React.FC = () => {
-  const { activeTab, theme, language, isFocusMode } = useApp();
+  const { activeTab, theme, language, isFocusMode, isRepeatPageOpen, setIsRepeatPageOpen } = useApp();
   const [scrollScale, setScrollScale] = useState(1);
 
   // Dynamic page title based on active tab
@@ -136,6 +137,7 @@ const MainContent: React.FC = () => {
       </main>
 
       {/* Global Interactive Modals & Toast Alerts */}
+      <QuranRepeatPage isOpen={isRepeatPageOpen} onClose={() => setIsRepeatPageOpen(false)} theme={theme} language={language} />
       <SmartSearchModal />
       <FontSettingsModal />
       <NotificationSettingsModal />

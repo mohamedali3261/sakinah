@@ -15,6 +15,7 @@ import {
   Moon,
   Sparkles,
   BookOpen,
+  Sliders,
   CircleDot,
   Clock,
   ChevronLeft,
@@ -47,7 +48,8 @@ export const HomeView: React.FC = () => {
     setSelectedChapter,
     soundEnabled,
     vibrationEnabled,
-    setIsSearchOpen
+    setIsSearchOpen,
+    setIsRepeatPageOpen
   } = useApp();
 
   const [isQuizModalOpen, setIsQuizModalOpen] = useState(false);
@@ -267,7 +269,7 @@ export const HomeView: React.FC = () => {
     <div className="w-full max-w-4xl mx-auto space-y-5 sm:space-y-6 pb-24 relative z-10">
       {/* Hero Welcome Glass Card */}
       <div
-        className={`relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-3xl border backdrop-blur-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 ${
+        className={`relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border backdrop-blur-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 ${
           theme === 'light'
             ? 'bg-gradient-to-br from-white/90 via-emerald-50/50 to-teal-50/70 border-emerald-200/60 text-slate-800'
             : theme === 'sepia'
@@ -299,7 +301,7 @@ export const HomeView: React.FC = () => {
           if (soundEnabled) soundEngine.playClick();
           setActiveTab('prayers');
         }}
-        className={`p-3 sm:p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all cursor-pointer hover:border-emerald-500/40 relative overflow-hidden group shadow-md ${
+        className={`p-3 sm:p-4 rounded-2xl sm:rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all cursor-pointer hover:border-emerald-500/40 relative overflow-hidden group shadow-md ${
           theme === 'light'
             ? 'bg-white/80 border-slate-200'
             : theme === 'sepia'
@@ -321,7 +323,7 @@ export const HomeView: React.FC = () => {
         </div>
 
         {/* Premium Countdown to Next Prayer Row */}
-        <div className={`relative overflow-hidden mb-3 sm:mb-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl border flex flex-col items-center justify-center text-center gap-4 sm:gap-5 transition-all ${
+        <div className={`relative overflow-hidden mb-3 sm:mb-5 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border flex flex-col items-center justify-center text-center gap-4 sm:gap-5 transition-all ${
           theme === 'light'
             ? 'bg-gradient-to-br from-emerald-50/70 via-emerald-50/40 to-teal-50/50 border-emerald-200/50'
             : theme === 'sepia'
@@ -455,7 +457,7 @@ export const HomeView: React.FC = () => {
           if (vibrationEnabled) triggerHaptic(10);
           setIsSearchOpen(true);
         }}
-        className={`w-full p-3 sm:p-4 rounded-2xl sm:rounded-3xl border cursor-pointer transition-all hover:scale-[1.01] flex items-center justify-between gap-3 shadow-md hover:shadow-lg relative z-10 ${
+        className={`w-full p-3 sm:p-4 rounded-2xl sm:rounded-2xl sm:rounded-3xl border cursor-pointer transition-all hover:scale-[1.01] flex items-center justify-between gap-3 shadow-md hover:shadow-lg relative z-10 ${
           theme === 'light'
             ? 'bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border-emerald-500/30 text-slate-800 hover:border-emerald-500/60'
             : theme === 'sepia'
@@ -486,24 +488,22 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* Primary Feature Quick Navigation Hub */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
         {/* Quran */}
         <button
           onClick={() => setActiveTab('quran')}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-2xl transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-lg hover:shadow-xl hover:-translate-y-1 ${
             theme === 'light'
-              ? 'bg-gradient-to-b from-white to-emerald-50/30 border-emerald-100 hover:border-emerald-300'
-              : theme === 'sepia'
-              ? 'bg-gradient-to-b from-[#150d08] to-amber-950/20 border-amber-900/30 hover:border-amber-700/50'
-              : 'bg-gradient-to-b from-slate-900 to-slate-800 border-emerald-500/20 hover:border-emerald-500/40'
+              ? 'bg-white/40 border-white/60 hover:bg-white/60 hover:border-emerald-500/30'
+              : 'bg-slate-900/40 border-white/10 hover:bg-white/5 hover:border-emerald-500/30'
           }`}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform duration-300">
-            <BookOpen className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform duration-300">
+            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
-              theme === 'light' ? 'text-emerald-950' : 'text-emerald-300'
+              theme === 'light' ? 'text-slate-800' : 'text-slate-100'
             }`}>
               {language === 'ar' ? 'المصحف الشريف' : 'Holy Quran'}
             </span>
@@ -515,10 +515,36 @@ export const HomeView: React.FC = () => {
           </div>
         </button>
 
+        {/* Custom Repeat */}
+        <button
+          onClick={() => setIsRepeatPageOpen(true)}
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-2xl transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-lg hover:shadow-xl hover:-translate-y-1 ${
+            theme === 'light'
+              ? 'bg-white/40 border-white/60 hover:bg-white/60 hover:border-teal-500/30'
+              : 'bg-slate-900/40 border-white/10 hover:bg-white/5 hover:border-teal-500/30'
+          }`}
+        >
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 group-hover:scale-110 transition-transform duration-300">
+            <Sliders className="w-5 h-5 sm:w-6 sm:h-6" />
+          </div>
+          <div>
+            <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
+              theme === 'light' ? 'text-slate-800' : 'text-slate-100'
+            }`}>
+              {language === 'ar' ? 'التكرار المخصص' : 'Custom Repeat'}
+            </span>
+            <span className={`text-[10px] sm:text-[11px] block ${
+              theme === 'light' ? 'text-slate-500' : 'text-slate-400'
+            }`}>
+              {language === 'ar' ? 'تخصيص الحفظ' : 'Customize Hifz'}
+            </span>
+          </div>
+        </button>
+
         {/* Athkar */}
         <button
           onClick={() => setActiveTab('athkar')}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
             theme === 'light'
               ? 'bg-gradient-to-b from-white to-amber-50/30 border-amber-100 hover:border-amber-300'
               : theme === 'sepia'
@@ -526,8 +552,8 @@ export const HomeView: React.FC = () => {
               : 'bg-gradient-to-b from-slate-900 to-slate-800 border-amber-500/20 hover:border-amber-500/40'
           }`}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform duration-300">
-            <Sparkles className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform duration-300">
+            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
@@ -546,7 +572,7 @@ export const HomeView: React.FC = () => {
         {/* Sebha */}
         <button
           onClick={() => setActiveTab('sebha')}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
             theme === 'light'
               ? 'bg-gradient-to-b from-white to-indigo-50/30 border-indigo-100 hover:border-indigo-300'
               : theme === 'sepia'
@@ -554,8 +580,8 @@ export const HomeView: React.FC = () => {
               : 'bg-gradient-to-b from-slate-900 to-slate-800 border-indigo-500/20 hover:border-indigo-500/40'
           }`}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform duration-300">
-            <CircleDot className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform duration-300">
+            <CircleDot className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
@@ -574,7 +600,7 @@ export const HomeView: React.FC = () => {
         {/* Library */}
         <button
           onClick={() => setActiveTab('library')}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
             theme === 'light'
               ? 'bg-gradient-to-b from-white to-fuchsia-50/30 border-fuchsia-100 hover:border-fuchsia-300'
               : theme === 'sepia'
@@ -582,8 +608,8 @@ export const HomeView: React.FC = () => {
               : 'bg-gradient-to-b from-slate-900 to-slate-800 border-fuchsia-500/20 hover:border-fuchsia-500/40'
           }`}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-500 group-hover:scale-110 transition-transform duration-300">
-            <Compass className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-500 group-hover:scale-110 transition-transform duration-300">
+            <Compass className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
@@ -602,7 +628,7 @@ export const HomeView: React.FC = () => {
         {/* Prayers */}
         <button
           onClick={() => setActiveTab('prayers')}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
             theme === 'light'
               ? 'bg-gradient-to-b from-white to-sky-50/30 border-sky-100 hover:border-sky-300'
               : theme === 'sepia'
@@ -610,8 +636,8 @@ export const HomeView: React.FC = () => {
               : 'bg-gradient-to-b from-slate-900 to-slate-800 border-sky-500/20 hover:border-sky-500/40'
           }`}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-500 group-hover:scale-110 transition-transform duration-300">
-            <Clock className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-500 group-hover:scale-110 transition-transform duration-300">
+            <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
@@ -630,7 +656,7 @@ export const HomeView: React.FC = () => {
         {/* Radio */}
         <button
           onClick={() => setActiveTab('radio')}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
             theme === 'light'
               ? 'bg-gradient-to-b from-white to-teal-50/30 border-teal-100 hover:border-teal-300'
               : theme === 'sepia'
@@ -638,8 +664,8 @@ export const HomeView: React.FC = () => {
               : 'bg-gradient-to-b from-slate-900 to-slate-800 border-teal-500/20 hover:border-teal-500/40'
           }`}
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-teal-500/10 flex items-center justify-center text-teal-500 group-hover:scale-110 transition-transform duration-300">
-            <Radio className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-teal-500/10 flex items-center justify-center text-teal-500 group-hover:scale-110 transition-transform duration-300">
+            <Radio className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
@@ -672,7 +698,7 @@ export const HomeView: React.FC = () => {
             if (vibrationEnabled) triggerHaptic(12);
             setIsQuizModalOpen(true);
           }}
-          className={`p-4 sm:p-5 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group shadow-md ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group shadow-md ${
             theme === 'light'
               ? 'bg-gradient-to-r from-amber-500/10 via-amber-50/50 to-orange-500/10 border-amber-200 hover:border-amber-400 text-slate-800'
               : 'bg-gradient-to-r from-amber-950/40 via-slate-900 to-amber-950/20 border-amber-500/30 hover:border-amber-400 text-slate-100'
@@ -709,7 +735,7 @@ export const HomeView: React.FC = () => {
             if (vibrationEnabled) triggerHaptic(12);
             setIsFastingModalOpen(true);
           }}
-          className={`p-4 sm:p-5 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group shadow-md ${
+          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group shadow-md ${
             theme === 'light'
               ? 'bg-gradient-to-r from-teal-500/10 via-emerald-50/50 to-teal-500/10 border-teal-200 hover:border-teal-400 text-slate-800'
               : 'bg-gradient-to-r from-teal-950/40 via-slate-900 to-teal-950/20 border-teal-500/30 hover:border-teal-400 text-slate-100'
@@ -747,7 +773,7 @@ export const HomeView: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div
           onClick={() => setActiveTab('quran')}
-          className={`p-4 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group ${
+          className={`p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group ${
             theme === 'light'
               ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-200 hover:border-emerald-400 text-slate-800'
               : 'bg-gradient-to-r from-emerald-950/40 to-slate-900 border-emerald-500/30 hover:border-emerald-400 text-slate-100'
@@ -773,7 +799,7 @@ export const HomeView: React.FC = () => {
 
         <div
           onClick={() => setActiveTab('quran')}
-          className={`p-4 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group ${
+          className={`p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between group ${
             theme === 'light'
               ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200 hover:border-amber-400 text-slate-800'
               : 'bg-gradient-to-r from-amber-950/40 to-slate-900 border-amber-500/30 hover:border-amber-400 text-slate-100'
@@ -815,7 +841,7 @@ export const HomeView: React.FC = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
           {ATHKAR_CATEGORIES.slice(0, 4).map((cat) => (
             <motion.div
               key={cat.id}
@@ -824,7 +850,7 @@ export const HomeView: React.FC = () => {
                 setSelectedAthkarCategoryId(cat.id);
                 setActiveTab('athkar');
               }}
-              className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl shadow-md transition-all cursor-pointer flex flex-col justify-between group ${
+              className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-2xl sm:rounded-3xl border backdrop-blur-xl shadow-md transition-all cursor-pointer flex flex-col justify-between group ${
                 theme === 'light'
                   ? 'bg-white/80 border-slate-200 text-slate-800 hover:border-emerald-400'
                   : theme === 'sepia'
@@ -859,7 +885,7 @@ export const HomeView: React.FC = () => {
 
       {/* Featured Book Spotlight */}
       <div
-        className={`p-5 sm:p-6 rounded-3xl border backdrop-blur-xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 ${
+        className={`p-5 sm:p-6 rounded-2xl sm:rounded-3xl border backdrop-blur-xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 ${
           theme === 'light'
             ? 'bg-white/80 border-slate-200 text-slate-800'
             : theme === 'sepia'
@@ -903,7 +929,7 @@ export const HomeView: React.FC = () => {
       {/* Next Prayer Preview Shortcut */}
       <div
         onClick={() => setActiveTab('prayers')}
-        className="p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border border-white/10 hover:border-emerald-500/40 bg-white/5 backdrop-blur-xl flex items-center justify-between gap-3 cursor-pointer transition-all"
+        className="p-3.5 sm:p-4 rounded-2xl sm:rounded-2xl sm:rounded-3xl border border-white/10 hover:border-emerald-500/40 bg-white/5 backdrop-blur-xl flex items-center justify-between gap-3 cursor-pointer transition-all"
       >
         <div className="flex items-center gap-3">
           <div className="p-2 sm:p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400">
