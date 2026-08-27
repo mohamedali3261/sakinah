@@ -16,7 +16,7 @@ export const SAHIH_BUKHARI_BOOK: Book = {
   category: 'hadith',
   descriptionAr: 'أصح كتاب بعد كتاب الله عز وجل، يجمع عيون الأحاديث الصحيحة المسندة في العقيدة والأحكام والفضائل والأخلاق والأذكار.',
   descriptionEn: 'The most authentic collection of Hadith after the Holy Quran.',
-  chaptersCount: 14,
+  chaptersCount: 20,
   colorAccent: 'emerald',
   chapters: [
     {
@@ -155,9 +155,69 @@ export const SAHIH_BUKHARI_BOOK: Book = {
       titleAr: 'حديث من صلى البردين دخل الجنة (صحيح البخاري 574)',
       titleEn: 'One Who Prays the Two Cool Prayers (Sahih Bukhari 574)',
       contentAr: 'عَنْ أَبِي مُوسَى الأَشْعَرِيِّ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ:\n\n«مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ». [رواه البخاري في صحيحه - الحديث رقم 574]',
-      contentEn: 'Narrated Abu Musa Al-Ash’ari: The Messenger of Allah ﷺ said: "He who prays the two cool prayers (i.e., Dawn and Afternoon prayers) will enter Paradise."',
+      contentEn: "Narrated Abu Musa Al-Ash'ari: The Messenger of Allah ﷺ said: \"He who prays the two cool prayers (i.e., Dawn and Afternoon prayers) will enter Paradise.\"",
       explanationAr: 'البردان هما صلاة الصبح وصلاة العصر؛ وتخصيصهما بالذكر لأهميتهما وصعوبتهما على النفوس في أوقات النوم والعمل، والمحافظة عليهما دليل على كمال الإيمان والالتزام بالعبادة.',
       explanationEn: 'The "two cool prayers" are Fajr and Asr. Preserving them under conditions of sleep and labor indicates supreme commitment to faith.'
+    },
+    {
+      id: 'bkh-15',
+      hadithNumber: 6224,
+      titleAr: 'حديث المؤمن القوي أحب إلى الله من المؤمن الضعيف (صحيح البخاري 6224)',
+      titleEn: 'The Strong Believer is Better Than the Weak Believer (Sahih Bukhari 6224)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«الْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اللَّهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ، وَفِي كُلٍّ خَيْرٌ، احْرِصْ عَلَى مَا يَنْفَعُكَ، وَاسْتَعِنْ بِاللَّهِ وَلَا تَعْجِزْ، وَإِنْ أَصَابَكَ شَيْءٌ فَلَا تَقُلْ لَوْ أَنِّي فَعَلْتُ كَانَ كَذَا وَكَذَا، وَلَكِنْ قُلْ قَدَّرَ اللَّهُ وَمَا شَاءَ فَعَلَ، فَإِنَّ لَوْ تَفْتَحُ عَمَلَ الشَّيْطَانِ». [رواه البخاري في صحيحه - الحديث رقم 6224]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "The strong believer is better and more beloved to Allah than the weak believer, although there is good in both. Strive for that which will benefit you, seek the help of Allah, and do not feel helpless. If something befalls you, do not say, "If only I had done such and such," rather say, "Qaddara Allahu wa ma sha\'a fa\'al" (Allah has decreed and whatever He wills, He does). For (saying) "If only" opens the door to the deeds of Satan."',
+      explanationAr: 'الحث على القوة الإيمانية والبدنية والعملية، والنهي عن العجز والكسل، والتحذير من كلمة "لو" التي تفتح باب الندم والحزن.',
+      explanationEn: 'Encourages spiritual and physical strength, discourages helplessness, and warns against the regretful "if only" phrase that opens doors to Satan\'s influence.'
+    },
+    {
+      id: 'bkh-16',
+      hadithNumber: 5999,
+      titleAr: 'حديث إن الله جميل يحب الجمال (صحيح البخاري 5999)',
+      titleEn: 'Allah is Beautiful and Loves Beauty (Sahih Bukhari 5999)',
+      contentAr: 'عَنْ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«إِنَّ اللَّهَ جَمِيلٌ يُحِبُّ الْجَمَالَ». [رواه البخاري في صحيحه - الحديث رقم 5999]',
+      contentEn: 'Narrated Abdullah ibn Mas\'ud: The Messenger of Allah ﷺ said: "Allah is Beautiful and loves beauty."',
+      explanationAr: 'بيان أن الله سبحانه وتعالى جميل في ذاته وأسمائه وصفاته وأفعاله، وأنه يحب الجمال في كل شيء.',
+      explanationEn: 'Allah is Beautiful in His essence, names, attributes, and actions, and He loves beauty in all things.'
+    },
+    {
+      id: 'bkh-17',
+      hadithNumber: 6022,
+      titleAr: 'حديث لا يؤمن أحدكم حتى أكون أحب إليه من والده وولده (صحيح البخاري 6022)',
+      titleEn: 'None of You Truly Believes Until I am More Beloved (Sahih Bukhari 6022)',
+      contentAr: 'عَنْ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ النَّبِيُّ ﷺ:\n\n«لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى أَكُونَ أَحَبَّ إِلَيْهِ مِنْ وَالِدِهِ وَوَلَدِهِ وَالنَّاسِ أَجْمَعِينَ». [رواه البخاري في صحيحه - الحديث رقم 6022]',
+      contentEn: 'Narrated Anas ibn Malik: The Prophet ﷺ said: "None of you truly believes until I am more beloved to him than his father, his child, and all of mankind."',
+      explanationAr: 'بيان أن محبة النبي ﷺ من كمال الإيمان، لأنه الدليل على اتباعه وتطبيق سنته والاقتداء به.',
+      explanationEn: 'Loving the Prophet ﷺ more than family and all people is a sign of complete faith, as it leads to following his example and sunnah.'
+    },
+    {
+      id: 'bkh-18',
+      hadithNumber: 1442,
+      titleAr: 'حديث من أنفق زوجين في سبيل الله نودي من أبواب الجنة (صحيح البخاري 1442)',
+      titleEn: 'Whoever Spends Two Pairs in Allah\'s Cause (Sahih Bukhari 1442)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«مَنْ أَنْفَقَ زَوْجَيْنِ فِي سَبِيلِ اللَّهِ، نُودِيَ مِنْ أَبْوَابِ الْجَنَّةِ: يَا عَبْدَ اللَّهِ، هَذَا خَيْرٌ، فَمَنْ كَانَ مِنْ أَهْلِ الصَّلَاةِ دُعِيَ مِنْ بَابِ الصَّلَاةِ، وَمَنْ كَانَ مِنْ أَهْلِ الْجِهَادِ دُعِيَ مِنْ بَابِ الْجِهَادِ، وَمَنْ كَانَ مِنْ أَهْلِ الصَّدَقَةِ دُعِيَ مِنْ بَابِ الصَّدَقَةِ، وَمَنْ كَانَ مِنْ أَهْلِ الصِّيَامِ دُعِيَ مِنْ بَابِ الرَّيَّانِ». [رواه البخاري في صحيحه - الحديث رقم 1442]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "Whoever spends two pairs in Allah\'s Cause will be called from the gates of Paradise: "O slave of Allah, this is good." Whoever was among the people of prayer will be called from the gate of prayer, whoever was among the people of jihad will be called from the gate of jihad, whoever was among the people of charity will be called from the gate of charity, and whoever was among the people of fasting will be called from the gate of Ar-Rayyan."',
+      explanationAr: 'بيان عظمة الإنفاق في سبيل الله وأن لكل عبادة باباً خاصاً في الجنة يدخل منه من أكثر منها.',
+      explanationEn: 'Shows the greatness of spending in Allah\'s cause and that each act of worship has its own gate in Paradise.'
+    },
+    {
+      id: 'bkh-19',
+      hadithNumber: 7392,
+      titleAr: 'حديث إن في الجنة لغرفاً يرى ظاهرها من باطنها (صحيح البخاري 7392)',
+      titleEn: 'Palaces in Paradise Visible Inside and Out (Sahih Bukhari 7392)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«إِنَّ فِي الْجَنَّةِ لَغُرَفًا يُرَى ظَاهِرُهَا مِنْ بَاطِنِهَا وَبَاط ُنُهَا مِنْ ظَاهِرِهَا». [رواه البخاري في صحيحه - الحديث رقم 7392]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "Indeed, in Paradise there are chambers whose outside can be seen from inside and whose inside can be seen from outside."',
+      explanationAr: 'وصف عظيم لنعيم الجنة وغرفها المبنية من ذهب وفضة وغيرها من الجواهر.',
+      explanationEn: 'Describes the magnificent chambers in Paradise built from gold, silver, and precious gems.'
+    },
+    {
+      id: 'bkh-20',
+      hadithNumber: 2766,
+      titleAr: 'حديث من سأل الله الشهادة بصدق (صحيح البخاري 2766)',
+      titleEn: 'Whoever Asks Allah for Martyrdom with Sincerity (Sahih Bukhari 2766)',
+      contentAr: 'عَنْ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ:\n\n«مَنْ طَلَبَ الشَّهَادَةَ بِصِدْقٍ بَلَّغَهُ اللَّهُ دَرَجَاتِ الشُّهَدَاءِ، وَإِنْ مَاتَ عَلَى فِرَاشِهِ». [رواه البخاري في صحيحه - الحديث رقم 2766]',
+      contentEn: 'Narrated Anas ibn Malik: The Messenger of Allah ﷺ said: "Whoever seeks martyrdom with sincerity will be granted by Allah the status of the martyrs, even if he dies on his bed."',
+      explanationAr: 'بيان أن النية الصادقة في طلب الشهادة تكفي في نيل درجة الشهداء ولو مات في فراشه.',
+      explanationEn: 'Sincere intention to seek martyrdom grants one the status of martyrs even if dying naturally.'
     }
   ]
 };
@@ -171,7 +231,7 @@ export const SAHIH_MUSLIM_BOOK: Book = {
   category: 'hadith',
   descriptionAr: 'ثاني أصح كتاب في السنة النبوية المطهرة، يمتاز بحسن الترتيب وسياق الأسانيد والمتون بدقة ودقة الرواية.',
   descriptionEn: 'The famous authentic collection of Imam Muslim, second only to Bukhari.',
-  chaptersCount: 14,
+  chaptersCount: 20,
   colorAccent: 'sky',
   chapters: [
     {
@@ -313,6 +373,66 @@ export const SAHIH_MUSLIM_BOOK: Book = {
       contentEn: 'Narrated Uthman ibn Affan: I heard the Messenger of Allah ﷺ saying: "He who prays Isha in congregation is as if he stood in prayer for half the night, and he who prays Fajr in congregation is as if he prayed the whole night."',
       explanationAr: 'ترغيب بليغ في أداء صلاتي العشاء والصبح جماعة بالمسجد، إذ يعادل أجرهما أجر قيام الليل كله لما فيهما من المشقة العالية ومجاهدة النفس والهوى.',
       explanationEn: 'Earning the immense reward of continuous overnight prayers simply by attending Fajr and Isha congregational services.'
+    },
+    {
+      id: 'msl-15',
+      hadithNumber: 1162,
+      titleAr: 'حديث الصلوات الخمس كفارات للخطايا (صحيح مسلم 1162)',
+      titleEn: 'The Five Prayers Expiate Sins (Sahih Muslim 1162)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ:\n\n«أَرَأَيْتُمْ لَوْ أَنَّ نَهْرًا بِبَابِ أَحَدِكُمْ يَغْتَسِلُ مِنْهُ كُلَّ يَوْمٍ خَمْسَ مَرَّاتٍ، هَلْ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ؟» قَالُوا: لاَ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ. قَالَ: «فَذَلِكَ مَثَلُ الصَّلَوَاتِ الْخَمْسِ يَمْحُو اللَّهُ بِهِنَّ الْخَطَايَا». [رواه مسلم في صحيحه - الحديث رقم 1162]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "What do you think if there were a river flowing at the door of any one of you and he bathed in it five times a day, would there remain any dirt from him?" They said: "No dirt would remain." He said: "That is the example of the five prayers by which Allah removes sins."',
+      explanationAr: 'بيان عظمة الصلوات الخمس في تكفير الذنوب والخطايا، تشبيهاً بنهر يغتسل منه الإنسان فيزول عنه الدرن.',
+      explanationEn: 'The five daily prayers wash away sins like a flowing river cleanses dirt.'
+    },
+    {
+      id: 'msl-16',
+      hadithNumber: 171,
+      titleAr: 'حديث المسلم إذا اغتسل يوم الجمعة (صحيح مسلم 171)',
+      titleEn: 'Ghusl on Friday (Sahih Muslim 171)',
+      contentAr: 'عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«غُسْلُ يَوْمِ الْجُمُعَةِ وَاجِبٌ عَلَى كُلِّ مُحْتَلِمٍ». [رواه مسلم في صحيحه - الحديث رقم 171]',
+      contentEn: 'Narrated Abu Sa\'id Al-Khudri: The Messenger of Allah ﷺ said: "Ghusl on Friday is obligatory for every adult."',
+      explanationAr: 'الحث على الاغتسال يوم الجمعة استعداداً للصلاة والاجتماع، وهو من شعائر الإسلام العظيمة.',
+      explanationEn: 'Encourages ritual bathing on Friday in preparation for congregational prayer.'
+    },
+    {
+      id: 'msl-17',
+      hadithNumber: 494,
+      titleAr: 'حديث صيام رمضان إيماناً واحتساباً (صحيح مسلم 494)',
+      titleEn: 'Fasting Ramadan with Faith and Hope (Sahih Muslim 494)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ». [رواه مسلم في صحيحه - الحديث رقم 494]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "Whoever fasts Ramadan out of faith and seeking reward, his previous sins will be forgiven."',
+      explanationAr: 'بيان عظمة صيام رمضان وأنه سبب لمغفرة الذنوب السابقة إذا صامه بإيمان واحتساب.',
+      explanationEn: 'Fasting Ramadan with sincere faith brings forgiveness of all past sins.'
+    },
+    {
+      id: 'msl-18',
+      hadithNumber: 1163,
+      titleAr: 'حديث المشي إلى المساجد (صحيح مسلم 1163)',
+      titleEn: 'Walking to the Mosque (Sahih Muslim 1163)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«أَلاَ أَدُلُّكُمْ عَلَى مَا يَمْحُو اللَّهُ بِهِ الْخَطَايَا وَيَرْفَعُ بِهِ الدَّرَجَاتِ؟» قَالُوا: بَلَى يَا رَسُولَ اللَّهِ. قَالَ: «إِسْبَاغُ الْوُضُوءِ عَلَى الْمَكَارِهِ، وَكَثْرَةُ الْخُطَا إِلَى الْمَسَاجِدِ، وَانْتِظَارُ الصَّلاَةِ بَعْدَ الصَّلاَةِ». [رواه مسلم في صحيحه - الحديث رقم 1163]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "Shall I not tell you that by which Allah erases sins and raises ranks?" They said: "Yes, O Messenger of Allah." He said: "Performing wudu thoroughly despite difficulties, walking to the mosque, and waiting for prayer after prayer."',
+      explanationAr: 'بيان عظمة هذه الأعمال الثلاثة في تكفير الذنوب ورفع الدرجات.',
+      explanationEn: 'Three acts that erase sins and elevate spiritual ranks: thorough wudu, walking to mosque, and waiting for prayers.'
+    },
+    {
+      id: 'msl-19',
+      hadithNumber: 134,
+      titleAr: 'حديث الوضوء شطر الإيمان (صحيح مسلم 134)',
+      titleEn: 'Purification is Half of Faith (Sahih Muslim 134)',
+      contentAr: 'عَنْ أَبِي مَالِكٍ الأَشْعَرِيِّ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«الطُّهُورُ شَطْ ُرُ الإِيمَانِ». [رواه مسلم في صحيحه - الحديث رقم 134]',
+      contentEn: 'Narrated Abu Malik Al-Ash\'ari: The Messenger of Allah ﷺ said: "Purification is half of faith."',
+      explanationAr: 'بيان عظمة الطهارة وأهميتها في الإسلام، وأنها نصف الإيمان.',
+      explanationEn: 'Purification holds immense importance in Islam, constituting half of faith.'
+    },
+    {
+      id: 'msl-20',
+      hadithNumber: 2580,
+      titleAr: 'حديث تعظيم حرمة المسلم (صحيح مسلم 2580)',
+      titleEn: 'Sanctity of a Muslim (Sahih Muslim 2580)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«كُلُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ حَرَامٌ: دَمُهُ وَمَالُهُ وَعِرْضُهُ». [رواه مسلم في صحيحه - الحديث رقم 2580]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "Every Muslim is sacred to another Muslim: his blood, his wealth, and his honor."',
+      explanationAr: 'بيان حرمة المسلم على أخيه المسلم في دمه وماله وعرضه، وتحريم الاعتداء عليه.',
+      explanationEn: 'Establishes the sanctity of every Muslim\'s life, property, and honor.'
     }
   ]
 };
