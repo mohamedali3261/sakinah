@@ -12,28 +12,84 @@ class SoundEngine {
   }
 
   // Soft wooden / glass click for Subha bead press
-  playClick() {
+  playClick(type: 'wood' | 'gem' | 'mechanical' | 'soft' = 'wood') {
     try {
       this.init();
       if (!this.ctx) return;
       if (this.ctx.state === 'suspended') {
         this.ctx.resume();
       }
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
 
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(580, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.05);
+      if (type === 'gem') {
+        // High resonance crystal/gemstone bead sound
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1400, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(320, this.ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+      } else if (type === 'mechanical') {
+        // Crisp metallic mechanical counter click
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc1.type = 'square';
+        osc2.type = 'triangle';
+        osc1.frequency.setValueAtTime(880, this.ctx.currentTime);
+        osc2.frequency.setValueAtTime(220, this.ctx.currentTime);
+        gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc1.start();
+        osc2.start();
+        osc1.stop(this.ctx.currentTime + 0.04);
+        osc2.stop(this.ctx.currentTime + 0.04);
+      } else if (type === 'soft') {
+        // Gentle tactile thud for night prayer / tahajjud
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.06);
+      } else {
+        // Authentic resonant hardwood Kuka / Sandalwood bead knock
+        const osc = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
 
-      gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(140, this.ctx.currentTime + 0.06);
 
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(340, this.ctx.currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(90, this.ctx.currentTime + 0.06);
 
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.05);
+        gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.06);
+
+        osc.connect(gain);
+        osc2.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc2.start();
+        osc.stop(this.ctx.currentTime + 0.06);
+        osc2.stop(this.ctx.currentTime + 0.06);
+      }
     } catch {
       // Audio not supported or blocked
     }
@@ -70,6 +126,11 @@ class SoundEngine {
     } catch {
       // Audio fallback
     }
+  }
+
+  // Harmonic success chime for quiz, memorization, and khatmah milestones
+  playSuccess() {
+    this.playCompletion();
   }
 }
 

@@ -16,7 +16,7 @@ export const SAHIH_BUKHARI_BOOK: Book = {
   category: 'hadith',
   descriptionAr: 'أصح كتاب بعد كتاب الله عز وجل، يجمع عيون الأحاديث الصحيحة المسندة في العقيدة والأحكام والفضائل والأخلاق والأذكار.',
   descriptionEn: 'The most authentic collection of Hadith after the Holy Quran.',
-  chaptersCount: 10,
+  chaptersCount: 14,
   colorAccent: 'emerald',
   chapters: [
     {
@@ -118,6 +118,46 @@ export const SAHIH_BUKHARI_BOOK: Book = {
       contentEn: 'Narrated Anas ibn Malik: The Prophet ﷺ said: "Facilitate things for people and do not make them difficult, bring glad tidings and do not drive people away."',
       explanationAr: 'قاعدة التيسير والتبشير في الدعوة والعبادة والمعاملات ومراعاة احوال الناس.',
       explanationEn: 'The prophetic principle of ease, encouragement, and moderation.'
+    },
+    {
+      id: 'bkh-11',
+      hadithNumber: 71,
+      titleAr: 'حديث من يرد الله به خيراً يفقهه في الدين (صحيح البخاري 71)',
+      titleEn: 'If Allah Wills Good For Someone (Sahih Bukhari 71)',
+      contentAr: 'عَنْ مُعَاوِيَةَ بْنِ أَبِي سُفْيَانَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ النَّبِيَّ ﷺ يَقُولُ:\n\n«مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ، وَإِنَّمَا أَنَا قَاسِمٌ وَاللَّهُ يُعْطِي». [رواه البخاري في صحيحه - الحديث رقم 71]',
+      contentEn: 'Narrated Muawiyah: I heard the Prophet ﷺ saying: "If Allah wants to do good to a person, He makes him comprehend/understand the religion."',
+      explanationAr: 'فضيلة العلم الشرعي والفقه في الدين، وأنه علامة واضحة على محبة الله للعبد وإرادته به الخير في الدارين.',
+      explanationEn: 'The virtue of Islamic knowledge and understanding as a sign of divine love and favor.'
+    },
+    {
+      id: 'bkh-12',
+      hadithNumber: 39,
+      titleAr: 'حديث يسر الإسلام وسماحته (صحيح البخاري 39)',
+      titleEn: 'Religion is Easy (Sahih Bukhari 39)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ ﷺ قَالَ:\n\n«إِنَّ الدِّينَ يُسْرٌ، وَلَنْ يُشَادَّ الدِّينَ أَحَدٌ إِلاَّ غَلَبَهُ، فَسَدِّدُوا وَقَارِبُوا وَأَبْشِرُوا، وَاسْتَعِينُوا بِالْغَدْوَةِ وَالرَّوْحَةِ وَشَيْءٍ مِنَ الدُّلْجَةِ». [رواه البخاري في صحيحه - الحديث رقم 39]',
+      contentEn: 'Narrated Abu Hurairah: The Prophet ﷺ said: "Religion is very easy and whoever overburdens himself in his religion will not be able to continue in that way. So follow the right path, be moderate, and receive glad tidings..."',
+      explanationAr: 'الدين مبني على اليسر والسماحة، والنهي عن الغلو والتشديد والمبالغة في العبادات بما يؤدي للملل والانقطاع.',
+      explanationEn: 'The ease of Islam and warning against extremism or over-burdening oneself in religious acts.'
+    },
+    {
+      id: 'bkh-13',
+      hadithNumber: 645,
+      titleAr: 'حديث فضل صلاة الجماعة (صحيح البخاري 645)',
+      titleEn: 'Virtue of Congregational Prayer (Sahih Bukhari 645)',
+      contentAr: 'عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ:\n\n«صَلاَةُ الجَمَاعَةِ تَفْضُلُ صَلاَةَ الفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً». [رواه البخاري في صحيحه - الحديث رقم 645]',
+      contentEn: 'Narrated Abdullah ibn Umar: The Messenger of Allah ﷺ said: "Prayer in congregation is twenty-seven times more meritorious than a prayer performed individually."',
+      explanationAr: 'عظم ثواب صلاة الجماعة في المسجد مقارنة بصلاة المنفرد في بيته أو سوقه، والترغيب الشديد في المحافظة عليها لتوطيد أركان المجتمع.',
+      explanationEn: 'The immense multiplying reward of congregational prayers compared to individual prayers.'
+    },
+    {
+      id: 'bkh-14',
+      hadithNumber: 574,
+      titleAr: 'حديث من صلى البردين دخل الجنة (صحيح البخاري 574)',
+      titleEn: 'One Who Prays the Two Cool Prayers (Sahih Bukhari 574)',
+      contentAr: 'عَنْ أَبِي مُوسَى الأَشْعَرِيِّ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ:\n\n«مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ». [رواه البخاري في صحيحه - الحديث رقم 574]',
+      contentEn: 'Narrated Abu Musa Al-Ash’ari: The Messenger of Allah ﷺ said: "He who prays the two cool prayers (i.e., Dawn and Afternoon prayers) will enter Paradise."',
+      explanationAr: 'البردان هما صلاة الصبح وصلاة العصر؛ وتخصيصهما بالذكر لأهميتهما وصعوبتهما على النفوس في أوقات النوم والعمل، والمحافظة عليهما دليل على كمال الإيمان والالتزام بالعبادة.',
+      explanationEn: 'The "two cool prayers" are Fajr and Asr. Preserving them under conditions of sleep and labor indicates supreme commitment to faith.'
     }
   ]
 };
@@ -131,7 +171,7 @@ export const SAHIH_MUSLIM_BOOK: Book = {
   category: 'hadith',
   descriptionAr: 'ثاني أصح كتاب في السنة النبوية المطهرة، يمتاز بحسن الترتيب وسياق الأسانيد والمتون بدقة ودقة الرواية.',
   descriptionEn: 'The famous authentic collection of Imam Muslim, second only to Bukhari.',
-  chaptersCount: 10,
+  chaptersCount: 14,
   colorAccent: 'sky',
   chapters: [
     {
@@ -233,6 +273,46 @@ export const SAHIH_MUSLIM_BOOK: Book = {
       contentEn: 'Narrated Abdullah ibn Mas’ud: The Prophet ﷺ said: "No one will enter Paradise who has an atom’s weight of arrogance in his heart..."',
       explanationAr: 'التحذير من الكبر والتطاول على الخلق، وتوضيح أن الكبر هو رد الحق واحتقار الناس.',
       explanationEn: 'Warning against arrogance and explaining that beauty and neatness are beloved to Allah.'
+    },
+    {
+      id: 'msl-11',
+      hadithNumber: 35,
+      titleAr: 'حديث شعب الإيمان (صحيح مسلم 35)',
+      titleEn: 'The Branches of Faith (Sahih Muslim 35)',
+      contentAr: 'عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:\n\n«الإِيمَانُ بِضْعٌ وَسَبْعُونَ أَوْ بِضْعٌ وَسِتُّونَ شُعْبَةً، فَأَفْضَلُهَا قَوْلُ لاَ إِلَهَ إِلاَّ اللَّهُ، وَأَدْنَاهَا إِمَاطَةُ الأَذَى عَنِ الطَّرِيقِ، وَالْحَيَاءُ شُعْبَةٌ مِنَ الإِيمَانِ». [رواه مسلم في صحيحه - الحديث رقم 35]',
+      contentEn: 'Narrated Abu Hurairah: The Messenger of Allah ﷺ said: "Faith has over seventy branches or over sixty branches, the most excellent of which is the declaration that there is no god but Allah, and the humblest of which is the removal of what is injurious from the path: and modesty is the branch of faith."',
+      explanationAr: 'بيان أن الإيمان ليس مجرد عقيدة قلبية أو كلمة تقال، بل هو عقيدة وقول وعمل، وله مراتب وشعب متعددة تشمل العبادات والأخلاق والمعاملات.',
+      explanationEn: 'Faith consists of belief, speech, and action, having many branches ranging from monotheism to practical civic kindness and modesty.'
+    },
+    {
+      id: 'msl-12',
+      hadithNumber: 55,
+      titleAr: 'حديث الدين النصيحة (صحيح مسلم 55)',
+      titleEn: 'Religion is Sincerity (Sahih Muslim 55)',
+      contentAr: 'عَنْ تَمِيمٍ الدَّارِيِّ رَضِيَ اللَّهُ عَنْهُ أَنَّ النَّبِيَّ ﷺ قَالَ:\n\n«الدِّينُ النَّصِيحَةُ». قُلْنَا: لِمَنْ؟ قَالَ: «لِلَّهِ وَلِكِتَابِهِ وَلِرَسُولِهِ وَلأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ». [رواه مسلم في صحيحه - الحديث رقم 55]',
+      contentEn: 'Narrated Tamim ad-Dari: The Prophet ﷺ said: "The deen (religion) is sincerity/advice." We said: "To whom?" He said: "To Allah, His Book, His Messenger, and to the leaders of the Muslims and their common folk."',
+      explanationAr: 'هذا الحديث عماد من أعمدة الدين، يوضح أن جوهر الدين قائم على النصح والإخلاص والصدق في كافة الروابط الإيمانية والاجتماعية.',
+      explanationEn: 'The essence of religion is sincerity and mutual advice across all levels of the community.'
+    },
+    {
+      id: 'msl-13',
+      hadithNumber: 2577,
+      titleAr: 'حديث تحريم الظلم والعدل بين العباد (صحيح مسلم 2577)',
+      titleEn: 'Prohibition of Oppression (Sahih Muslim 2577)',
+      contentAr: 'عَنْ أَبِي ذَرٍّ الْغِفَارِيِّ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ ﷺ فِيمَا يَرْوِي عَنْ رَبِّهِ تَبَارَكَ وَتَعَالَى أَنَّهُ قَالَ:\n\n«يَا عِبَادِي إِنِّي حَرَّمْتُ الظُّلْمَ عَلَى نَفْسِي وَجَعَلْتُهُ بَيْنَكُمْ مُحَرَّمًا فَلاَ تَظَالَمُوا...». [رواه مسلم في صحيحه - الحديث رقم 2577]',
+      contentEn: 'Narrated Abu Dharr: The Prophet ﷺ related that Allah said: "O My servants, I have forbidden oppression for Myself and have made it forbidden amongst you, so do not oppress one another..."',
+      explanationAr: 'حديث قدسي عظيم الشأن، يقرر كمال عدل الله تعالى، ويحرم الظلم بكافة صوره وأشكاله بين الناس، ويحث على طلب الهداية والرزق والمغفرة منه وحده.',
+      explanationEn: 'A magnificent Hadith Qudsi highlighting Divine absolute justice and the strict prohibition of injustice among mankind.'
+    },
+    {
+      id: 'msl-14',
+      hadithNumber: 656,
+      titleAr: 'حديث فضل صلاة العشاء والصبح في جماعة (صحيح مسلم 656)',
+      titleEn: 'The Virtues of Fajr and Isha in Congregation (Sahih Muslim 656)',
+      contentAr: 'عَنْ عُثْمَانَ بْنِ عَفَّانَ رَضِيَ اللَّهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ:\n\n«مَنْ صَلَّى الْعِشَاءَ فِي جَمَاعَةٍ فَكَأَنَّمَا قَامَ نِصْفَ اللَّيْلِ، وَمَنْ صَلَّى الصُّبْحَ فِي جَمَاعَةٍ فَكَأَنَّمَا صَلَّى اللَّيْلَ كُلَّهُ». [رواه مسلم في صحيحه - الحديث رقم 656]',
+      contentEn: 'Narrated Uthman ibn Affan: I heard the Messenger of Allah ﷺ saying: "He who prays Isha in congregation is as if he stood in prayer for half the night, and he who prays Fajr in congregation is as if he prayed the whole night."',
+      explanationAr: 'ترغيب بليغ في أداء صلاتي العشاء والصبح جماعة بالمسجد، إذ يعادل أجرهما أجر قيام الليل كله لما فيهما من المشقة العالية ومجاهدة النفس والهوى.',
+      explanationEn: 'Earning the immense reward of continuous overnight prayers simply by attending Fajr and Isha congregational services.'
     }
   ]
 };

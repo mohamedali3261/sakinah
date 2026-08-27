@@ -131,8 +131,9 @@
 
 /* Islamic pattern background overlay */
 .bg-islamic-pattern {
-  background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
-    radial-gradient(rgba(245, 158, 11, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+  background-image: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.94)), url('./assets/Ghh.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: repeat-y;
+  background-attachment: scroll;
 }

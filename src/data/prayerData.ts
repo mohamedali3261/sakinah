@@ -28,7 +28,7 @@ export const CALCULATION_METHODS: CalculationMethod[] = [
   },
   {
     id: 'mwl',
-    nameAr: 'رابطة العالم الإسلامي',
+    nameAr: 'رابطة العالم الإسلامي (MWL)',
     nameEn: 'Muslim World League (MWL)',
     descriptionAr: 'الفجر ١٨° - العشاء ١٧° (أوروبا، الشرق الأقصى، أجزاء من أمريكا)',
     fajrAngle: 18.0,
@@ -61,6 +61,7 @@ export const CALCULATION_METHODS: CalculationMethod[] = [
 ];
 
 export const CITIES_PRAYERS: CityPrayer[] = [
+  // مصر
   {
     cityAr: 'القاهرة',
     cityEn: 'Cairo',
@@ -72,7 +73,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:37',
     maghrib: '17:55',
     isha: '19:14',
-    qiblaAngle: 136
+    qiblaAngle: 136,
+    latitude: 30.0444,
+    longitude: 31.2357,
+    timezone: 2
   },
   {
     cityAr: 'الإسكندرية',
@@ -85,8 +89,157 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:43',
     maghrib: '18:00',
     isha: '19:21',
-    qiblaAngle: 138
+    qiblaAngle: 138,
+    latitude: 31.2001,
+    longitude: 29.9187,
+    timezone: 2
   },
+  {
+    cityAr: 'الجيزة',
+    cityEn: 'Giza',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:54',
+    sunrise: '06:20',
+    dhuhr: '12:08',
+    asr: '15:37',
+    maghrib: '17:55',
+    isha: '19:14',
+    qiblaAngle: 136,
+    latitude: 30.0131,
+    longitude: 31.2089,
+    timezone: 2
+  },
+  {
+    cityAr: 'المنصورة',
+    cityEn: 'Mansoura',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:52',
+    sunrise: '06:19',
+    dhuhr: '12:07',
+    asr: '15:36',
+    maghrib: '17:54',
+    isha: '19:14',
+    qiblaAngle: 139,
+    latitude: 31.0409,
+    longitude: 31.3785,
+    timezone: 2
+  },
+  {
+    cityAr: 'طنطا',
+    cityEn: 'Tanta',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:54',
+    sunrise: '06:21',
+    dhuhr: '12:09',
+    asr: '15:38',
+    maghrib: '17:56',
+    isha: '19:16',
+    qiblaAngle: 138,
+    latitude: 30.7865,
+    longitude: 31.0004,
+    timezone: 2
+  },
+  {
+    cityAr: 'بورسعيد',
+    cityEn: 'Port Said',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:48',
+    sunrise: '06:15',
+    dhuhr: '12:03',
+    asr: '15:31',
+    maghrib: '17:50',
+    isha: '19:10',
+    qiblaAngle: 142,
+    latitude: 31.2653,
+    longitude: 32.3019,
+    timezone: 2
+  },
+  {
+    cityAr: 'السويس',
+    cityEn: 'Suez',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:50',
+    sunrise: '06:15',
+    dhuhr: '12:04',
+    asr: '15:32',
+    maghrib: '17:52',
+    isha: '19:10',
+    qiblaAngle: 139,
+    latitude: 29.9668,
+    longitude: 32.5498,
+    timezone: 2
+  },
+  {
+    cityAr: 'أسوان',
+    cityEn: 'Aswan',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:52',
+    sunrise: '06:12',
+    dhuhr: '12:02',
+    asr: '15:26',
+    maghrib: '17:52',
+    isha: '19:07',
+    qiblaAngle: 115,
+    latitude: 24.0889,
+    longitude: 32.8998,
+    timezone: 2
+  },
+  {
+    cityAr: 'الأقصر',
+    cityEn: 'Luxor',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:51',
+    sunrise: '06:13',
+    dhuhr: '12:03',
+    asr: '15:29',
+    maghrib: '17:53',
+    isha: '19:08',
+    qiblaAngle: 120,
+    latitude: 25.6872,
+    longitude: 32.6396,
+    timezone: 2
+  },
+  {
+    cityAr: 'أسيوط',
+    cityEn: 'Asyut',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:55',
+    sunrise: '06:18',
+    dhuhr: '12:08',
+    asr: '15:35',
+    maghrib: '17:57',
+    isha: '19:14',
+    qiblaAngle: 129,
+    latitude: 27.1783,
+    longitude: 31.1859,
+    timezone: 2
+  },
+  {
+    cityAr: 'سوهاج',
+    cityEn: 'Sohag',
+    countryAr: 'مصر',
+    countryEn: 'Egypt',
+    fajr: '04:53',
+    sunrise: '06:16',
+    dhuhr: '12:06',
+    asr: '15:33',
+    maghrib: '17:55',
+    isha: '19:12',
+    qiblaAngle: 125,
+    latitude: 26.5569,
+    longitude: 31.6948,
+    timezone: 2
+  },
+
+  // المملكة العربية السعودية
   {
     cityAr: 'مكة المكرمة',
     cityEn: 'Makkah',
@@ -98,7 +251,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:52',
     maghrib: '18:34',
     isha: '20:04',
-    qiblaAngle: 0
+    qiblaAngle: 0,
+    latitude: 21.3891,
+    longitude: 39.8579,
+    timezone: 3
   },
   {
     cityAr: 'المدينة المنورة',
@@ -111,20 +267,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:56',
     maghrib: '18:35',
     isha: '20:05',
-    qiblaAngle: 172
-  },
-  {
-    cityAr: 'القدس الشريف',
-    cityEn: 'Jerusalem',
-    countryAr: 'فلسطين',
-    countryEn: 'Palestine',
-    fajr: '04:47',
-    sunrise: '06:11',
-    dhuhr: '11:58',
-    asr: '15:24',
-    maghrib: '17:44',
-    isha: '19:04',
-    qiblaAngle: 154
+    qiblaAngle: 172,
+    latitude: 24.5247,
+    longitude: 39.5692,
+    timezone: 3
   },
   {
     cityAr: 'الرياض',
@@ -137,8 +283,127 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:33',
     maghrib: '18:10',
     isha: '19:40',
-    qiblaAngle: 243
+    qiblaAngle: 243,
+    latitude: 24.7136,
+    longitude: 46.6753,
+    timezone: 3
   },
+  {
+    cityAr: 'جدة',
+    cityEn: 'Jeddah',
+    countryAr: 'المملكة العربية السعودية',
+    countryEn: 'Saudi Arabia',
+    fajr: '05:06',
+    sunrise: '06:24',
+    dhuhr: '12:30',
+    asr: '15:54',
+    maghrib: '18:36',
+    isha: '20:06',
+    qiblaAngle: 104,
+    latitude: 21.5433,
+    longitude: 39.1728,
+    timezone: 3
+  },
+  {
+    cityAr: 'الدمام',
+    cityEn: 'Dammam',
+    countryAr: 'المملكة العربية السعودية',
+    countryEn: 'Saudi Arabia',
+    fajr: '04:36',
+    sunrise: '05:56',
+    dhuhr: '11:58',
+    asr: '15:22',
+    maghrib: '17:59',
+    isha: '19:29',
+    qiblaAngle: 247,
+    latitude: 26.4207,
+    longitude: 50.0888,
+    timezone: 3
+  },
+  {
+    cityAr: 'الطائف',
+    cityEn: 'Taif',
+    countryAr: 'المملكة العربية السعودية',
+    countryEn: 'Saudi Arabia',
+    fajr: '05:02',
+    sunrise: '06:19',
+    dhuhr: '12:26',
+    asr: '15:49',
+    maghrib: '18:32',
+    isha: '20:02',
+    qiblaAngle: 295,
+    latitude: 21.2854,
+    longitude: 40.4222,
+    timezone: 3
+  },
+  {
+    cityAr: 'تبوك',
+    cityEn: 'Tabuk',
+    countryAr: 'المملكة العربية السعودية',
+    countryEn: 'Saudi Arabia',
+    fajr: '05:14',
+    sunrise: '06:37',
+    dhuhr: '12:43',
+    asr: '16:09',
+    maghrib: '18:48',
+    isha: '20:18',
+    qiblaAngle: 161,
+    latitude: 28.3835,
+    longitude: 36.5662,
+    timezone: 3
+  },
+  {
+    cityAr: 'أبها',
+    cityEn: 'Abha',
+    countryAr: 'المملكة العربية السعودية',
+    countryEn: 'Saudi Arabia',
+    fajr: '04:59',
+    sunrise: '06:14',
+    dhuhr: '12:20',
+    asr: '15:41',
+    maghrib: '18:25',
+    isha: '19:55',
+    qiblaAngle: 334,
+    latitude: 18.2164,
+    longitude: 42.5053,
+    timezone: 3
+  },
+
+  // فلسطين والبلاد المجاورة
+  {
+    cityAr: 'القدس الشريف',
+    cityEn: 'Jerusalem',
+    countryAr: 'فلسطين',
+    countryEn: 'Palestine',
+    fajr: '04:47',
+    sunrise: '06:11',
+    dhuhr: '11:58',
+    asr: '15:24',
+    maghrib: '17:44',
+    isha: '19:04',
+    qiblaAngle: 154,
+    latitude: 31.7683,
+    longitude: 35.2137,
+    timezone: 2
+  },
+  {
+    cityAr: 'غزة',
+    cityEn: 'Gaza',
+    countryAr: 'فلسطين',
+    countryEn: 'Palestine',
+    fajr: '04:50',
+    sunrise: '06:14',
+    dhuhr: '12:01',
+    asr: '15:28',
+    maghrib: '17:48',
+    isha: '19:07',
+    qiblaAngle: 148,
+    latitude: 31.5017,
+    longitude: 34.4668,
+    timezone: 2
+  },
+
+  // الإمارات والخليج
   {
     cityAr: 'دبي',
     cityEn: 'Dubai',
@@ -150,7 +415,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:53',
     maghrib: '18:32',
     isha: '19:50',
-    qiblaAngle: 258
+    qiblaAngle: 258,
+    latitude: 25.2048,
+    longitude: 55.2708,
+    timezone: 4
   },
   {
     cityAr: 'أبو ظبي',
@@ -163,59 +431,26 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:56',
     maghrib: '18:36',
     isha: '19:53',
-    qiblaAngle: 260
+    qiblaAngle: 260,
+    latitude: 24.4539,
+    longitude: 54.3773,
+    timezone: 4
   },
   {
-    cityAr: 'بغداد',
-    cityEn: 'Baghdad',
-    countryAr: 'العراق',
-    countryEn: 'Iraq',
-    fajr: '05:08',
-    sunrise: '06:32',
-    dhuhr: '12:18',
-    asr: '15:39',
-    maghrib: '18:04',
-    isha: '19:28',
-    qiblaAngle: 198
-  },
-  {
-    cityAr: 'دمشق',
-    cityEn: 'Damascus',
-    countryAr: 'سوريا',
-    countryEn: 'Syria',
-    fajr: '04:52',
-    sunrise: '06:18',
-    dhuhr: '12:05',
-    asr: '15:28',
-    maghrib: '17:51',
-    isha: '19:12',
-    qiblaAngle: 161
-  },
-  {
-    cityAr: 'عمّان',
-    cityEn: 'Amman',
-    countryAr: 'الأردن',
-    countryEn: 'Jordan',
-    fajr: '04:49',
-    sunrise: '06:13',
-    dhuhr: '12:01',
-    asr: '15:26',
-    maghrib: '17:48',
-    isha: '19:07',
-    qiblaAngle: 157
-  },
-  {
-    cityAr: 'بيروت',
-    cityEn: 'Beirut',
-    countryAr: 'لبنان',
-    countryEn: 'Lebanon',
-    fajr: '04:56',
-    sunrise: '06:21',
-    dhuhr: '12:07',
-    asr: '15:30',
-    maghrib: '17:53',
-    isha: '19:15',
-    qiblaAngle: 162
+    cityAr: 'الشارقة',
+    cityEn: 'Sharjah',
+    countryAr: 'الإمارات العربية المتحدة',
+    countryEn: 'UAE',
+    fajr: '05:11',
+    sunrise: '06:29',
+    dhuhr: '12:31',
+    asr: '15:52',
+    maghrib: '18:31',
+    isha: '19:49',
+    qiblaAngle: 258,
+    latitude: 25.3463,
+    longitude: 55.4209,
+    timezone: 4
   },
   {
     cityAr: 'الكويت',
@@ -228,7 +463,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:38',
     maghrib: '18:12',
     isha: '19:35',
-    qiblaAngle: 226
+    qiblaAngle: 226,
+    latitude: 29.3759,
+    longitude: 47.9774,
+    timezone: 3
   },
   {
     cityAr: 'الدوحة',
@@ -241,7 +479,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:32',
     maghrib: '18:10',
     isha: '19:30',
-    qiblaAngle: 247
+    qiblaAngle: 247,
+    latitude: 25.2854,
+    longitude: 51.5310,
+    timezone: 3
   },
   {
     cityAr: 'المنامة',
@@ -254,7 +495,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:33',
     maghrib: '18:11',
     isha: '19:32',
-    qiblaAngle: 244
+    qiblaAngle: 244,
+    latitude: 26.2285,
+    longitude: 50.5860,
+    timezone: 3
   },
   {
     cityAr: 'مسقط',
@@ -267,7 +511,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:42',
     maghrib: '18:20',
     isha: '19:35',
-    qiblaAngle: 268
+    qiblaAngle: 268,
+    latitude: 23.5880,
+    longitude: 58.3829,
+    timezone: 4
   },
   {
     cityAr: 'صنعاء',
@@ -280,8 +527,111 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:37',
     maghrib: '18:17',
     isha: '19:32',
-    qiblaAngle: 334
+    qiblaAngle: 334,
+    latitude: 15.3694,
+    longitude: 44.1910,
+    timezone: 3
   },
+  {
+    cityAr: 'عدن',
+    cityEn: 'Aden',
+    countryAr: 'اليمن',
+    countryEn: 'Yemen',
+    fajr: '04:56',
+    sunrise: '06:11',
+    dhuhr: '12:13',
+    asr: '15:33',
+    maghrib: '18:14',
+    isha: '19:28',
+    qiblaAngle: 337,
+    latitude: 12.7855,
+    longitude: 45.0187,
+    timezone: 3
+  },
+
+  // الشام والعراق
+  {
+    cityAr: 'بغداد',
+    cityEn: 'Baghdad',
+    countryAr: 'العراق',
+    countryEn: 'Iraq',
+    fajr: '05:08',
+    sunrise: '06:32',
+    dhuhr: '12:18',
+    asr: '15:39',
+    maghrib: '18:04',
+    isha: '19:28',
+    qiblaAngle: 198,
+    latitude: 33.3152,
+    longitude: 44.3661,
+    timezone: 3
+  },
+  {
+    cityAr: 'البصرة',
+    cityEn: 'Basra',
+    countryAr: 'العراق',
+    countryEn: 'Iraq',
+    fajr: '04:58',
+    sunrise: '06:21',
+    dhuhr: '12:11',
+    asr: '15:34',
+    maghrib: '18:01',
+    isha: '19:23',
+    qiblaAngle: 217,
+    latitude: 30.5081,
+    longitude: 47.7835,
+    timezone: 3
+  },
+  {
+    cityAr: 'دمشق',
+    cityEn: 'Damascus',
+    countryAr: 'سوريا',
+    countryEn: 'Syria',
+    fajr: '04:52',
+    sunrise: '06:18',
+    dhuhr: '12:05',
+    asr: '15:28',
+    maghrib: '17:51',
+    isha: '19:12',
+    qiblaAngle: 161,
+    latitude: 33.5138,
+    longitude: 36.2765,
+    timezone: 3
+  },
+  {
+    cityAr: 'عمّان',
+    cityEn: 'Amman',
+    countryAr: 'الأردن',
+    countryEn: 'Jordan',
+    fajr: '04:49',
+    sunrise: '06:13',
+    dhuhr: '12:01',
+    asr: '15:26',
+    maghrib: '17:48',
+    isha: '19:07',
+    qiblaAngle: 157,
+    latitude: 31.9454,
+    longitude: 35.9284,
+    timezone: 3
+  },
+  {
+    cityAr: 'بيروت',
+    cityEn: 'Beirut',
+    countryAr: 'لبنان',
+    countryEn: 'Lebanon',
+    fajr: '04:56',
+    sunrise: '06:21',
+    dhuhr: '12:07',
+    asr: '15:30',
+    maghrib: '17:53',
+    isha: '19:15',
+    qiblaAngle: 162,
+    latitude: 33.8938,
+    longitude: 35.5018,
+    timezone: 2
+  },
+
+  // المغرب العربي وشمال إفريقيا
   {
     cityAr: 'الخرطوم',
     cityEn: 'Khartoum',
@@ -293,7 +643,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:33',
     maghrib: '18:11',
     isha: '19:25',
-    qiblaAngle: 47
+    qiblaAngle: 47,
+    latitude: 15.5007,
+    longitude: 32.5599,
+    timezone: 2
   },
   {
     cityAr: 'طرابلس',
@@ -306,7 +659,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:32',
     maghrib: '19:08',
     isha: '20:30',
-    qiblaAngle: 116
+    qiblaAngle: 116,
+    latitude: 32.8872,
+    longitude: 13.1913,
+    timezone: 2
   },
   {
     cityAr: 'تونس',
@@ -319,7 +675,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:21',
     maghrib: '19:00',
     isha: '20:25',
-    qiblaAngle: 114
+    qiblaAngle: 114,
+    latitude: 36.8065,
+    longitude: 10.1815,
+    timezone: 1
   },
   {
     cityAr: 'الجزائر',
@@ -332,7 +691,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:38',
     maghrib: '19:16',
     isha: '20:41',
-    qiblaAngle: 104
+    qiblaAngle: 104,
+    latitude: 36.7538,
+    longitude: 3.0588,
+    timezone: 1
   },
   {
     cityAr: 'الرباط',
@@ -345,7 +707,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '17:03',
     maghrib: '20:07',
     isha: '21:30',
-    qiblaAngle: 96
+    qiblaAngle: 96,
+    latitude: 34.0209,
+    longitude: -6.8416,
+    timezone: 1
   },
   {
     cityAr: 'الدار البيضاء',
@@ -358,8 +723,29 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '17:06',
     maghrib: '20:09',
     isha: '21:33',
-    qiblaAngle: 96
+    qiblaAngle: 96,
+    latitude: 33.5731,
+    longitude: -7.5898,
+    timezone: 1
   },
+  {
+    cityAr: 'نواكشوط',
+    cityEn: 'Nouakchott',
+    countryAr: 'موريتانيا',
+    countryEn: 'Mauritania',
+    fajr: '05:32',
+    sunrise: '06:48',
+    dhuhr: '13:08',
+    asr: '16:31',
+    maghrib: '19:27',
+    isha: '20:40',
+    qiblaAngle: 75,
+    latitude: 18.0735,
+    longitude: -15.9582,
+    timezone: 0
+  },
+
+  // مدن عالمية
   {
     cityAr: 'إسطنبول',
     cityEn: 'Istanbul',
@@ -371,7 +757,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:21',
     maghrib: '19:04',
     isha: '20:30',
-    qiblaAngle: 150
+    qiblaAngle: 150,
+    latitude: 41.0082,
+    longitude: 28.9784,
+    timezone: 3
   },
   {
     cityAr: 'لندن',
@@ -384,7 +773,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:55',
     maghrib: '20:01',
     isha: '21:38',
-    qiblaAngle: 119
+    qiblaAngle: 119,
+    latitude: 51.5074,
+    longitude: -0.1278,
+    timezone: 0
   },
   {
     cityAr: 'باريس',
@@ -397,7 +789,26 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '17:34',
     maghrib: '20:38',
     isha: '22:08',
-    qiblaAngle: 119
+    qiblaAngle: 119,
+    latitude: 48.8566,
+    longitude: 2.3522,
+    timezone: 1
+  },
+  {
+    cityAr: 'برلين',
+    cityEn: 'Berlin',
+    countryAr: 'ألمانيا',
+    countryEn: 'Germany',
+    fajr: '04:45',
+    sunrise: '06:25',
+    dhuhr: '13:12',
+    asr: '17:05',
+    maghrib: '19:58',
+    isha: '21:35',
+    qiblaAngle: 136,
+    latitude: 52.5200,
+    longitude: 13.4050,
+    timezone: 1
   },
   {
     cityAr: 'نيويورك',
@@ -410,7 +821,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:38',
     maghrib: '19:19',
     isha: '20:47',
-    qiblaAngle: 58
+    qiblaAngle: 58,
+    latitude: 40.7128,
+    longitude: -74.0060,
+    timezone: -5
   },
   {
     cityAr: 'كوالالمبور',
@@ -423,7 +837,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '16:35',
     maghrib: '19:28',
     isha: '20:39',
-    qiblaAngle: 293
+    qiblaAngle: 293,
+    latitude: 3.1390,
+    longitude: 101.6869,
+    timezone: 8
   },
   {
     cityAr: 'جاكرتا',
@@ -436,7 +853,10 @@ export const CITIES_PRAYERS: CityPrayer[] = [
     asr: '15:15',
     maghrib: '18:01',
     isha: '19:11',
-    qiblaAngle: 295
+    qiblaAngle: 295,
+    latitude: -6.2088,
+    longitude: 106.8456,
+    timezone: 7
   }
 ];
 

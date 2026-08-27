@@ -35,8 +35,6 @@ export const LibraryView: React.FC = () => {
     setSelectedChapter,
     addBookmark,
     isBookmarked,
-    toggleOfflineBook,
-    isBookOffline,
     setIsFontSettingsOpen,
     showToast
   } = useApp();
@@ -50,7 +48,6 @@ export const LibraryView: React.FC = () => {
     const prevChapter = currentIndex > 0 ? selectedBook.chapters[currentIndex - 1] : null;
     const nextChapter =
       currentIndex < selectedBook.chapters.length - 1 ? selectedBook.chapters[currentIndex + 1] : null;
-    const isOffline = isBookOffline(selectedBook.id);
 
     const handleCopy = () => {
       navigator.clipboard.writeText(
@@ -83,19 +80,6 @@ export const LibraryView: React.FC = () => {
           </button>
 
           <div className="flex items-center gap-1.5">
-            {/* Offline Save Toggle */}
-            <button
-              onClick={() => toggleOfflineBook(selectedBook.id)}
-              className={`p-2 rounded-xl border transition-all ${
-                isOffline
-                  ? 'border-emerald-500/50 bg-emerald-500/20 text-emerald-300'
-                  : 'border-white/10 hover:bg-white/10 text-slate-400'
-              }`}
-              title={language === 'ar' ? 'حفظ للقراءة دون اتصال' : 'Save Offline'}
-            >
-              {isOffline ? <Check className="w-4 h-4 text-emerald-400" /> : <Download className="w-4 h-4" />}
-            </button>
-
             {/* Bookmark Chapter */}
             <button
               onClick={() =>
@@ -237,7 +221,6 @@ export const LibraryView: React.FC = () => {
 
   // If a book is selected but not a chapter -> Show Chapters List
   if (selectedBook) {
-    const isOffline = isBookOffline(selectedBook.id);
     return (
       <div className="w-full max-w-4xl mx-auto space-y-6 pb-24">
         {/* Book Header Card */}
@@ -268,19 +251,6 @@ export const LibraryView: React.FC = () => {
               {language === 'ar' ? selectedBook.descriptionAr : selectedBook.descriptionEn}
             </p>
           </div>
-
-          <GlassButton
-            variant={isOffline ? 'primary' : 'secondary'}
-            size="sm"
-            onClick={() => toggleOfflineBook(selectedBook.id)}
-          >
-            {isOffline ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
-            <span>
-              {isOffline
-                ? language === 'ar' ? 'محفوظ للقراءة دون اتصال' : 'Saved for Offline'
-                : language === 'ar' ? 'تحميل للقراءة دون اتصال' : 'Save Offline'}
-            </span>
-          </GlassButton>
         </div>
 
         {/* Chapters Grid */}
@@ -351,7 +321,6 @@ export const LibraryView: React.FC = () => {
       {/* Books Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredBooks.map((book) => {
-          const isOffline = isBookOffline(book.id);
           return (
             <motion.div
               key={book.id}
@@ -370,13 +339,6 @@ export const LibraryView: React.FC = () => {
                   <span className="text-[10px] font-bold font-cairo px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 uppercase">
                     {book.category}
                   </span>
-
-                  {isOffline && (
-                    <span className="flex items-center gap-1 text-[10px] font-cairo text-emerald-400 font-semibold px-2 py-0.5 rounded-md bg-emerald-500/10">
-                      <Check className="w-3 h-3" />
-                      {language === 'ar' ? 'محفوظ دون اتصال' : 'Offline'}
-                    </span>
-                  )}
                 </div>
 
                 <h3 className="text-lg font-bold font-cairo group-hover:text-emerald-400 transition-colors">

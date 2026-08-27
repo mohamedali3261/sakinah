@@ -96,7 +96,7 @@ export const BOOKS_DATA: Book[] = [
     category: 'tazkiyah',
     descriptionAr: 'منهاج السالكين في تهذيب الأخلاق والترقي في مراتب العبودية',
     descriptionEn: 'The path of spiritual refinement, ethical nobility and continuous awareness of God',
-    chaptersCount: 4,
+    chaptersCount: 9,
     colorAccent: 'amber',
     chapters: [
       {
@@ -134,6 +134,51 @@ export const BOOKS_DATA: Book[] = [
         contentEn: 'Umar ibn Al-Khattab reported: I heard the Messenger of Allah ﷺ say: "If you were to rely upon Allah with the required reliance, He would provide for you just as He provides for the birds: they go out in the morning hungry and return in the evening full."',
         explanationAr: 'التوكل يجمع بين الأخذ بالأسباب الدنيوية والتعلق القلبي التام بمسبب الأسباب وخالق الكون سبحانه.',
         explanationEn: 'True Tawakkul harmonizes active effort in taking practical causes with complete reliance of the heart upon God.'
+      },
+      {
+        id: 'r-5',
+        titleAr: 'باب التوبة والرجوع إلى الله',
+        titleEn: 'Chapter on Repentance (Tawbah)',
+        contentAr: 'قال تعالى: {وَتُوبُوا إِلَى اللَّهِ جَمِيعاً أَيُّهَا الْمُؤْمِنُونَ لَعَلَّكُمْ تُفْلِحُونَ}.\n\nوعن أبي حمزة أنس بن مالك الأنصاري خادم رسول الله ﷺ رضي الله عنه قال: قال رسول الله ﷺ:\n«للَّهُ أَفْرَحُ بِتَوْبَةِ عَبْدِهِ مِنْ أَحَدِكُمْ سَقَطَ عَلَى بَعِيرِهِ وَقَدْ أَضَلَّهُ فِي أَرْضِ فَلَاةٍ». [متفق عليه]',
+        contentEn: 'Allah says: "And turn to Allah in repentance, all of you, O believers, that you might succeed."\n\nAnas ibn Malik reported that the Messenger of Allah ﷺ said: "Allah is more pleased with the repentance of His servant than any one of you who finds his camel after having lost it in a barren desert."',
+        explanationAr: 'التوبة هي أولى منازل السالكين وعماد العبودية، وفيها إثبات سعة رحمة الله تبارك وتعالى وفرحه بعودة التائبين إليه مهما كثرت ذنوبهم.',
+        explanationEn: 'Repentance is the foundation of spiritual path, illustrating Allah’s boundless mercy and joy in the return of a penitent servant.'
+      },
+      {
+        id: 'r-6',
+        titleAr: 'باب بر الوالدين وصلة الأرحام',
+        titleEn: 'Chapter on Kindness to Parents & Kinship',
+        contentAr: 'قال تعالى: {وَقَضَى رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ وَبِالْوَالِدَيْنِ إِحْسَاناً}.\n\nوعن أبي هريرة رضي الله عنه عن النبي ﷺ قال:\n«رَغِمَ أَنْفُ، ثُمَّ رَغِمَ أَنْفُ، ثُمَّ رَغِمَ أَنْفُ مَنْ أَدْرَكَ أَبَوَيْهِ عِنْدَ الْكِبَرِ، أَحَدَهُمَا أَوْ كِلَيْهِمَا فَلَمْ يَدْخُلِ الْجَنَّةَ». [رواه مسلم]',
+        contentEn: 'Allah says: "And your Lord has decreed that you not worship except Him, and to parents, good treatment."\n\nAbu Hurairah reported that the Prophet ﷺ said: "May he be disgraced, then may he be disgraced, then may he be disgraced, who finds his parents, one or both of them, in old age, and does not enter Paradise [through serving them]."',
+        explanationAr: 'بر الوالدين من أعظم القربات إلى الله تعالى وهو قرين التوحيد، وفيه بيان أن الإحسان إليهما عند كبرهما سبب مباشر في نيل الجنة ورضا الرحمن.',
+        explanationEn: 'Serving and honoring parents is coupled with Monotheism, and doing so in their old age is a direct gateway to Paradise.'
+      },
+      {
+        id: 'r-7',
+        titleAr: 'باب الصدق وفضيلته',
+        titleEn: 'Chapter on Truthfulness (Sidq)',
+        contentAr: 'قال تعالى: {يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ}.\n\nوعن عبد الله بن مسعود رضي الله عنه عن النبي ﷺ قال:\n«إِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ، وَإِنَّ الْبِرَّ يَهْدِي إِلَى الْجَنَّةِ، وَإِنَّ الرَّجُلَ لَيَصْدُقُ حَتَّى يُكْتَبَ عِنْدَ اللَّهِ صِدِّيقاً، وَإِنَّ الْكَذِبَ يَهْدِي إِلَى الْفُجُورِ، وَإِنَّ الْفُجُورَ يَهْدِي إِلَى النَّارِ، وَإِنَّ الرَّجُلَ لَيَكْذِبُ حَتَّى يُكْتَبَ عِنْدَ اللَّهِ كَذَّاباً». [متفق عليه]',
+        contentEn: 'Allah says: "O you who have believed, fear Allah and be with those who are true."\n\nIbn Mas’ud reported that the Prophet ﷺ said: "Truthfulness leads to righteousness, and righteousness leads to Paradise. A man continues to tell the truth until he is written with Allah as a truthful person..."',
+        explanationAr: 'الصدق هو مطابقة الظاهر للباطن، وهو أصل الهداية والنجاة وسبب الطمأنينة النفسية، والتحذير من الكذب وأنه يقود للفجور والهلاك.',
+        explanationEn: 'Truthfulness brings spiritual peace, integrity and leads to Paradise, while dishonesty breeds corruption and misery.'
+      },
+      {
+        id: 'r-8',
+        titleAr: 'باب فضل قراءة القرآن وحفظه',
+        titleEn: 'Chapter on Virtues of Reciting the Quran',
+        contentAr: 'قال تعالى: {إِنَّ الَّذِينَ يَتْلُونَ كِتَابَ اللَّهِ وَأَقَامُوا الصَّلَاةَ وَأَنفَقُوا مِمَّا رَزَقْنَاهُمْ سِرّاً وَعَلَانِيَةً يَرْجُونَ تِجَارَةً لَّن تَبُورَ}.\n\nوعن أبي أمامة رضي الله عنه قال: سمعت رسول الله ﷺ يقول:\n«اقْرَؤُوا القُرْآنَ فإنَّه يَأْتي يَومَ القِيامَةِ شَفِيعاً لأَصْحابِهِ». [رواه مسلم]',
+        contentEn: 'Allah says: "Indeed, those who recite the Book of Allah and establish prayer and spend out of what We have provided them... hope for a transaction that will never perish."\n\nAbu Umama reported: I heard the Messenger of Allah ﷺ say: "Recite the Quran, for it will come on the Day of Resurrection as an intercessor for its companions."',
+        explanationAr: 'الترغيب العظيم في ملازمة كتاب الله تلاوة وتدبراً وعملاً، وبشارة قارئ القرآن بالشفاعة العظمى من كلام الله يوم القيامة.',
+        explanationEn: 'Strong encouragement to maintain a close relationship with the Quran, guaranteeing its intercession on Resurrection Day.'
+      },
+      {
+        id: 'r-9',
+        titleAr: 'باب فضل الذكر والتحريض عليه',
+        titleEn: 'Chapter on the Virtues of Dhikr',
+        contentAr: 'قال تعالى: {فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ}.\n\nوعن أبي هريرة رضي الله عنه قال: قال رسول الله ﷺ: «يَقُولُ اللَّهُ تَعَالَى: أَنَا عِنْدَ ظَنِّ عَبْدِي بِي، وَأَنَا مَعَهُ إِذَا ذَكَرَنِي، فَإِنْ ذَكَرَنِي فِي نَفْسِهِ ذَكَرْتُهُ فِي نَفْسِي، وَإِنْ ذَكَرَنِي فِي مَلَأٍ ذَكَرْتُهُ فِي مَلَأٍ خَيْرٍ مِنْهُمْ». [متفق عليه]',
+        contentEn: 'Allah says: "So remember Me; I will remember you. And be grateful to Me and do not deny Me."\n\nAbu Hurairah reported that the Prophet ﷺ said: "Allah says: I am as My servant thinks of Me, and I am with him when he remembers Me. If he remembers Me in himself, I remember him in Myself; and if he remembers Me in a gathering, I remember him in a gathering better than them..."',
+        explanationAr: 'هذا الحديث القدسي من أرجى الأحاديث وأعظمها فضلاً؛ يبين المعية الخاصة والمحبة الإلهية التي يظفر بها الذاكرون الله كثيراً والذاكرات في كافة أحوالهم.',
+        explanationEn: 'This divine narration highlights the immense companionship and love Allah bestows upon those who frequently remember Him in solitude and in public.'
       }
     ]
   },

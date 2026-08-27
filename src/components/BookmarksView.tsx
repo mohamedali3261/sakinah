@@ -22,18 +22,12 @@ export const BookmarksView: React.FC = () => {
     theme,
     bookmarks,
     removeBookmark,
-    offlineBookIds,
-    toggleOfflineBook,
     setActiveTab,
     setSelectedBook,
     setSelectedChapter,
     setSelectedAthkarCategoryId,
     showToast
   } = useApp();
-
-  const [activeSubTab, setActiveSubTab] = useState<'bookmarks' | 'offline'>('bookmarks');
-
-  const offlineBooks = BOOKS_DATA.filter((b) => offlineBookIds.includes(b.id));
 
   const handleOpenBookmark = (item: (typeof bookmarks)[0]) => {
     if (item.type === 'athkar') {
@@ -74,45 +68,19 @@ export const BookmarksView: React.FC = () => {
           </div>
           <div>
             <h2 className="text-xl font-bold font-cairo">
-              {language === 'ar' ? 'المحفوظات والقراءة دون اتصال' : 'Saved Bookmarks & Offline Books'}
+              {language === 'ar' ? 'المحفوظات والمفضلة' : 'Saved Bookmarks'}
             </h2>
             <p className="text-xs opacity-75 font-cairo">
               {language === 'ar'
                 ? 'أدعية وآيات وكتب محفوظة للرجوع إليها في أي وقت'
-                : 'Your personal spiritual repository available anytime offline'}
+                : 'Your personal spiritual repository available anytime'}
             </p>
           </div>
-        </div>
-
-        {/* Sub-tab switcher */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setActiveSubTab('bookmarks')}
-            className={`px-4 py-2 rounded-2xl border text-xs font-cairo font-bold transition-all cursor-pointer ${
-              activeSubTab === 'bookmarks'
-                ? 'border-emerald-400 bg-emerald-500/20 text-emerald-300 shadow-md'
-                : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
-            }`}
-          >
-            {language === 'ar' ? 'المفضلة' : 'Bookmarks'} ({bookmarks.length})
-          </button>
-
-          <button
-            onClick={() => setActiveSubTab('offline')}
-            className={`px-4 py-2 rounded-2xl border text-xs font-cairo font-bold transition-all cursor-pointer ${
-              activeSubTab === 'offline'
-                ? 'border-emerald-400 bg-emerald-500/20 text-emerald-300 shadow-md'
-                : 'border-white/10 bg-white/5 opacity-70 hover:opacity-100'
-            }`}
-          >
-            {language === 'ar' ? 'الكتب المحمّلة' : 'Offline Books'} ({offlineBooks.length})
-          </button>
         </div>
       </div>
 
       {/* Bookmarks Section */}
-      {activeSubTab === 'bookmarks' && (
-        <div className="space-y-3">
+      <div className="space-y-3">
           {bookmarks.length === 0 ? (
             <div className="p-12 rounded-3xl border border-white/10 bg-white/5 text-center opacity-60">
               <Bookmark className="w-10 h-10 mx-auto text-amber-400/60 mb-2" />
@@ -179,77 +147,6 @@ export const BookmarksView: React.FC = () => {
             ))
           )}
         </div>
-      )}
-
-      {/* Offline Books Section */}
-      {activeSubTab === 'offline' && (
-        <div className="space-y-4">
-          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3 text-xs font-cairo">
-            <span className="text-emerald-300">
-              {language === 'ar'
-                ? 'جميع الكتب المدرجة هنا متوفرة بالكامل دون الحاجة لأي اتصال بالإنترنت.'
-                : 'All listed books below are fully downloaded and cached locally for offline reading.'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {offlineBooks.map((book) => (
-              <div
-                key={book.id}
-                className={`p-6 rounded-3xl border backdrop-blur-xl shadow-xl flex flex-col justify-between ${
-                  theme === 'light'
-                    ? 'bg-white/85 border-slate-200 text-slate-800'
-                    : theme === 'sepia'
-                    ? 'bg-[#291c14]/85 border-amber-800/40 text-amber-50'
-                    : 'bg-slate-900/80 border-slate-800 text-slate-100'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-bold font-cairo px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300">
-                      {book.chapters.length} {language === 'ar' ? 'فصل كامل' : 'Chapters'}
-                    </span>
-                    <span className="flex items-center gap-1 text-[10px] font-cairo text-emerald-400 font-bold">
-                      <Check className="w-3.5 h-3.5" />
-                      {language === 'ar' ? 'جاهز دون اتصال' : 'Offline Ready'}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-bold font-cairo">
-                    {language === 'ar' ? book.titleAr : book.titleEn}
-                  </h3>
-                  <p className="text-xs opacity-70 font-cairo mt-0.5">
-                    {language === 'ar' ? book.authorAr : book.authorEn}
-                  </p>
-                </div>
-
-                <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between gap-2">
-                  <GlassButton
-                    size="sm"
-                    variant="primary"
-                    onClick={() => {
-                      setSelectedBook(book);
-                      setSelectedChapter(book.chapters[0]);
-                      setActiveTab('library');
-                    }}
-                  >
-                    <BookOpen className="w-3.5 h-3.5" />
-                    <span>{language === 'ar' ? 'بدء القراءة' : 'Read Book'}</span>
-                  </GlassButton>
-
-                  <button
-                    onClick={() => toggleOfflineBook(book.id)}
-                    className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-rose-400 text-xs font-cairo"
-                    title={language === 'ar' ? 'حذف من التخزين' : 'Remove from offline'}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

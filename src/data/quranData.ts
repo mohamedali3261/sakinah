@@ -150,6 +150,48 @@ export const RECITERS_LIST: Reciter[] = [
     nameAr: 'خالد الجليل',
     nameEn: 'Khalid Al-Jalil',
     serverUrl: 'https://server10.mp3quran.net/jleel'
+  },
+  {
+    id: 'hudhaifi',
+    nameAr: 'علي الحذيفي',
+    nameEn: 'Ali Al-Hudhaifi',
+    serverUrl: 'https://server9.mp3quran.net/hthfi'
+  },
+  {
+    id: 'juhany',
+    nameAr: 'عبد الله عواد الجهني',
+    nameEn: 'Abdullah Awad Al-Juhany',
+    serverUrl: 'https://server13.mp3quran.net/jhn'
+  },
+  {
+    id: 'muhammad_ayyub',
+    nameAr: 'محمد أيوب',
+    nameEn: 'Muhammad Ayyub',
+    serverUrl: 'https://server8.mp3quran.net/ayyub'
+  },
+  {
+    id: 'wadih_yamani',
+    nameAr: 'وديع اليمني',
+    nameEn: 'Wadih Al-Yamani',
+    serverUrl: 'https://server6.mp3quran.net/wdee3'
+  },
+  {
+    id: 'bandar_baleela',
+    nameAr: 'بندر بليلة',
+    nameEn: 'Bandar Baleela',
+    serverUrl: 'https://server6.mp3quran.net/balila'
+  },
+  {
+    id: 'salah_budair',
+    nameAr: 'صلاح البدير',
+    nameEn: 'Salah Al-Budair',
+    serverUrl: 'https://server6.mp3quran.net/s_bud'
+  },
+  {
+    id: 'tawfeeq_sayegh',
+    nameAr: 'توفيق الصائغ',
+    nameEn: 'Tawfeeq As-Sayegh',
+    serverUrl: 'https://server6.mp3quran.net/twfeeq'
   }
 ];
 

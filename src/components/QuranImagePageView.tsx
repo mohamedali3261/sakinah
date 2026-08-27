@@ -37,6 +37,8 @@ interface QuranImagePageViewProps {
   language: 'ar' | 'en';
   surahNameAr?: string;
   juzNumber?: number;
+  isStandalone?: boolean;
+  onClose?: () => void;
 }
 
 // Standard Madani Mushaf Surah Start Pages (604 pages total)
@@ -82,26 +84,58 @@ const CornerOrnamentSVG: React.FC<{ position: 'top-left' | 'top-right' | 'bottom
   }[position];
 
   return (
-    <div className={`absolute ${posClass} w-7 h-7 sm:w-12 sm:h-12 pointer-events-none z-20 ${rotation}`}>
-      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className={`absolute ${posClass} w-8 h-8 sm:w-14 sm:h-14 pointer-events-none z-20 ${rotation}`}>
+      <svg viewBox="0 0 120 120" className="w-full h-full drop-shadow-md" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id={`goldGrad-${position}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fef08a" />
-            <stop offset="50%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#78350f" />
+            <stop offset="0%" stopColor="#FFF9D0" />
+            <stop offset="35%" stopColor="#FACC15" />
+            <stop offset="70%" stopColor="#CA8A04" />
+            <stop offset="100%" stopColor="#854D0E" />
           </linearGradient>
           <linearGradient id={`emeraldGrad-${position}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#34d399" />
-            <stop offset="100%" stopColor="#065f46" />
+            <stop offset="0%" stopColor="#34D399" />
+            <stop offset="50%" stopColor="#059669" />
+            <stop offset="100%" stopColor="#064E3B" />
           </linearGradient>
         </defs>
-        {/* Corner Arabesque Arch */}
-        <path d="M 0,0 L 100,0 C 65,0 42,18 42,42 C 18,42 0,65 0,100 Z" fill={`url(#goldGrad-${position})`} />
-        <path d="M 0,0 L 80,0 C 50,0 32,15 32,32 C 15,32 0,50 0,80 Z" fill={`url(#emeraldGrad-${position})`} />
-        <circle cx="25" cy="25" r="7" fill={`url(#goldGrad-${position})`} />
-        <polygon points="25,14 28,22 36,25 28,28 25,36 22,28 14,25 22,22" fill="#ffffff" />
-        <line x1="0" y1="0" x2="100" y2="0" stroke="#fef08a" strokeWidth="3" />
-        <line x1="0" y1="0" x2="0" y2="100" stroke="#fef08a" strokeWidth="3" />
+        
+        {/* Layer 1: Traditional Outer Arabesque Gate/Arch */}
+        <path d="M 0,0 L 120,0 C 85,0 55,20 55,55 C 55,85 20,120 0,120 Z" fill={`url(#goldGrad-${position})`} opacity="0.9" />
+        
+        {/* Layer 2: Inner Emerald Engraving */}
+        <path d="M 0,0 L 105,0 C 72,0 46,18 46,46 C 46,72 18,105 0,105 Z" fill={`url(#emeraldGrad-${position})`} />
+        
+        {/* Layer 3: Nested Golden Filigree Arcs */}
+        <path d="M 0,0 L 90,0 C 60,0 38,15 38,38 C 15,38 0,60 0,90 Z" stroke={`url(#goldGrad-${position})`} strokeWidth="1.5" />
+        <path d="M 0,0 L 75,0 C 50,0 30,12 30,30 C 12,30 0,50 0,75 Z" stroke={`url(#goldGrad-${position})`} strokeWidth="1" strokeDasharray="2,2" />
+
+        {/* Hand-drawn Arabesque Swirls (سنابل وزخارف نباتية مرسومة) */}
+        <path d="M 15,80 C 15,50 35,35 65,35 C 50,20 30,15 10,25" stroke={`url(#goldGrad-${position})`} strokeWidth="1.2" fill="none" strokeLinecap="round" />
+        <path d="M 80,15 C 50,15 35,35 35,65 C 20,50 15,30 25,10" stroke={`url(#goldGrad-${position})`} strokeWidth="1.2" fill="none" strokeLinecap="round" />
+        
+        {/* Small teardrop leaves inside */}
+        <path d="M 45,45 C 50,40 55,45 50,50 C 45,55 40,50 45,45 Z" fill={`url(#goldGrad-${position})`} />
+        <path d="M 28,28 C 32,24 36,28 32,32 C 28,36 24,32 28,28 Z" fill={`url(#goldGrad-${position})`} />
+        <path d="M 60,20 C 65,18 68,22 65,25 C 62,28 58,25 60,20 Z" fill={`url(#goldGrad-${position})`} />
+        <path d="M 20,60 C 18,65 22,68 25,65 C 28,62 25,58 20,60 Z" fill={`url(#goldGrad-${position})`} />
+
+        {/* Layer 4: Exquisite 8-Pointed Star (ثمن النجمة الإسلامية المباركة) */}
+        <g transform="translate(32, 32)">
+          {/* Outer Star */}
+          <path d="M 0,-15 L 4,-4 L 15,0 L 4,4 L 0,15 L -4,4 L -15,0 L -4,-4 Z" fill={`url(#goldGrad-${position})`} />
+          {/* Rotated Star for 8 points */}
+          <path d="M 0,-15 L 4,-4 L 15,0 L 4,4 L 0,15 L -4,4 L -15,0 L -4,-4 Z" fill={`url(#goldGrad-${position})`} transform="rotate(45)" />
+          {/* Inner core */}
+          <circle cx="0" cy="0" r="5" fill="#92400E" />
+          <circle cx="0" cy="0" r="3" fill="#FFF9D0" />
+        </g>
+        
+        {/* Solid Gilded Corner Borders */}
+        <line x1="0" y1="0" x2="120" y2="0" stroke={`url(#goldGrad-${position})`} strokeWidth="3" />
+        <line x1="0" y1="0" x2="0" y2="120" stroke={`url(#goldGrad-${position})`} strokeWidth="3" />
+        <circle cx="0" cy="0" r="8" fill={`url(#goldGrad-${position})`} />
+        <circle cx="0" cy="0" r="4" fill="#064E3B" />
       </svg>
     </div>
   );
@@ -114,14 +148,52 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
   theme,
   language,
   surahNameAr: initialSurahName,
-  juzNumber: initialJuz
+  juzNumber: initialJuz,
+  isStandalone = false,
+  onClose
 }) => {
   const [zoomScale, setZoomScale] = useState<number>(1);
   const [resolution, setResolution] = useState<1200 | 1920 | 1024>(1200);
   const [isNightFilter, setIsNightFilter] = useState<boolean>(theme === 'dark');
+  const [pageBgMode, setPageBgMode] = useState<'default' | 'warm-yellow' | 'dark'>(() => {
+    const saved = localStorage.getItem('sakinah_mushaf_bg_mode');
+    if (saved === 'default' || saved === 'warm-yellow' || saved === 'dark') {
+      return saved as 'default' | 'warm-yellow' | 'dark';
+    }
+    return theme === 'dark' ? 'dark' : 'default';
+  });
+
+  const handleSetPageBgMode = (mode: 'default' | 'warm-yellow' | 'dark') => {
+    setPageBgMode(mode);
+    setIsNightFilter(mode === 'dark');
+    localStorage.setItem('sakinah_mushaf_bg_mode', mode);
+  };
+
+  const [bookmarks, setBookmarks] = useState<number[]>(() => {
+    const saved = localStorage.getItem('sakinah_mushaf_bookmarks');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const toggleBookmark = () => {
+    soundEngine.playClick();
+    triggerHaptic(15);
+    let updated: number[];
+    if (bookmarks.includes(pageNumber)) {
+      updated = bookmarks.filter((p) => p !== pageNumber);
+    } else {
+      updated = [...bookmarks, pageNumber].sort((a, b) => a - b);
+    }
+    setBookmarks(updated);
+    localStorage.setItem('sakinah_mushaf_bookmarks', JSON.stringify(updated));
+  };
+
+  // Keep pageNumber in localStorage to automatically resume reading position
+  useEffect(() => {
+    localStorage.setItem('sakinah_last_quran_page', pageNumber.toString());
+  }, [pageNumber]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(isStandalone);
   
   // Fill width mode (eliminates side black bars & fills screen width)
   const [isFillWidth, setIsFillWidth] = useState<boolean>(true);
@@ -137,6 +209,9 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
   const [isCachedOffline, setIsCachedOffline] = useState<boolean>(false);
   const [cacheProgress, setCacheProgress] = useState<number | null>(null);
   const [isCachingRange, setIsCachingRange] = useState<boolean>(false);
+  const [isCachingEntire, setIsCachingEntire] = useState<boolean>(false);
+  const [entireCacheProgress, setEntireCacheProgress] = useState<number | null>(null);
+  const [entireCacheCurrentPage, setEntireCacheCurrentPage] = useState<number | null>(null);
 
   // Audio Reciter Player state
   const [selectedReciter, setSelectedReciter] = useState<Reciter>(RECITERS_LIST[0]);
@@ -179,18 +254,18 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
   const getSourcesForPage = (page: number, res: number) => {
     const p3 = String(page).padStart(3, '0');
     return [
+      { name: 'المصحف المحلي', url: `/quran-images/page${p3}.png` },
       { name: 'IslamDB CDN', url: `https://quran.islam-db.com/public/data/pages/quranpages_1024/images/page${p3}.png` },
       { name: 'Quran.com CDN', url: `https://cdn.quran.com/images/pages/${res}/${page}.png` },
       { name: 'QuranHub CDN', url: `https://raw.githubusercontent.com/QuranHub/quran-pages-images/main/Hafs/page${p3}.png` },
-      { name: 'GovarJabbar CDN', url: `https://raw.githubusercontent.com/GovarJabbar/Quran-PNG/main/images/page${p3}.png` },
-      { name: 'Islamic Network CDN', url: `https://cdn.islamic.network/quran/images/high-resolution/page${p3}.png` }
+      { name: 'GovarJabbar CDN', url: `https://raw.githubusercontent.com/GovarJabbar/Quran-PNG/main/images/page${p3}.png` }
     ];
   };
 
   const [serverIndex, setServerIndex] = useState<number>(0);
   const sources = getSourcesForPage(pageNumber, resolution);
   const [currentImgSrc, setCurrentImgSrc] = useState<string>(
-    `https://quran.islam-db.com/public/data/pages/quranpages_1024/images/page${String(pageNumber).padStart(3, '0')}.png`
+    `/quran-images/page${String(pageNumber).padStart(3, '0')}.png`
   );
 
   // Audio setup when surah or reciter changes
@@ -334,6 +409,62 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
     triggerHaptic(30);
   };
 
+  const cacheEntireMushaf = async () => {
+    if (!('caches' in window)) return;
+    setIsCachingEntire(true);
+    soundEngine.playClick();
+    triggerHaptic(25);
+
+    const start = 1;
+    const end = 604;
+    const total = 604;
+    let completed = 0;
+
+    const cache = await caches.open(CACHE_NAME);
+
+    for (let p = start; p <= end; p++) {
+      // Allow user to cancel caching midway
+      if (localStorage.getItem('sakinah_cancel_caching') === 'true') {
+        localStorage.removeItem('sakinah_cancel_caching');
+        break;
+      }
+
+      setEntireCacheCurrentPage(p);
+      const url = getSourcesForPage(p, resolution)[serverIndex]?.url;
+      if (url) {
+        try {
+          const match = await cache.match(url);
+          if (!match) {
+            const res = await fetch(url, { mode: 'cors' });
+            if (res.ok) await cache.put(url, res);
+          }
+        } catch (e) {
+          console.warn(`Failed to cache page ${p}:`, e);
+        }
+      }
+      completed++;
+      setEntireCacheProgress(Math.round((completed / total) * 100));
+      // Small pause to keep browser fluid and responsive
+      await new Promise((resolve) => setTimeout(resolve, 30));
+    }
+
+    setIsCachingEntire(false);
+    setEntireCacheProgress(null);
+    setEntireCacheCurrentPage(null);
+    setIsCachedOffline(true);
+    soundEngine.playCompletion();
+    triggerHaptic(40);
+  };
+
+  const cancelCachingEntire = () => {
+    localStorage.setItem('sakinah_cancel_caching', 'true');
+    setIsCachingEntire(false);
+    setEntireCacheProgress(null);
+    setEntireCacheCurrentPage(null);
+    soundEngine.playClick();
+    triggerHaptic(15);
+  };
+
   const handlePrevPage = () => {
     if (hasPrev) {
       soundEngine.playClick();
@@ -394,11 +525,7 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
     soundEngine.playClick();
     const nextFullscreen = !isFullscreen;
     setIsFullscreen(nextFullscreen);
-    if (nextFullscreen) {
-      setShowControls(false); // Automatically hide all toolbars so ONLY the page image is shown!
-    } else {
-      setShowControls(true);
-    }
+    setShowControls(true);
   };
 
   const pageVariants = {
@@ -430,10 +557,10 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
 
   return (
     <div
-      className={`relative select-none overflow-hidden transition-all duration-300 ${
+      className={`relative select-none overflow-hidden transition-all duration-300 w-full ${
         isFullscreen
-          ? 'fixed inset-0 z-[100] bg-slate-950 flex flex-col justify-between p-0 m-0 w-screen h-screen overflow-hidden'
-          : 'rounded-3xl border border-slate-800 bg-slate-950 p-1.5 sm:p-2.5 space-y-2 w-full max-w-full'
+          ? 'fixed inset-0 z-[100] bg-slate-950 p-0 m-0 w-screen h-screen'
+          : 'rounded-3xl border border-slate-800 bg-slate-950 p-0 max-w-full'
       }`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -453,39 +580,39 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.2 }}
-            className={`z-30 px-3 py-2 rounded-2xl border backdrop-blur-2xl shadow-xl flex flex-wrap items-center justify-between gap-2 transition-all ${
-              isFullscreen ? 'mx-2 mt-2' : ''
-            } ${
-              theme === 'light'
-                ? 'bg-white/95 border-slate-200 text-slate-800'
-                : theme === 'sepia'
-                ? 'bg-[#291c13]/95 border-amber-800/40 text-amber-50'
-                : 'bg-slate-900/95 border-slate-800 text-slate-100'
-            }`}
+            className="absolute top-2 left-2 right-2 z-30 px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl border backdrop-blur-xl shadow-xl flex items-center justify-between gap-1.5 transition-all duration-300 bg-slate-950/45 border-slate-800/30 text-slate-100"
           >
             {/* Left: Page Badge & Surah Info */}
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 font-bold font-mono text-xs sm:text-sm shadow-inner">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {isStandalone && onClose && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundEngine.playClick();
+                    onClose();
+                  }}
+                  className="pl-2 pr-2.5 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/35 text-red-300 border border-red-500/30 flex items-center gap-1 text-[11px] font-bold font-cairo transition-all cursor-pointer select-none ml-0.5 shadow-sm shrink-0"
+                >
+                  <X className="w-3 h-3" />
+                  <span className="hidden xs:inline">إغلاق</span>
+                </button>
+              )}
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 font-bold font-mono text-xs shadow-inner shrink-0">
                 {pageNumber}
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="text-xs sm:text-sm font-bold font-cairo text-amber-400">
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <span className="text-[11px] sm:text-xs font-extrabold font-cairo text-amber-400 whitespace-nowrap">
                   سورة {surahName || initialSurahName}
                 </span>
-                <span className="text-slate-500">•</span>
-                <span className="text-[11px] sm:text-xs font-bold font-cairo text-emerald-400">
-                  الجزء {juzNum || initialJuz}
+                <span className="text-slate-600 text-[10px] sm:text-xs">•</span>
+                <span className="text-[10px] sm:text-[11px] font-bold font-cairo text-emerald-400 whitespace-nowrap">
+                  ج {juzNum || initialJuz}
                 </span>
-                {isCachedOffline ? (
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse hidden sm:inline-block" title="محملة أوفلاين" />
-                ) : (
-                  <span className="w-2 h-2 rounded-full bg-amber-400 hidden sm:inline-block" title="تصفح أونلاين" />
-                )}
               </div>
             </div>
 
             {/* Right: Controls & Display Modes */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               {/* Fill Width Toggle Button */}
               <button
                 onClick={(e) => {
@@ -493,53 +620,25 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
                   soundEngine.playClick();
                   setIsFillWidth(!isFillWidth);
                 }}
-                title={isFillWidth ? 'إلغاء تعبئة العرض' : 'تعبئة العرض بدون فراغات جانبية'}
-                className={`px-2.5 py-1.5 rounded-xl border text-xs font-bold font-cairo flex items-center gap-1 transition-all cursor-pointer shadow-sm ${
+                title={isFillWidth ? 'إلغاء تعبئة العرض' : 'تعبئة العرض'}
+                className={`p-1.5 sm:px-2 sm:py-1 rounded-lg border text-[11px] font-bold font-cairo flex items-center justify-center gap-1 transition-all cursor-pointer shadow-sm shrink-0 ${
                   isFillWidth
-                    ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold'
-                    : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border-slate-700'
+                    ? 'bg-emerald-500 text-slate-950 border-emerald-400'
+                    : 'bg-slate-800/80 hover:bg-slate-700 text-slate-300 border-slate-700/60'
                 }`}
               >
                 <Maximize2 className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">{isFillWidth ? 'تعبئة العرض ↔️' : 'احتواء عادي'}</span>
+                <span className="hidden md:inline">{isFillWidth ? 'تعبئة' : 'احتواء'}</span>
               </button>
-
-              {/* Quick Zoom Buttons */}
-              <div className="hidden sm:flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    soundEngine.playClick();
-                    setZoomScale((prev) => Math.max(0.8, prev - 0.15));
-                  }}
-                  title="تصغير"
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-300 cursor-pointer"
-                >
-                  <ZoomOut className="w-3.5 h-3.5" />
-                </button>
-                <span className="text-[10px] font-mono font-bold text-amber-300 px-1">
-                  {Math.round(zoomScale * 100)}%
-                </span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    soundEngine.playClick();
-                    setZoomScale((prev) => Math.min(2.5, prev + 0.15));
-                  }}
-                  title="تكبير"
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-300 cursor-pointer"
-                >
-                  <ZoomIn className="w-3.5 h-3.5" />
-                </button>
-              </div>
 
               {/* Quick Audio Pill */}
               <button
                 onClick={handleToggleAudioPlay}
-                className={`px-2.5 py-1.5 rounded-xl border text-xs font-bold font-cairo flex items-center gap-1.5 transition-all cursor-pointer shadow-sm ${
+                title={isPlayingAudio ? 'إيقاف التلاوة' : 'تشغيل التلاوة'}
+                className={`p-1.5 sm:px-2 sm:py-1 rounded-lg border text-[11px] font-bold font-cairo flex items-center justify-center gap-1 transition-all cursor-pointer shadow-sm shrink-0 ${
                   isPlayingAudio
                     ? 'bg-amber-500 text-slate-950 border-amber-400 animate-pulse'
-                    : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-emerald-300'
+                    : 'bg-slate-800/80 hover:bg-slate-700 border-slate-700/60 text-emerald-300'
                 }`}
               >
                 {isPlayingAudio ? (
@@ -558,15 +657,34 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
               {/* Fullscreen Mode Button */}
               <button
                 onClick={toggleFullscreen}
-                title={isFullscreen ? 'خروج من الشاشة الكاملة' : 'عرض ملء الشاشة (الصورة فقط)'}
-                className={`p-2 rounded-xl border text-xs font-bold font-cairo flex items-center gap-1.5 transition-all cursor-pointer shadow-sm ${
+                title={isFullscreen ? 'خروج من ملء الشاشة' : 'ملء الشاشة'}
+                className={`p-1.5 sm:px-2 sm:py-1 rounded-lg border text-[11px] font-bold font-cairo flex items-center justify-center gap-1 transition-all cursor-pointer shadow-sm shrink-0 ${
                   isFullscreen
-                    ? 'bg-amber-500 text-slate-950 border-amber-400 font-bold'
+                    ? 'bg-amber-500 text-slate-950 border-amber-400'
                     : 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40'
                 }`}
               >
-                {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-                <span className="hidden sm:inline">{isFullscreen ? 'إنهاء' : 'ملء الشاشة'}</span>
+                {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+                <span className="hidden sm:inline">ملء الشاشة</span>
+              </button>
+
+              {/* Bookmark Current Page Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleBookmark();
+                }}
+                title={bookmarks.includes(pageNumber) ? 'إزالة العلامة المرجعية' : 'حفظ الصفحة الحالية'}
+                className={`p-1.5 sm:px-2 sm:py-1 rounded-lg border text-[11px] font-bold font-cairo flex items-center justify-center gap-1 transition-all cursor-pointer shadow-sm shrink-0 ${
+                  bookmarks.includes(pageNumber)
+                    ? 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold shadow-amber-500/20 shadow-md'
+                    : 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40'
+                }`}
+              >
+                <Bookmark className={`w-3.5 h-3.5 ${bookmarks.includes(pageNumber) ? 'fill-current' : ''}`} />
+                <span className="hidden sm:inline">
+                  {bookmarks.includes(pageNumber) ? 'محفوظة ✓' : 'حفظ الصفحة'}
+                </span>
               </button>
 
               {/* Dedicated Settings Modal Trigger */}
@@ -576,9 +694,10 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
                   soundEngine.playClick();
                   setIsSettingsOpen(true);
                 }}
-                className="p-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-bold font-cairo shadow-sm"
+                title="إعدادات المصحف"
+                className="p-1.5 sm:px-2 sm:py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 transition-all cursor-pointer flex items-center justify-center gap-1 text-[11px] font-bold font-cairo shadow-sm shrink-0"
               >
-                <Sliders className="w-4 h-4" />
+                <Sliders className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">الإعدادات</span>
               </button>
             </div>
@@ -589,10 +708,18 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
       {/* PURE QURAN PAGE DISPLAY CANVAS (DISTRACTION-FREE WITH GILDED ISLAMIC FRAME) */}
       <div
         onClick={handlePageTap}
-        className={`relative overflow-hidden flex items-center justify-center p-0 sm:p-1 cursor-pointer transition-all ${
+        className={`relative overflow-hidden flex items-center justify-center p-0 cursor-pointer transition-all mx-auto ${
           isFullscreen
-            ? 'flex-1 w-full h-full bg-slate-950'
-            : 'rounded-2xl sm:rounded-3xl border border-amber-500/20 bg-slate-950 shadow-2xl min-h-[580px] sm:min-h-[720px] w-full'
+            ? `w-screen h-screen ${
+                pageBgMode === 'warm-yellow'
+                  ? 'bg-[#fcf7e6]'
+                  : 'bg-slate-950'
+              }`
+            : `rounded-3xl border shadow-2xl min-h-[640px] sm:min-h-[880px] w-full max-w-xl md:max-w-2xl lg:max-w-[65vh] ${
+                pageBgMode === 'warm-yellow'
+                  ? 'border-amber-700/20 bg-[#fcf7e6]'
+                  : 'border-amber-500/10 bg-slate-950'
+              }`
         }`}
       >
         {/* Side Click Zones for Quick Page Turning in Fullscreen / Hidden Controls */}
@@ -654,13 +781,6 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
           </div>
         )}
 
-        {/* Immersive Reader Tap Helper Tip when Controls Hidden */}
-        {!showControls && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-[10px] text-amber-300/80 font-cairo border border-amber-500/20 pointer-events-none animate-fade-in">
-            انقر لإظهار القائمة 📱
-          </div>
-        )}
-
         {/* Pure Quran Page Image with Ornate Islamic Gilded Frame */}
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
@@ -677,16 +797,25 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
             <div
               className={`relative w-full h-full flex flex-col items-center justify-between transition-all my-auto overflow-hidden ${
                 !showFrameDecorations
-                  ? 'p-0 bg-slate-950 border-0 shadow-none'
+                  ? `p-0 border-0 shadow-none ${pageBgMode === 'warm-yellow' ? 'bg-[#faf3dc]' : 'bg-slate-950'}`
                   : isFullscreen
-                  ? 'p-0.5 sm:p-1.5 rounded-none border-0 bg-slate-950 shadow-none'
-                  : 'p-1 sm:p-2.5 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-amber-600/80 shadow-[0_0_30px_rgba(217,119,6,0.2)] bg-gradient-to-b from-[#fefcf8] via-[#fbf7ed] to-[#f4ecd8] dark:from-[#0d1522] dark:via-[#090f19] dark:to-[#04070c]'
+                  ? `p-0.5 sm:p-1.5 rounded-none border-0 shadow-none ${pageBgMode === 'warm-yellow' ? 'bg-[#faf3dc]' : 'bg-slate-950'}`
+                  : `p-1 sm:p-2.5 rounded-xl sm:rounded-2xl border-2 sm:border-4 shadow-[0_0_35px_rgba(217,119,6,0.25)] ${
+                      pageBgMode === 'warm-yellow'
+                        ? 'border-amber-700 bg-gradient-to-b from-[#fbf8ee] via-[#faf3dc] to-[#f3e9ca]'
+                        : pageBgMode === 'dark'
+                        ? 'border-slate-800 bg-[#0d1422]'
+                        : 'border-amber-600/80 bg-gradient-to-b from-[#fefcf8] via-[#fbf7ed] to-[#f4ecd8] dark:from-[#0d1522] dark:via-[#090f19] dark:to-[#04070c]'
+                    }`
               }`}
             >
               {showFrameDecorations && (
                 <>
-                  {/* Double Inner Arabesque Filigree Line */}
-                  <div className="absolute inset-0.5 sm:inset-1 rounded-lg border border-emerald-600/50 pointer-events-none ring-1 ring-amber-400/60 z-10" />
+                  {/* Concentric Islamic Filigree Borders for Exquisite Craft Feel */}
+                  <div className="absolute inset-0.5 sm:inset-1 rounded-lg border border-dashed border-amber-600/35 pointer-events-none z-10" />
+                  <div className="absolute inset-1 sm:inset-1.5 rounded-lg border border-emerald-600/50 pointer-events-none ring-1 ring-amber-400/60 z-10" />
+                  <div className="absolute inset-2 sm:inset-3 rounded-md border border-amber-500/20 pointer-events-none z-10" />
+
                   <CornerOrnamentSVG position="top-left" />
                   <CornerOrnamentSVG position="top-right" />
                   <CornerOrnamentSVG position="bottom-left" />
@@ -694,9 +823,13 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
 
                   {/* Top Surah & Juz Cartouche */}
                   <div className="z-10 mt-0.5 mb-0.5 pointer-events-none">
-                    <div className="px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-950/90 via-emerald-950/90 to-amber-950/90 border border-amber-400/70 shadow-md flex items-center gap-1.5">
+                    <div className={`px-3 py-0.5 rounded-full border shadow-md flex items-center gap-1.5 ${
+                      pageBgMode === 'warm-yellow'
+                        ? 'bg-gradient-to-r from-amber-900 via-amber-950 to-amber-900 border-amber-400/70'
+                        : 'bg-gradient-to-r from-amber-950/90 via-emerald-950/90 to-amber-950/90 border-amber-400/70'
+                    }`}>
                       <span className="text-amber-400 text-[10px]">۞</span>
-                      <span className="font-extrabold font-cairo text-[10px] sm:text-xs text-amber-200 tracking-wide">
+                      <span className="font-extrabold font-cairo text-[10px] sm:text-xs text-amber-100 tracking-wide">
                         سورة {surahName || initialSurahName} • الجزء {juzNum || initialJuz}
                       </span>
                       <span className="text-amber-400 text-[10px]">۞</span>
@@ -716,10 +849,12 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
                     referrerPolicy="no-referrer"
                     className={`transition-all duration-200 ${
                       isFillWidth
-                        ? 'w-full h-full max-h-none sm:max-h-full object-contain sm:object-fill my-auto'
+                        ? 'w-full h-full max-h-none sm:max-h-full object-contain my-auto'
                         : 'w-full h-auto max-h-[88vh] sm:max-h-[94vh] object-contain my-auto'
                     } ${
-                      isNightFilter ? 'filter invert brightness-90 contrast-125 hue-rotate-180' : ''
+                      pageBgMode === 'dark' ? 'filter invert brightness-90 contrast-125 hue-rotate-180' : ''
+                    } ${
+                      pageBgMode === 'warm-yellow' ? 'mix-blend-multiply opacity-[0.98]' : ''
                     }`}
                   />
                 ) : null}
@@ -727,7 +862,11 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
 
               {showFrameDecorations && (
                 <div className="z-10 mb-0.5 mt-0.5 pointer-events-none">
-                  <div className="px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-950/90 via-slate-950/90 to-amber-950/90 border border-amber-500/60 text-amber-300 font-mono font-bold text-[10px] flex items-center gap-1 shadow-sm">
+                  <div className={`px-3 py-0.5 rounded-full bg-gradient-to-r border font-mono font-bold text-[10px] flex items-center gap-1 shadow-sm ${
+                    pageBgMode === 'warm-yellow'
+                      ? 'from-amber-900 via-amber-950 to-amber-900 border-amber-500/50 text-amber-100'
+                      : 'from-amber-950/90 via-slate-950/90 to-amber-950/90 border-amber-500/60 text-amber-300'
+                  }`}>
                     <span className="text-amber-500 font-serif">﴿</span>
                     <span>{pageNumber}</span>
                     <span className="text-amber-500 font-serif">﴾</span>
@@ -747,33 +886,27 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 15 }}
             transition={{ duration: 0.2 }}
-            className={`z-30 p-2.5 sm:p-3 rounded-2xl border border-slate-800 bg-slate-900/95 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-2.5 shadow-xl ${
-              isFullscreen ? 'mx-2 mb-2' : ''
-            }`}
+            className="absolute bottom-2 left-2 right-2 z-30 p-1.5 sm:p-2 rounded-xl sm:rounded-2xl border shadow-xl flex items-center justify-between gap-2 transition-all duration-300 bg-slate-950/45 border-slate-800/30 text-slate-100 backdrop-blur-xl"
           >
-            {/* Prev Page Button */}
+            {/* Prev Page Button (Circular Icon Only to Save Space) */}
             <button
               onClick={handlePrevPage}
               disabled={!hasPrev}
-              className={`w-full sm:w-auto px-3.5 py-1.5 rounded-xl border text-xs font-bold font-cairo flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+              title="الصفحة السابقة"
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
                 hasPrev
-                  ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200 hover:text-emerald-300 shadow-sm'
+                  ? 'bg-slate-800/90 hover:bg-slate-700 border-slate-700/60 text-slate-200 hover:text-emerald-300 shadow-sm'
                   : 'bg-slate-900/40 border-slate-800/40 text-slate-600 opacity-40 cursor-not-allowed'
               }`}
             >
-              <ChevronRight className={`w-4 h-4 ${language === 'en' ? 'rotate-180' : ''}`} />
-              <span>الصفحة السابقة</span>
+              <ChevronRight className={`w-5 h-5 ${language === 'en' ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Range Slider & Counter */}
-            <div className="w-full max-w-md flex flex-col items-center gap-1 px-2">
-              <div className="flex items-center justify-between w-full text-[10px] text-slate-400 font-mono">
-                <span>١</span>
-                <span className="text-amber-400 font-bold font-cairo text-xs">
-                  ﴿ صفحة {pageNumber} من ٦٠٤ ﴾
-                </span>
-                <span>٦٠٤</span>
-              </div>
+            {/* Range Slider & Counter inside single row */}
+            <div className="flex-1 flex items-center gap-2 px-1">
+              <span className="text-amber-400 font-bold font-cairo text-[10px] sm:text-xs whitespace-nowrap bg-slate-950/30 px-2 py-1 rounded-md border border-amber-500/10 shadow-inner">
+                صفحة {pageNumber}
+              </span>
               <input
                 type="range"
                 min={1}
@@ -783,22 +916,22 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
                   const p = parseInt(e.target.value, 10);
                   onPageChange(p, p > pageNumber ? 1 : -1);
                 }}
-                className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                className="flex-1 accent-emerald-500 cursor-pointer h-1 bg-slate-800 rounded-lg"
               />
             </div>
 
-            {/* Next Page Button */}
+            {/* Next Page Button (Circular Icon Only to Save Space) */}
             <button
               onClick={handleNextPage}
               disabled={!hasNext}
-              className={`w-full sm:w-auto px-3.5 py-1.5 rounded-xl border text-xs font-bold font-cairo flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+              title="الصفحة التالية"
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
                 hasNext
                   ? 'bg-emerald-500/20 hover:bg-emerald-500/30 border-emerald-500/40 text-emerald-300 shadow-sm'
                   : 'bg-slate-900/40 border-slate-800/40 text-slate-600 opacity-40 cursor-not-allowed'
               }`}
             >
-              <span>الصفحة التالية</span>
-              <ChevronLeft className={`w-4 h-4 ${language === 'en' ? 'rotate-180' : ''}`} />
+              <ChevronLeft className={`w-5 h-5 ${language === 'en' ? 'rotate-180' : ''}`} />
             </button>
           </motion.div>
         )}
@@ -869,6 +1002,54 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
                     </select>
                   </div>
                 </div>
+              </div>
+
+              {/* Section 1.5: Saved Bookmarks */}
+              <div className="space-y-2 p-3 bg-slate-950/60 rounded-2xl border border-slate-800">
+                <h4 className="text-xs font-bold font-cairo text-amber-400 flex items-center gap-1.5 justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <Bookmark className="w-4 h-4 fill-amber-400/20 text-amber-400" />
+                    <span>العلامات المرجعية والصفحات المحفوظة</span>
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono bg-slate-800/80 px-1.5 py-0.5 rounded-md">({bookmarks.length})</span>
+                </h4>
+                {bookmarks.length === 0 ? (
+                  <p className="text-[11px] text-slate-500 text-center font-cairo py-1.5">
+                    لا توجد صفحات محفوظة حالياً. اضغط على زر "حفظ الصفحة" في الأعلى لحفظ أي صفحة.
+                  </p>
+                ) : (
+                  <div className="flex flex-wrap gap-1.5 max-h-[110px] overflow-y-auto pr-1">
+                    {bookmarks.map((p) => {
+                      let matchedSurahName = '';
+                      for (let sNum = 114; sNum >= 1; sNum--) {
+                        if (p >= SURAH_START_PAGES[sNum]) {
+                          matchedSurahName = SURAHS_METADATA[sNum - 1]?.nameAr || '';
+                          break;
+                        }
+                      }
+                      if (!matchedSurahName) matchedSurahName = SURAHS_METADATA[0].nameAr;
+
+                      return (
+                        <div
+                          key={p}
+                          onClick={() => {
+                            soundEngine.playClick();
+                            triggerHaptic(10);
+                            onPageChange(p, p > pageNumber ? 1 : -1);
+                          }}
+                          className={`px-2 py-1 rounded-lg text-[10px] font-cairo flex items-center gap-1 border cursor-pointer transition-all ${
+                            pageNumber === p
+                              ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 font-bold'
+                              : 'bg-slate-800 hover:bg-slate-700 border-slate-700/60 text-slate-300'
+                          }`}
+                        >
+                          <span>📖 ص {p}</span>
+                          <span className="opacity-75">({matchedSurahName})</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Section 2: Audio Reciter Selection */}
@@ -974,23 +1155,29 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
                     </div>
                   </div>
 
-                  {/* Night Reading Filter */}
+                  {/* Comfortable Page Background Selector */}
                   <div>
-                    <span className="text-[11px] text-slate-400 font-cairo block mb-1">القراءة الليلية:</span>
-                    <button
-                      onClick={() => {
-                        soundEngine.playClick();
-                        setIsNightFilter(!isNightFilter);
-                      }}
-                      className={`w-full py-1.5 px-3 rounded-xl border text-xs font-cairo font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                        isNightFilter
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-                          : 'bg-slate-800 border-slate-700 text-slate-300'
-                      }`}
-                    >
-                      {isNightFilter ? <Moon className="w-3.5 h-3.5 fill-current" /> : <Sun className="w-3.5 h-3.5" />}
-                      <span>{isNightFilter ? 'عاكس الألوان' : 'عادي'}</span>
-                    </button>
+                    <span className="text-[11px] text-slate-400 font-cairo block mb-1">خلفية مريحة للعين:</span>
+                    <div className="flex gap-1 bg-slate-800 p-1 rounded-xl">
+                      {[
+                        { id: 'default', label: '⚪ عادي', activeClass: 'bg-slate-700 text-slate-100 font-bold' },
+                        { id: 'warm-yellow', label: '🟡 صفراء', activeClass: 'bg-amber-500 text-slate-950 font-extrabold' },
+                        { id: 'dark', label: '⚫ داكنة', activeClass: 'bg-emerald-500 text-slate-950 font-extrabold' }
+                      ].map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() => {
+                            soundEngine.playClick();
+                            handleSetPageBgMode(item.id as any);
+                          }}
+                          className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-cairo font-bold transition-all cursor-pointer text-center ${
+                            pageBgMode === item.id ? item.activeClass : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -1026,25 +1213,70 @@ export const QuranImagePageView: React.FC<QuranImagePageViewProps> = ({
               </div>
 
               {/* Section 4: Offline Download Range */}
-              <div className="space-y-2 p-3 bg-slate-950/60 rounded-2xl border border-slate-800">
+              <div className="space-y-3.5 p-3.5 bg-slate-950/60 rounded-2xl border border-slate-800">
                 <h4 className="text-xs font-bold font-cairo text-emerald-400 flex items-center gap-1.5">
                   <Download className="w-4 h-4" />
-                  <span>التخزين أوفلاين للقراءة بدون إنترنت</span>
+                  <span>تحميل المصحف الشريف للأوفلاين (بدون إنترنت)</span>
                 </h4>
-                <button
-                  onClick={cacheNext20Pages}
-                  disabled={isCachingRange}
-                  className={`w-full py-2 px-3 rounded-xl border text-xs font-cairo font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    isCachingRange
-                      ? 'bg-amber-500/20 border-amber-500/40 text-amber-300 animate-pulse'
-                      : 'bg-emerald-500/20 hover:bg-emerald-500/30 border-emerald-500/40 text-emerald-300'
-                  }`}
-                >
-                  <Download className="w-4 h-4" />
-                  <span>
-                    {isCachingRange ? `جاري حفظ 20 صفحة (${cacheProgress}%)` : 'حفظ 20 صفحة قادمة للأوفلاين'}
-                  </span>
-                </button>
+                
+                <p className="text-[11px] text-slate-400 font-cairo leading-relaxed">
+                  يمكنك حفظ صفحات المصحف بالكامل في ذاكرة متصفحك الآمنة لتعمل معك بدون حاجة للاتصال بالإنترنت نهائياً.
+                </p>
+
+                <div className="grid grid-cols-1 gap-2">
+                  {/* Button 1: Cache Next 20 Pages */}
+                  <button
+                    onClick={cacheNext20Pages}
+                    disabled={isCachingRange || isCachingEntire}
+                    className={`w-full py-2.5 px-3 rounded-xl border text-xs font-cairo font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                      isCachingRange
+                        ? 'bg-amber-500/20 border-amber-500/40 text-amber-300 animate-pulse'
+                        : 'bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30 text-emerald-300 disabled:opacity-40'
+                    }`}
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>
+                      {isCachingRange ? `جاري حفظ 20 صفحة (${cacheProgress}%)` : 'حفظ 20 صفحة قادمة للأوفلاين'}
+                    </span>
+                  </button>
+
+                  {/* Button 2: Cache Entire 604 Pages */}
+                  {!isCachingEntire ? (
+                    <button
+                      onClick={cacheEntireMushaf}
+                      disabled={isCachingRange || isCachingEntire}
+                      className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-slate-950 font-cairo font-extrabold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md disabled:opacity-40"
+                    >
+                      <BookOpen className="w-4 h-4 fill-slate-950 text-slate-950" />
+                      <span>تحميل وحفظ المصحف كاملاً (٦٠٤ صفحة)</span>
+                    </button>
+                  ) : (
+                    <div className="space-y-2 p-2 bg-slate-900 rounded-xl border border-teal-500/30">
+                      <div className="flex items-center justify-between text-xs font-cairo font-bold">
+                        <span className="text-teal-400 animate-pulse">جاري تحميل المصحف كاملاً...</span>
+                        <span className="text-amber-400">{entireCacheProgress}%</span>
+                      </div>
+                      
+                      {/* Caching Progress Bar */}
+                      <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div
+                          className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full transition-all duration-300"
+                          style={{ width: `${entireCacheProgress}%` }}
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-between text-[10px] text-slate-400 font-cairo">
+                        <span>جاري حفظ صفحة {entireCacheCurrentPage} من 604</span>
+                        <button
+                          onClick={cancelCachingEntire}
+                          className="text-red-400 hover:text-red-300 font-bold underline cursor-pointer"
+                        >
+                          إلغاء التحميل
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Close Button */}

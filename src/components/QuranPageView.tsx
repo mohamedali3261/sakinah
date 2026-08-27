@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { QuranSurah, QuranVerse } from '../types';
+import { useApp } from '../context/AppContext';
+import { getPaperThemeById } from '../data/paperThemes';
 import {
   ChevronLeft,
   ChevronRight,
@@ -53,6 +55,9 @@ export const QuranPageView: React.FC<QuranPageViewProps> = ({
   isBookmarked,
   selectedAyahNumber
 }) => {
+  const { quranPaperTheme, setIsPaperThemeModalOpen } = useApp();
+  const paperTheme = getPaperThemeById(quranPaperTheme);
+
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
   const [isImageMode, setIsImageMode] = useState<boolean>(false);
@@ -214,6 +219,19 @@ export const QuranPageView: React.FC<QuranPageViewProps> = ({
 
         {/* Page Turn Actions & Image Mode Toggle */}
         <div className="flex items-center gap-1.5">
+          {/* Toggle Paper Theme & Ambient Sounds Quick Actions */}
+          <button
+            onClick={() => {
+              soundEngine.playClick();
+              setIsPaperThemeModalOpen(true);
+            }}
+            title={language === 'ar' ? 'ألوان ورق المصحف' : 'Paper Themes'}
+            className="p-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 text-xs font-bold font-cairo flex items-center gap-1 transition-all cursor-pointer"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">{language === 'ar' ? 'ورق المصحف' : 'Paper'}</span>
+          </button>
+
           {/* Toggle between Digital Text and Quran.com Page Image */}
           <button
             onClick={() => {
@@ -287,31 +305,23 @@ export const QuranPageView: React.FC<QuranPageViewProps> = ({
             initial="enter"
             animate="center"
             exit="exit"
-            className={`relative w-full rounded-3xl border-2 p-4 sm:p-7 md:p-9 shadow-2xl transition-all ${
-              theme === 'light'
-                ? 'bg-[#fbf7ed] border-amber-400/80 text-slate-900 shadow-amber-900/10'
-                : theme === 'sepia'
-                ? 'bg-[#261911] border-amber-700/60 text-amber-50 shadow-black/70'
-                : 'bg-[#09151e] border-emerald-500/40 text-slate-100 shadow-emerald-950/60'
-            }`}
+            className={`relative w-full rounded-3xl border-2 p-4 sm:p-7 md:p-9 shadow-2xl transition-all ${paperTheme.bgClass} ${paperTheme.borderClass} ${paperTheme.textClass}`}
           >
             {/* Inner Ornate Framing Line */}
-            <div className={`absolute inset-2 sm:inset-3 border rounded-2xl pointer-events-none transition-colors ${
-              theme === 'light' ? 'border-amber-400/30' : theme === 'sepia' ? 'border-amber-600/30' : 'border-emerald-500/25'
-            }`} />
+            <div className={`absolute inset-2 sm:inset-3 border rounded-2xl pointer-events-none transition-colors ${paperTheme.innerBorderClass}`} />
 
             {/* Islamic Floral Decorative Corner Accents */}
-            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 border-t-2 border-r-2 border-amber-400/60 rounded-tr-lg pointer-events-none flex items-center justify-center">
-              <span className="text-[9px] text-amber-400 opacity-60">❖</span>
+            <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 border-t-2 border-r-2 rounded-tr-lg pointer-events-none flex items-center justify-center ${paperTheme.innerBorderClass}`}>
+              <span className={`text-[9px] ${paperTheme.rosetteClass}`}>❖</span>
             </div>
-            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 w-7 h-7 border-t-2 border-l-2 border-amber-400/60 rounded-tl-lg pointer-events-none flex items-center justify-center">
-              <span className="text-[9px] text-amber-400 opacity-60">❖</span>
+            <div className={`absolute top-3 left-3 sm:top-4 sm:left-4 w-7 h-7 border-t-2 border-l-2 rounded-tl-lg pointer-events-none flex items-center justify-center ${paperTheme.innerBorderClass}`}>
+              <span className={`text-[9px] ${paperTheme.rosetteClass}`}>❖</span>
             </div>
-            <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 w-7 h-7 border-b-2 border-r-2 border-amber-400/60 rounded-br-lg pointer-events-none flex items-center justify-center">
-              <span className="text-[9px] text-amber-400 opacity-60">❖</span>
+            <div className={`absolute bottom-3 right-3 sm:bottom-4 sm:right-4 w-7 h-7 border-b-2 border-r-2 rounded-br-lg pointer-events-none flex items-center justify-center ${paperTheme.innerBorderClass}`}>
+              <span className={`text-[9px] ${paperTheme.rosetteClass}`}>❖</span>
             </div>
-            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 w-7 h-7 border-b-2 border-l-2 border-amber-400/60 rounded-bl-lg pointer-events-none flex items-center justify-center">
-              <span className="text-[9px] text-amber-400 opacity-60">❖</span>
+            <div className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 w-7 h-7 border-b-2 border-l-2 rounded-bl-lg pointer-events-none flex items-center justify-center ${paperTheme.innerBorderClass}`}>
+              <span className={`text-[9px] ${paperTheme.rosetteClass}`}>❖</span>
             </div>
 
             {/* Mushaf Page Header */}

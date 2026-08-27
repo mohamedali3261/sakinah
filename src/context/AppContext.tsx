@@ -4,6 +4,7 @@ import {
   ThemeMode,
   ArabicFont,
   FontSize,
+  QuranPaperThemeId,
   ActiveTab,
   Bookmark,
   DailyReminder,
@@ -21,6 +22,8 @@ interface AppContextType {
   setFontFamily: (font: ArabicFont) => void;
   fontSize: FontSize;
   setFontSize: (size: FontSize) => void;
+  quranPaperTheme: QuranPaperThemeId;
+  setQuranPaperTheme: (theme: QuranPaperThemeId) => void;
   activeTab: ActiveTab;
   setActiveTab: (tab: ActiveTab) => void;
   
@@ -58,6 +61,8 @@ interface AppContextType {
   setIsFontSettingsOpen: (val: boolean) => void;
   isNotificationSettingsOpen: boolean;
   setIsNotificationSettingsOpen: (val: boolean) => void;
+  isPaperThemeModalOpen: boolean;
+  setIsPaperThemeModalOpen: (val: boolean) => void;
   
   // Notifications
   reminders: DailyReminder[];
@@ -121,6 +126,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return (localStorage.getItem('sakinah_font_size') as FontSize) || 'md';
   });
 
+  const [quranPaperTheme, setQuranPaperThemeState] = useState<QuranPaperThemeId>(() => {
+    return (localStorage.getItem('sakinah_quran_paper_theme') as QuranPaperThemeId) || 'cream';
+  });
+
   const [activeTab, setActiveTab] = useState<ActiveTab>('home');
   const [selectedAthkarCategoryId, setSelectedAthkarCategoryId] = useState<string | null>(null);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
@@ -148,9 +157,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return localStorage.getItem('sakinah_sound') !== 'false';
   });
 
-  const [vibrationEnabled, setVibrationEnabled] = useState<boolean>(() => {
+  const [vibrationEnabled, setVibrationEnabledState] = useState<boolean>(() => {
     return localStorage.getItem('sakinah_vibe') !== 'false';
   });
+
+  const setVibrationEnabled = (val: boolean) => {
+    setVibrationEnabledState(val);
+    localStorage.setItem('sakinah_vibe', val ? 'true' : 'false');
+  };
 
   // Reminders
   const [reminders, setReminders] = useState<DailyReminder[]>(() => {
@@ -163,6 +177,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFontSettingsOpen, setIsFontSettingsOpen] = useState(false);
   const [isNotificationSettingsOpen, setIsNotificationSettingsOpen] = useState(false);
+  const [isPaperThemeModalOpen, setIsPaperThemeModalOpen] = useState(false);
 
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<{ title: string; body: string } | null>(null);
@@ -193,6 +208,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setFontSize = (s: FontSize) => {
     setFontSizeState(s);
     localStorage.setItem('sakinah_font_size', s);
+  };
+
+  const setQuranPaperTheme = (p: QuranPaperThemeId) => {
+    setQuranPaperThemeState(p);
+    localStorage.setItem('sakinah_quran_paper_theme', p);
   };
 
   const addBookmark = (item: Omit<Bookmark, 'id' | 'dateAdded'>) => {
@@ -283,6 +303,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setFontFamily,
         fontSize,
         setFontSize,
+        quranPaperTheme,
+        setQuranPaperTheme,
         activeTab,
         setActiveTab,
         selectedAthkarCategoryId,
@@ -312,6 +334,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsFontSettingsOpen,
         isNotificationSettingsOpen,
         setIsNotificationSettingsOpen,
+        isPaperThemeModalOpen,
+        setIsPaperThemeModalOpen,
         reminders,
         toggleReminder,
         toastMessage,

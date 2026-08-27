@@ -7,6 +7,10 @@ import { QuranImagePageView, SURAH_START_PAGES } from './QuranImagePageView';
 import { QuranReciterModal } from './QuranReciterModal';
 import { AyahEndMarker } from './AyahEndMarker';
 import { MushafSurahHeader } from './MushafSurahHeader';
+import { TafsirModal } from './TafsirModal';
+import { QuranMemorizeModal } from './QuranMemorizeModal';
+import { KhatmahTracker } from './KhatmahTracker';
+import { getPaperThemeById } from '../data/paperThemes';
 import {
   Search,
   BookOpen,
@@ -40,7 +44,9 @@ import {
   Star,
   Grid,
   List,
-  Compass
+  Compass,
+  Award,
+  Repeat
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { soundEngine, triggerHaptic } from '../utils/audio';
@@ -85,6 +91,9 @@ export const QuranView: React.FC = () => {
     theme,
     fontSize,
     fontFamily,
+    quranPaperTheme,
+    setIsPaperThemeModalOpen,
+    setIsAmbientModalOpen,
     addBookmark,
     isBookmarked,
     removeBookmark,
@@ -92,23 +101,33 @@ export const QuranView: React.FC = () => {
     soundEnabled,
     vibrationEnabled,
     isFocusMode,
-    setIsFocusMode
+    setIsFocusMode,
+    setActiveTab
   } = useApp();
+
+  const paperTheme = getPaperThemeById(quranPaperTheme);
 
   const [selectedSurahNumber, setSelectedSurahNumber] = useState<number | null>(null);
   const [currentSurahData, setCurrentSurahData] = useState<QuranSurah | null>(null);
   const [loadingSurah, setLoadingSurah] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterType, setFilterType] = useState<'all' | 'Meccan' | 'Medinan' | 'juz' | 'favorites' | 'images'>('all');
+  const [filterType, setFilterType] = useState<'all' | 'Meccan' | 'Medinan' | 'juz' | 'favorites' | 'images' | 'khatmah'>('all');
   const [layoutMode, setLayoutMode] = useState<'grid' | 'list'>('grid');
 
-  // Reading Modes: 'detailed' (آية بآية), 'page' (صفحة بصفحة), 'mushaf_image' (مصورة quran.com), 'continuous' (السورة كاملة)
-  const [viewMode, setViewMode] = useState<'detailed' | 'page' | 'mushaf_image' | 'continuous'>('page');
+  // Reading Modes: 'page' (صفحة بصفحة), 'mushaf_image' (مصورة quran.com), 'continuous' (السورة كاملة)
+  const [viewMode, setViewMode] = useState<'page' | 'mushaf_image' | 'continuous'>('page');
 
   // Page-by-page state
-  const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
+  const [currentPageNumber, setCurrentPageNumber] = useState<number>(() => {
+    const saved = localStorage.getItem('sakinah_last_quran_page');
+    return saved ? parseInt(saved, 10) : 1;
+  });
   const [pagesInSurah, setPagesInSurah] = useState<number[]>([1]);
   const [pageDirection, setPageDirection] = useState<number>(1);
+
+  // Modals
+  const [isTafsirModalOpen, setIsTafsirModalOpen] = useState<boolean>(false);
+  const [isMemorizeModalOpen, setIsMemorizeModalOpen] = useState<boolean>(false);
 
   // Audio Player State
   const [selectedReciter, setSelectedReciter] = useState<Reciter>(RECITERS_LIST[0]);
@@ -133,6 +152,22 @@ export const QuranView: React.FC = () => {
     const saved = localStorage.getItem('sakinah_last_read_quran');
     return saved ? JSON.parse(saved) : null;
   });
+
+  // Standalone Mushaf State
+  const [isStandaloneMushafOpen, setIsStandaloneMushafOpen] = useState<boolean>(false);
+
+  // Check if standalone Mushaf was triggered from another view
+  useEffect(() => {
+    if (localStorage.getItem('sakinah_trigger_standalone_mushaf') === 'true') {
+      localStorage.removeItem('sakinah_trigger_standalone_mushaf');
+      const savedPage = localStorage.getItem('sakinah_last_quran_page');
+      if (savedPage) {
+        setCurrentPageNumber(parseInt(savedPage, 10));
+      }
+      setIsStandaloneMushafOpen(true);
+      setIsFocusMode(true);
+    }
+  }, [isStandaloneMushafOpen, setIsFocusMode]);
 
   // Toggle favorite surah
   const handleToggleFavoriteSurah = (surahNum: number, e: React.MouseEvent) => {
@@ -262,16 +297,46 @@ export const QuranView: React.FC = () => {
   const handlePageChange = (newPage: number, direction: number) => {
     setPageDirection(direction);
     setCurrentPageNumber(newPage);
+    localStorage.setItem('sakinah_last_quran_page', newPage.toString());
   };
 
   // Click on Surah
   const handleSurahClick = (surahNum: number, initialPage?: number) => {
     if (soundEnabled) soundEngine.playClick();
     if (vibrationEnabled) triggerHaptic(15);
-    setSelectedSurahNumber(surahNum);
     const startPage = initialPage || SURAH_START_PAGES[surahNum] || 1;
     setCurrentPageNumber(startPage);
-    setViewMode('mushaf_image');
+    localStorage.setItem('sakinah_last_quran_page', startPage.toString());
+    setIsStandaloneMushafOpen(true);
+    setIsFocusMode(true);
+  };
+
+  const openStandaloneMushaf = (page?: number) => {
+    if (soundEnabled) soundEngine.playClick();
+    if (vibrationEnabled) triggerHaptic(15);
+    if (page) {
+      setCurrentPageNumber(page);
+      localStorage.setItem('sakinah_last_quran_page', page.toString());
+    } else {
+      const savedPage = localStorage.getItem('sakinah_last_quran_page');
+      if (savedPage) {
+        setCurrentPageNumber(parseInt(savedPage, 10));
+      }
+    }
+    setIsStandaloneMushafOpen(true);
+    setIsFocusMode(true);
+  };
+
+  const closeStandaloneMushaf = () => {
+    if (soundEnabled) soundEngine.playClick();
+    if (vibrationEnabled) triggerHaptic(10);
+    setIsStandaloneMushafOpen(false);
+    setIsFocusMode(false);
+    
+    if (localStorage.getItem('sakinah_opened_from_index') === 'true') {
+      localStorage.removeItem('sakinah_opened_from_index');
+      setActiveTab('index');
+    }
   };
 
   // Copy Ayah
@@ -341,14 +406,30 @@ export const QuranView: React.FC = () => {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
+  if (isStandaloneMushafOpen) {
+    return (
+      <div className="fixed inset-0 z-[120] bg-slate-950 flex flex-col justify-between w-screen h-screen overflow-hidden">
+        <QuranImagePageView
+          pageNumber={currentPageNumber}
+          onPageChange={handlePageChange}
+          direction={pageDirection}
+          theme={theme}
+          language={language}
+          isStandalone={true}
+          onClose={closeStandaloneMushaf}
+        />
+      </div>
+    );
+  }
+
   return (
     <div id="quran-view" className="space-y-5 pb-24">
-      {/* If No Surah Selected: Surah Browser & Index */}
+      {/* If No Surah Selected: Clean, Beautiful Quran Gateway */}
       {!selectedSurahNumber ? (
         <div className="space-y-6">
-          {/* Header Hero Banner */}
+          {/* Header Hero Banner with Large Standalone Button */}
           <div
-            className={`relative overflow-hidden rounded-3xl p-6 sm:p-8 border backdrop-blur-2xl transition-all shadow-xl ${
+            className={`relative overflow-hidden rounded-3xl p-6 sm:p-10 border backdrop-blur-2xl transition-all shadow-2xl ${
               theme === 'light'
                 ? 'bg-gradient-to-br from-amber-50 via-white to-emerald-50 border-amber-300/80 text-slate-900 shadow-amber-900/5'
                 : theme === 'sepia'
@@ -359,262 +440,137 @@ export const QuranView: React.FC = () => {
             {/* Islamic Background Texture */}
             <div className="absolute inset-0 bg-islamic-arabesque opacity-20 pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-3 font-cairo">
-                  <BookOpen className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{language === 'ar' ? 'المصحف الشريف كاملاً (١١٤ سورة)' : 'The Holy Qur’an (114 Surahs)'}</span>
-                </div>
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-cairo text-slate-100 mb-2">
-                  {language === 'ar' ? 'فهرس سور وأجزاء القرآن الكريم' : 'Quran Surahs & Ajza’ Catalog'}
-                </h1>
-                <p className="text-xs sm:text-sm text-slate-300 max-w-xl font-cairo leading-relaxed">
-                  {language === 'ar'
-                    ? 'تصفح وقراءة المصحف الشريف بنمط الصفحة، أو الآيات المفصلة، أو السورة المتصلة، مع الاستماع لأشهر القراء.'
-                    : 'Read and listen to the Holy Quran by Page, Verse, or Continuous flow with renowned reciters.'}
-                </p>
+            <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-cairo">
+                <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                <span>{language === 'ar' ? 'المصحف الشريف المصور (كامل ٦٠٤ صفحة)' : 'The Holy Qur’an (Full 604 Pages)'}</span>
               </div>
+              
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-cairo text-slate-100 leading-tight">
+                {language === 'ar' ? 'المصحف الشريف المصور' : 'The Holy Quran (Immersive Images)'}
+              </h1>
+              
+              <p className="text-xs sm:text-base text-slate-300 leading-relaxed font-cairo">
+                {language === 'ar'
+                  ? 'قراءة هادئة خالية من المشتتات والرموز بنمط الصفحات المصورة عالية الجودة. انقر على أي مكان في الصفحة أثناء القراءة لإظهار أزرار التحكم وخيارات التنقل والتمكين الصوتي.'
+                  : 'Immersive, distraction-free Hafs Quran reading experience with high-quality pages. During reading, tap anywhere on the screen to show or hide navigation controls and audio playbacks.'}
+              </p>
 
-              {/* Last Read Quick Jump */}
-              {lastReadSurah && (
+              {/* THE ULTIMATE STANDALONE BUTTON (زر المصحف لفتحه لوحده) */}
+              <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
                 <button
-                  onClick={() => handleSurahClick(lastReadSurah.number)}
-                  className="group flex items-center gap-3.5 p-3.5 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 hover:border-emerald-400/80 transition-all cursor-pointer shadow-lg shrink-0"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 group-hover:scale-105 transition-transform">
-                    <Bookmark className="w-5 h-5 fill-emerald-400 text-emerald-300" />
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[11px] text-amber-400 block font-bold font-cairo">
-                      {language === 'ar' ? 'متابعة القراءة الأخيرة' : 'Continue Reading'}
-                    </span>
-                    <span className="text-sm font-bold font-cairo text-slate-100">
-                      {language === 'ar' ? `سورة ${lastReadSurah.nameAr}` : `Surah ${lastReadSurah.nameEn}`}
-                    </span>
-                  </div>
-                  <ChevronLeft className={`w-4 h-4 text-emerald-400 group-hover:-translate-x-1 transition-transform ${language === 'en' ? 'rotate-180' : ''}`} />
-                </button>
-              )}
-            </div>
-
-            {/* Quick Surahs Bar */}
-            <div className="relative z-10 mt-6 pt-4 border-t border-slate-700/40 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-              <span className="text-xs text-amber-300 font-bold shrink-0 font-cairo flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-amber-400" />
-                {language === 'ar' ? 'سور مباركة شائعة:' : 'Quick Surahs:'}
-              </span>
-              {[
-                { num: 1, name: 'الفاتحة' },
-                { num: 18, name: 'الكهف' },
-                { num: 36, name: 'يس' },
-                { num: 55, name: 'الرحمن' },
-                { num: 56, name: 'الواقعة' },
-                { num: 67, name: 'الملك' },
-                { num: 112, name: 'الإخلاص' }
-              ].map((qs) => (
-                <button
-                  key={qs.num}
-                  onClick={() => handleSurahClick(qs.num)}
-                  className="px-3.5 py-1 text-xs rounded-full bg-slate-900/80 border border-slate-700/70 hover:border-emerald-400 hover:bg-emerald-950/60 text-slate-200 hover:text-emerald-300 transition-all shrink-0 cursor-pointer font-cairo font-semibold"
-                >
-                  {qs.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Search, Filter Tabs & Layout Switcher */}
-          <div className="space-y-3">
-            <div className="flex flex-col md:flex-row items-center gap-3">
-              {/* Search Input */}
-              <div className="relative w-full flex-1">
-                <Search className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-400 ${language === 'ar' ? 'right-3.5' : 'left-3.5'}`} />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={language === 'ar' ? 'ابحث عن سورة بالاسم، أو الرقم، أو المعنى...' : 'Search Surah by name, number, or meaning...'}
-                  className={`w-full py-3 rounded-2xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50 ${
-                    language === 'ar' ? 'pr-10 pl-4 font-cairo' : 'pl-10 pr-4'
-                  } ${
-                    theme === 'light'
-                      ? 'bg-white border-slate-200 text-slate-800'
-                      : 'bg-slate-900/80 border-slate-800 text-slate-100 placeholder-slate-500'
-                  }`}
-                />
-              </div>
-
-              {/* Layout Switcher (Grid / List) */}
-              <div className="flex items-center gap-1 bg-slate-800/80 p-1 rounded-2xl border border-slate-700 shrink-0">
-                <button
-                  onClick={() => setLayoutMode('grid')}
-                  title={language === 'ar' ? 'عرض شبكي' : 'Grid View'}
-                  className={`p-2 rounded-xl transition-all cursor-pointer ${
-                    layoutMode === 'grid' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <Grid className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setLayoutMode('list')}
-                  title={language === 'ar' ? 'عرض قائمة' : 'List View'}
-                  className={`p-2 rounded-xl transition-all cursor-pointer ${
-                    layoutMode === 'list' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <List className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Filter Navigation Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-              {[
-                { id: 'all', labelAr: 'جميع السور (١١٤)', labelEn: 'All Surahs (114)' },
-                { id: 'images', labelAr: 'المصحف المصور (quran.com) 🖼️', labelEn: 'Quran Images (604 Pages)' },
-                { id: 'Meccan', labelAr: 'مكية (٨٦) 🕋', labelEn: 'Meccan (86)' },
-                { id: 'Medinan', labelAr: 'مدنية (٢٨) 🕌', labelEn: 'Medinan (28)' },
-                { id: 'juz', labelAr: 'تصفح الأجزاء (٣٠ جزءاً) 📑', labelEn: 'By Juz (30)' },
-                { id: 'favorites', labelAr: 'السور المفضلة ⭐', labelEn: 'Favorites' }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
                   onClick={() => {
                     soundEngine.playClick();
-                    setFilterType(tab.id as any);
+                    setActiveTab('index');
                   }}
-                  className={`px-4 py-2 rounded-2xl text-xs font-bold font-cairo whitespace-nowrap transition-all cursor-pointer ${
-                    filterType === tab.id
-                      ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/25'
-                      : 'bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/70'
-                  }`}
+                  className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-extrabold font-cairo text-lg sm:text-xl shadow-2xl hover:from-amber-300 hover:to-amber-500 transition-all flex items-center justify-center gap-3 border border-amber-300/40 cursor-pointer hover:shadow-amber-500/40 hover:scale-[1.02] duration-300 active:scale-[0.98]"
                 >
-                  {language === 'ar' ? tab.labelAr : tab.labelEn}
+                  <BookOpen className="w-6 h-6 fill-slate-950" />
+                  <span>{language === 'ar' ? 'المصحف' : 'The Mushaf'}</span>
                 </button>
-              ))}
+              </div>
             </div>
           </div>
 
-          {/* View: Direct quran.com-images Browser (All 604 pages) */}
-          {filterType === 'images' ? (
-            <div className="space-y-4">
-              <QuranImagePageView
-                pageNumber={currentPageNumber}
-                onPageChange={handlePageChange}
-                direction={pageDirection}
-                theme={theme}
-                language={language}
-              />
-            </div>
-          ) : filterType === 'juz' ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {QURAN_AJZA.map((j) => (
-                <motion.div
-                  key={j.juz}
-                  whileHover={{ y: -2 }}
-                  onClick={() => handleSurahClick(j.startSurah, j.startPage)}
-                  className={`p-4 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer shadow-md hover:shadow-lg flex items-center justify-between ${
-                    theme === 'light'
-                      ? 'bg-white/90 border-slate-200 hover:border-emerald-500/60 hover:bg-emerald-50/40 text-slate-800'
-                      : 'bg-slate-900/80 border-slate-800 hover:border-emerald-500/50 hover:bg-slate-800/80 text-slate-100'
-                  }`}
-                >
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold font-mono text-sm shrink-0 shadow-inner">
-                      {j.juz}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-sm sm:text-base font-cairo text-slate-100">
-                        {j.nameAr}
-                      </h3>
-                      <p className="text-xs text-emerald-400 font-cairo mt-0.5">{j.labelAr}</p>
-                      <span className="text-[10px] text-slate-400 font-mono">يبدأ من صفحة {j.startPage}</span>
-                    </div>
+          {/* Quick Info & Last Read Card */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Last Read Quick Jump Box */}
+            {lastReadSurah ? (
+              <div
+                onClick={() => handleSurahClick(lastReadSurah.number)}
+                className={`group p-5 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between shadow-lg ${
+                  theme === 'light'
+                    ? 'bg-white/80 border-slate-200 hover:border-emerald-500/50 hover:bg-emerald-50/20'
+                    : 'bg-slate-900/60 border-slate-800 hover:border-emerald-500/40 hover:bg-slate-800/60'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-105 transition-transform">
+                    <Bookmark className="w-6 h-6 fill-amber-400 text-amber-300" />
                   </div>
-                  <ChevronLeft className={`w-4 h-4 text-emerald-400 ${language === 'en' ? 'rotate-180' : ''}`} />
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            /* Surahs Grid or List */
-            <div className={layoutMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5' : 'space-y-2.5'}>
-              {filteredSurahs.map((surah) => {
-                const isFav = favoriteSurahs.includes(surah.number);
+                  <div className="text-right">
+                    <span className="text-xs text-slate-400 block font-bold font-cairo">
+                      {language === 'ar' ? 'متابعة القراءة والورد الأخير' : 'Resume Your Last Read'}
+                    </span>
+                    <span className="text-base font-extrabold font-cairo text-slate-100">
+                      {language === 'ar' ? `سورة ${lastReadSurah.nameAr} (صفحة ${currentPageNumber})` : `Surah ${lastReadSurah.nameEn} (Page ${currentPageNumber})`}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-bold font-cairo">
+                  <span>{language === 'ar' ? 'اقرأ الآن' : 'Read'}</span>
+                  <ChevronLeft className={`w-4 h-4 group-hover:-translate-x-1 transition-transform ${language === 'en' ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+            ) : (
+              <div
+                onClick={() => handleSurahClick(1)}
+                className={`group p-5 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between shadow-lg ${
+                  theme === 'light'
+                    ? 'bg-white/80 border-slate-200 hover:border-emerald-500/50 hover:bg-emerald-50/20'
+                    : 'bg-slate-900/60 border-slate-800 hover:border-emerald-500/40 hover:bg-slate-800/60'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs text-slate-400 block font-bold font-cairo">
+                      {language === 'ar' ? 'ابدأ تلاوة جديدة' : 'Start Fresh Reading'}
+                    </span>
+                    <span className="text-base font-extrabold font-cairo text-slate-100">
+                      {language === 'ar' ? 'سورة الفاتحة (صفحة ١)' : 'Surah Al-Fatihah (Page 1)'}
+                    </span>
+                  </div>
+                </div>
+                <ChevronLeft className={`w-4 h-4 text-emerald-400 group-hover:-translate-x-1 transition-transform ${language === 'en' ? 'rotate-180' : ''}`} />
+              </div>
+            )}
 
-                return (
-                  <motion.div
-                    key={surah.number}
-                    whileHover={{ y: -2 }}
-                    onClick={() => handleSurahClick(surah.number)}
-                    className={`group p-4 rounded-3xl border backdrop-blur-xl transition-all cursor-pointer flex items-center justify-between shadow-sm hover:shadow-md ${
-                      theme === 'light'
-                        ? 'bg-white/85 border-slate-200 hover:border-emerald-500/60 hover:bg-emerald-50/30'
-                        : theme === 'sepia'
-                        ? 'bg-[#291c13]/85 border-amber-800/40 hover:border-amber-500/50'
-                        : 'bg-slate-900/80 border-slate-800 hover:border-emerald-500/40 hover:bg-slate-800/80'
-                    }`}
+            {/* Quick Settings Configuration Box */}
+            <div
+              className={`p-5 rounded-3xl border backdrop-blur-xl flex items-center justify-between shadow-lg ${
+                theme === 'light'
+                  ? 'bg-white/80 border-slate-200'
+                  : 'bg-slate-900/60 border-slate-800'
+              }`}
+            >
+              <div className="flex items-center gap-3.5 w-full">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                  <Sliders className="w-5.5 h-5.5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-slate-400 block font-bold font-cairo mb-1">
+                    {language === 'ar' ? 'القارئ الصوتي الحالي للمصحف:' : 'Active Reciter for Audios:'}
+                  </span>
+                  <select
+                    value={selectedReciter.id}
+                    onChange={(e) => {
+                      const r = RECITERS_LIST.find((item) => item.id === e.target.value);
+                      if (r) setSelectedReciter(r);
+                    }}
+                    className="w-full p-1.5 rounded-xl text-xs font-bold font-cairo bg-slate-800 border border-slate-700 text-emerald-300 outline-none cursor-pointer truncate"
                   >
-                    {/* Left: Star Rosette Number + Titles */}
-                    <div className="flex items-center gap-3.5">
-                      {/* Islamic Rosette Badge */}
-                      <div className="relative w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold font-mono text-sm group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all shrink-0 shadow-inner">
-                        <span>{surah.number}</span>
-                      </div>
-
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h3 className="font-bold text-base font-cairo text-slate-100 group-hover:text-emerald-400 transition-colors">
-                            {language === 'ar' ? `سورة ${surah.nameAr}` : surah.nameEn}
-                          </h3>
-                        </div>
-
-                        {/* Metadata Pills */}
-                        <div className="flex items-center gap-2 text-[11px] text-slate-400 font-cairo mt-1">
-                          <span className="text-amber-400 font-medium">
-                            {surah.revelationType === 'Meccan' ? 'مكية 🕋' : 'مدنية 🕌'}
-                          </span>
-                          <span>•</span>
-                          <span>{surah.versesCount} {language === 'ar' ? 'آية' : 'Ayahs'}</span>
-                          <span>•</span>
-                          <span>{language === 'ar' ? `الجزء ${surah.juzStart}` : `Juz ${surah.juzStart}`}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right: Surah Calligraphy & Favorite Star */}
-                    <div className="flex items-center gap-2.5">
-                      <div className="text-right">
-                        <span className="text-xl sm:text-2xl font-quran font-bold text-amber-300/90 group-hover:text-amber-300 block">
-                          {surah.nameAr}
-                        </span>
-                        <span className="text-[10px] text-slate-400 font-sans block">{surah.englishMeaning}</span>
-                      </div>
-
-                      {/* Favorite Button */}
-                      <button
-                        onClick={(e) => handleToggleFavoriteSurah(surah.number, e)}
-                        title={isFav ? (language === 'ar' ? 'إزالة من المفضلة' : 'Remove Favorite') : (language === 'ar' ? 'إضافة للمفضلة' : 'Add Favorite')}
-                        className={`p-2 rounded-xl transition-all cursor-pointer ${
-                          isFav ? 'text-amber-400 bg-amber-400/10' : 'text-slate-500 hover:text-amber-300 hover:bg-slate-800'
-                        }`}
-                      >
-                        <Star className={`w-4 h-4 ${isFav ? 'fill-current' : ''}`} />
-                      </button>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                    {RECITERS_LIST.map((rec) => (
+                      <option key={rec.id} value={rec.id}>
+                        {rec.nameAr}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
             </div>
-          )}
+          </div>
 
-          {filteredSurahs.length === 0 && filterType !== 'juz' && (
-            <div className="text-center py-16 text-slate-400">
-              <BookOpen className="w-10 h-10 mx-auto mb-2 opacity-40 text-emerald-400" />
-              <p className="font-cairo text-sm">
-                {language === 'ar' ? 'لم يتم العثور على أي سورة مطابقة للبحث.' : 'No Surahs found matching your search.'}
-              </p>
-            </div>
-          )}
+          {/* Khatmah Tracker Segment directly inside the Quran page */}
+          <KhatmahTracker
+            theme={theme}
+            language={language}
+            onNavigateToQuranPage={(page) => {
+              openStandaloneMushaf(page);
+            }}
+          />
         </div>
       ) : (
         /* Surah Reader View */
@@ -666,8 +622,7 @@ export const QuranView: React.FC = () => {
                 {[
                   { id: 'page', labelAr: 'صفحة بصفحة', labelEn: 'By Page', icon: <BookOpen className="w-3.5 h-3.5" /> },
                   { id: 'mushaf_image', labelAr: 'مصحف الصور', labelEn: 'Quran Images', icon: <Eye className="w-3.5 h-3.5 text-amber-400" /> },
-                  { id: 'continuous', labelAr: 'السورة كاملة', labelEn: 'Full Surah', icon: <AlignJustify className="w-3.5 h-3.5" /> },
-                  { id: 'detailed', labelAr: 'آية بآية', labelEn: 'By Verse', icon: <Layers className="w-3.5 h-3.5" /> }
+                  { id: 'continuous', labelAr: 'السورة كاملة', labelEn: 'Full Surah', icon: <AlignJustify className="w-3.5 h-3.5" /> }
                 ].map((mode) => (
                   <button
                     key={mode.id}
@@ -687,6 +642,32 @@ export const QuranView: React.FC = () => {
                 ))}
               </div>
 
+              {/* Memorization Mode Button */}
+              <button
+                onClick={() => {
+                  soundEngine.playClick();
+                  setIsMemorizeModalOpen(true);
+                }}
+                title={language === 'ar' ? 'وضع تحفيظ وتكرار الآيات' : 'Memorization Mode'}
+                className="px-3 py-1.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 text-xs font-bold font-cairo flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <Repeat className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">{language === 'ar' ? 'تحفيظ الآيات' : 'Memorize'}</span>
+              </button>
+
+              {/* Quran Paper Theme Selector Button */}
+              <button
+                onClick={() => {
+                  soundEngine.playClick();
+                  setIsPaperThemeModalOpen(true);
+                }}
+                title={language === 'ar' ? 'ألوان وخلفيات ورق المصحف' : 'Quran Paper Themes'}
+                className="px-3 py-1.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 text-xs font-bold font-cairo flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden md:inline">{language === 'ar' ? 'ورق المصحف' : 'Paper'}</span>
+              </button>
+
               {/* Reciter Selector Button */}
               <button
                 onClick={() => setIsReciterModalOpen(true)}
@@ -701,13 +682,13 @@ export const QuranView: React.FC = () => {
               <button
                 onClick={handleTogglePlay}
                 title={isPlaying ? (language === 'ar' ? 'إيقاف مؤقت' : 'Pause') : (language === 'ar' ? 'تشغيل السورة' : 'Play Surah')}
-                className={`p-2 rounded-2xl border transition-all cursor-pointer shadow-md ${
+                className={`p-1.5 sm:p-2 rounded-2xl border transition-all cursor-pointer shadow-md ${
                   isPlaying
                     ? 'bg-amber-500 text-slate-950 border-amber-400'
                     : 'bg-emerald-500 text-slate-950 border-emerald-400 hover:scale-105'
                 }`}
               >
-                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
+                {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />}
               </button>
             </div>
           </div>
@@ -768,7 +749,10 @@ export const QuranView: React.FC = () => {
               fontSize={fontSize}
               theme={theme}
               language={language}
-              onAyahClick={(verse) => setInspectedAyah(verse)}
+              onAyahClick={(verse) => {
+                setInspectedAyah(verse);
+                setIsTafsirModalOpen(true);
+              }}
               onCopyAyah={(verse) => handleCopyAyah(verse, currentSurahData.nameAr)}
               onToggleBookmark={(verse) => handleToggleAyahBookmark(verse, currentSurahData)}
               isBookmarked={(id) => isBookmarked(id)}
@@ -801,24 +785,16 @@ export const QuranView: React.FC = () => {
 
               {/* Full Continuous Flow Container in Authentic Double Border */}
               <div
-                className={`relative p-5 sm:p-9 md:p-11 rounded-3xl border-2 shadow-2xl transition-all ${
-                  theme === 'light'
-                    ? 'bg-[#fbf7ed] border-amber-400/80 text-slate-900 shadow-amber-900/10'
-                    : theme === 'sepia'
-                    ? 'bg-[#261911] border-amber-700/60 text-amber-50 shadow-black/70'
-                    : 'bg-[#09151e] border-emerald-500/40 text-slate-100 shadow-emerald-950/60'
-                }`}
+                className={`relative p-5 sm:p-9 md:p-11 rounded-3xl border-2 shadow-2xl transition-all ${paperTheme.bgClass} ${paperTheme.borderClass} ${paperTheme.textClass}`}
               >
                 {/* Inner Framing Line */}
-                <div className={`absolute inset-2 sm:inset-3 border rounded-2xl pointer-events-none ${
-                  theme === 'light' ? 'border-amber-400/30' : theme === 'sepia' ? 'border-amber-600/30' : 'border-emerald-500/25'
-                }`} />
+                <div className={`absolute inset-2 sm:inset-3 border rounded-2xl pointer-events-none ${paperTheme.innerBorderClass}`} />
 
                 {/* Corner Floral Rosettes */}
-                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 text-[9px] text-amber-400 opacity-60 pointer-events-none">❖</div>
-                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 text-[9px] text-amber-400 opacity-60 pointer-events-none">❖</div>
-                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 text-[9px] text-amber-400 opacity-60 pointer-events-none">❖</div>
-                <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 text-[9px] text-amber-400 opacity-60 pointer-events-none">❖</div>
+                <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 text-[9px] pointer-events-none ${paperTheme.rosetteClass}`}>❖</div>
+                <div className={`absolute top-3 left-3 sm:top-4 sm:left-4 text-[9px] pointer-events-none ${paperTheme.rosetteClass}`}>❖</div>
+                <div className={`absolute bottom-3 right-3 sm:bottom-4 sm:right-4 text-[9px] pointer-events-none ${paperTheme.rosetteClass}`}>❖</div>
+                <div className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 text-[9px] pointer-events-none ${paperTheme.rosetteClass}`}>❖</div>
 
                 {/* Justified Quran Text */}
                 <div
@@ -833,7 +809,10 @@ export const QuranView: React.FC = () => {
                     return (
                       <span
                         key={verse.id || verse.verseNumber}
-                        onClick={() => setInspectedAyah(verse)}
+                        onClick={() => {
+                          setInspectedAyah(verse);
+                          setIsTafsirModalOpen(true);
+                        }}
                         className={`inline transition-all cursor-pointer rounded-lg px-0.5 py-0.5 ${
                           isSelected
                             ? 'bg-emerald-500/30 text-emerald-200 shadow-sm'
@@ -845,98 +824,15 @@ export const QuranView: React.FC = () => {
                           verseNumber={verse.verseNumber}
                           isBookmarked={saved}
                           isSelected={isSelected}
-                          onClick={() => setInspectedAyah(verse)}
+                          onClick={() => {
+                            setInspectedAyah(verse);
+                            setIsTafsirModalOpen(true);
+                          }}
                         />{' '}
                       </span>
                     );
                   })}
                 </div>
-              </div>
-            </div>
-          )}
-
-          {/* 3. Detailed Verses Reading View Mode (آية بآية) */}
-          {currentSurahData && !loadingSurah && viewMode === 'detailed' && (
-            <div className="space-y-4">
-              <MushafSurahHeader
-                surah={currentSurahData}
-                showBismillah={false}
-                theme={theme}
-                language={language}
-              />
-
-              <div className="space-y-3.5">
-                {currentSurahData.verses.map((verse) => {
-                  const bookmarkId = `quran_${currentSurahData.number}_${verse.verseNumber}`;
-                  const saved = isBookmarked(bookmarkId);
-
-                  return (
-                    <div
-                      key={verse.id || verse.verseNumber}
-                      className={`p-5 sm:p-6 rounded-3xl border backdrop-blur-xl transition-all shadow-sm ${
-                        theme === 'light'
-                          ? 'bg-white/85 border-slate-200 hover:border-emerald-400/50'
-                          : theme === 'sepia'
-                          ? 'bg-[#291c13] border-amber-800/40 hover:border-amber-500/50'
-                          : 'bg-slate-900/70 border-slate-800/80 hover:border-emerald-500/30'
-                      }`}
-                    >
-                      {/* Verse Header Info & Actions */}
-                      <div className="flex items-center justify-between mb-4 border-b border-slate-800/50 pb-2.5">
-                        <div className="flex items-center gap-2">
-                          <span className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold text-xs flex items-center justify-center font-mono">
-                            {verse.verseNumber}
-                          </span>
-                          <span className="text-xs text-slate-400 font-cairo">
-                            {language === 'ar' ? `آية ${verse.verseNumber}` : `Ayah ${verse.verseNumber}`}
-                          </span>
-                          <span className="text-[11px] text-slate-500 font-mono">
-                            {language === 'ar' ? `(صفحة ${verse.page || 1})` : `(Page ${verse.page || 1})`}
-                          </span>
-                        </div>
-
-                        <div className="flex items-center gap-1.5">
-                          <button
-                            onClick={() => handleCopyAyah(verse, currentSurahData.nameAr)}
-                            title={language === 'ar' ? 'نسخ الآية' : 'Copy Ayah'}
-                            className="p-1.5 rounded-xl text-slate-400 hover:text-emerald-300 hover:bg-slate-800 transition-all cursor-pointer"
-                          >
-                            <Copy className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => handleToggleAyahBookmark(verse, currentSurahData)}
-                            title={language === 'ar' ? 'حفظ في المفضلة' : 'Bookmark'}
-                            className={`p-1.5 rounded-xl transition-all cursor-pointer ${
-                              saved ? 'text-amber-400 bg-amber-400/10' : 'text-slate-400 hover:text-amber-300 hover:bg-slate-800'
-                            }`}
-                          >
-                            <Bookmark className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} />
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Arabic Verse Text */}
-                      <p
-                        dir="rtl"
-                        className={`text-right font-semibold text-slate-100 mb-3 ${getArabicFontClass()} ${getFontSizeClass()}`}
-                      >
-                        {verse.textAr}{' '}
-                        <AyahEndMarker
-                          verseNumber={verse.verseNumber}
-                          isBookmarked={saved}
-                          isSelected={inspectedAyah?.verseNumber === verse.verseNumber}
-                          onClick={() => setInspectedAyah(verse)}
-                        />
-                      </p>
-
-                      {verse.textEn && (
-                        <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed pt-2 border-t border-slate-800/40">
-                          {verse.textEn}
-                        </p>
-                      )}
-                    </div>
-                  );
-                })}
               </div>
             </div>
           )}
@@ -965,6 +861,59 @@ export const QuranView: React.FC = () => {
           );
         }}
       />
+
+      {/* Tafsir & Word Meanings Modal */}
+      {currentSurahData && (
+        <TafsirModal
+          isOpen={isTafsirModalOpen}
+          onClose={() => {
+            setIsTafsirModalOpen(false);
+            setInspectedAyah(null);
+          }}
+          verse={inspectedAyah}
+          surahNameAr={currentSurahData.nameAr}
+          surahNumber={currentSurahData.number}
+          theme={theme}
+          language={language}
+          hasPrevAyah={inspectedAyah ? inspectedAyah.verseNumber > 1 : false}
+          hasNextAyah={
+            inspectedAyah
+              ? inspectedAyah.verseNumber < currentSurahData.verses.length
+              : false
+          }
+          onNavigatePrevAyah={() => {
+            if (!inspectedAyah) return;
+            const prevIdx = currentSurahData.verses.findIndex(
+              (v) => v.verseNumber === inspectedAyah.verseNumber - 1
+            );
+            if (prevIdx !== -1) {
+              setInspectedAyah(currentSurahData.verses[prevIdx]);
+            }
+          }}
+          onNavigateNextAyah={() => {
+            if (!inspectedAyah) return;
+            const nextIdx = currentSurahData.verses.findIndex(
+              (v) => v.verseNumber === inspectedAyah.verseNumber + 1
+            );
+            if (nextIdx !== -1) {
+              setInspectedAyah(currentSurahData.verses[nextIdx]);
+            }
+          }}
+        />
+      )}
+
+      {/* Quran Memorization & Repetition Mode Modal */}
+      {currentSurahData && (
+        <QuranMemorizeModal
+          isOpen={isMemorizeModalOpen}
+          onClose={() => setIsMemorizeModalOpen(false)}
+          surahNumber={currentSurahData.number}
+          surahNameAr={currentSurahData.nameAr}
+          verses={currentSurahData.verses}
+          theme={theme}
+          language={language}
+        />
+      )}
     </div>
   );
 };

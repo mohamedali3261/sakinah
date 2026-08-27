@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useApp } from '../context/AppContext';
-import { ArabicFont, FontSize, ThemeMode } from '../types';
-import { Type, X, Moon, Sun, Flame, Check } from 'lucide-react';
+import { ArabicFont, FontSize, ThemeMode, QuranPaperThemeId } from '../types';
+import { QURAN_PAPER_THEMES } from '../data/paperThemes';
+import { Type, X, Moon, Sun, Flame, Check, Palette, Headphones } from 'lucide-react';
 import { GlassButton } from './GlassButton';
 
 export const FontSettingsModal: React.FC = () => {
@@ -14,6 +15,8 @@ export const FontSettingsModal: React.FC = () => {
     setFontFamily,
     fontSize,
     setFontSize,
+    quranPaperTheme,
+    setQuranPaperTheme,
     isFontSettingsOpen,
     setIsFontSettingsOpen
   } = useApp();
@@ -35,8 +38,7 @@ export const FontSettingsModal: React.FC = () => {
 
   const themes: { id: ThemeMode; labelAr: string; labelEn: string; icon: React.ReactNode }[] = [
     { id: 'dark', labelAr: 'ليلي زمردي', labelEn: 'Night Glass', icon: <Moon className="w-4 h-4" /> },
-    { id: 'sepia', labelAr: 'قنديل دافئ', labelEn: 'Warm Lantern', icon: <Flame className="w-4 h-4" /> },
-    { id: 'light', labelAr: 'لؤلؤي نهاري', labelEn: 'Day Pearl', icon: <Sun className="w-4 h-4" /> }
+    { id: 'sepia', labelAr: 'قنديل دافئ', labelEn: 'Warm Lantern', icon: <Flame className="w-4 h-4" /> }
   ];
 
   return (
@@ -95,7 +97,7 @@ export const FontSettingsModal: React.FC = () => {
             {/* Ambient Reading Theme */}
             <div>
               <label className="block text-sm font-semibold mb-3 font-cairo">
-                {language === 'ar' ? 'نمط الإضاءة والخلفية' : 'Ambient Theme & Lighting'}
+                {language === 'ar' ? 'نمط الإضاءة والخلفية العامة' : 'General App Theme'}
               </label>
               <div className="grid grid-cols-3 gap-2.5">
                 {themes.map((t) => (
@@ -112,6 +114,52 @@ export const FontSettingsModal: React.FC = () => {
                     <span className="text-xs font-cairo">{language === 'ar' ? t.labelAr : t.labelEn}</span>
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Quran Paper Themes (Paper Themes) */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-semibold font-cairo flex items-center gap-2">
+                  <Palette className="w-4 h-4 text-amber-400" />
+                  <span>{language === 'ar' ? 'لون وخلفية ورق المصحف (Paper Themes)' : 'Quran Paper Themes'}</span>
+                </label>
+                <span className="text-[10px] text-amber-300 font-bold bg-amber-500/20 px-2 py-0.5 rounded-full">
+                  {language === 'ar' ? 'مخصص للمصحف' : 'Mushaf Exclusive'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {QURAN_PAPER_THEMES.map((pt) => {
+                  const isSelected = quranPaperTheme === pt.id;
+                  return (
+                    <button
+                      key={pt.id}
+                      onClick={() => setQuranPaperTheme(pt.id)}
+                      className={`p-2.5 rounded-2xl border transition-all text-right flex items-center gap-2.5 cursor-pointer ${
+                        isSelected
+                          ? 'border-amber-400 bg-amber-500/20 text-amber-200 ring-1 ring-amber-400/50 shadow-md font-bold'
+                          : 'border-white/10 hover:border-white/20 bg-white/5 opacity-75 hover:opacity-100'
+                      }`}
+                    >
+                      <div
+                        className="w-7 h-7 rounded-lg border flex items-center justify-center font-quran text-xs shrink-0 shadow-inner font-bold"
+                        style={{
+                          backgroundColor: pt.previewBg,
+                          borderColor: pt.previewBorder,
+                          color: pt.previewText
+                        }}
+                      >
+                        ق
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-cairo block truncate">
+                          {language === 'ar' ? pt.nameAr : pt.nameEn}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 

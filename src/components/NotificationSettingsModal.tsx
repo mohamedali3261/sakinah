@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useApp } from '../context/AppContext';
-import { Bell, BellRing, X, Check, Clock, Sparkles } from 'lucide-react';
+import { Bell, BellRing, X, Check, Clock, Sparkles, Play, Square, Volume2, Timer } from 'lucide-react';
 import { GlassButton } from './GlassButton';
-import { soundEngine } from '../utils/audio';
+import { soundEngine, triggerHaptic } from '../utils/audio';
+import { salawatService, SALAWAT_VOICES, SalawatVoice } from '../utils/salawatService';
 
 export const NotificationSettingsModal: React.FC = () => {
   const {
@@ -15,6 +16,65 @@ export const NotificationSettingsModal: React.FC = () => {
     toggleReminder,
     showToast
   } = useApp();
+
+  const [selectedVoiceId, setSelectedVoiceId] = useState<string>(() => {
+    return salawatService.getCurrentVoiceId();
+  });
+  const [isSalawatPlaying, setIsSalawatPlaying] = useState<boolean>(
+    salawatService.getIsPlaying()
+  );
+  const [periodicMinutes, setPeriodicMinutes] = useState<number>(() => {
+    return salawatService.getPeriodicMinutes();
+  });
+
+  useEffect(() => {
+    const unsubscribe = salawatService.subscribe((playing, voiceId) => {
+      setIsSalawatPlaying(playing);
+      setSelectedVoiceId(voiceId);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleVoiceChange = (voice: SalawatVoice) => {
+    setSelectedVoiceId(voice.id);
+    salawatService.setCurrentVoiceId(voice.id);
+    if (soundEnabledGlobal) soundEngine.playClick();
+  };
+
+  const handlePlaySalawat = async (voiceId: string) => {
+    soundEngine.playClick();
+    triggerHaptic(15);
+    const success = await salawatService.playSalawat(voiceId);
+    if (success) {
+      showToast(
+        language === 'ar' ? 'صلِّ على النبي ﷺ' : 'Salawat on the Prophet ﷺ',
+        language === 'ar' ? 'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ' : 'May Allah send blessings upon Muhammad ﷺ'
+      );
+    }
+  };
+
+  const handleStopSalawat = () => {
+    soundEngine.playClick();
+    triggerHaptic(10);
+    salawatService.stop();
+  };
+
+  const handleSetPeriodic = (mins: number) => {
+    setPeriodicMinutes(mins);
+    salawatService.setPeriodicMinutes(mins);
+    showToast(
+      mins > 0
+        ? language === 'ar'
+          ? `سيتم التذكير بالصلاة على النبي كل ${mins} دقيقة ⏱️`
+          : `Periodic Salawat set every ${mins} mins ⏱️`
+        : language === 'ar'
+        ? 'تم إيقاف التذكير الدوري'
+        : 'Periodic reminder turned off',
+      ''
+    );
+  };
+
+  const soundEnabledGlobal = true; // safe fallback
 
   const handleTestNotification = (title: string, desc: string) => {
     soundEngine.playCompletion();
@@ -117,6 +177,95 @@ export const NotificationSettingsModal: React.FC = () => {
               <GlassButton size="sm" variant="accent" onClick={requestBrowserPermission}>
                 {language === 'ar' ? 'تفعيل' : 'Allow'}
               </GlassButton>
+            </div>
+
+            {/* 💖 Salawat Voice Selection Panel */}
+            <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 space-y-3">
+              <div className="flex items-center gap-2">
+                <Volume2 className="w-5 h-5 text-amber-400" />
+                <div>
+                  <h4 className="text-sm font-bold font-cairo text-amber-300">
+                    {language === 'ar' ? 'صوت التذكير بالصلاة على النبي ﷺ' : 'Salawat Reminder Reciter'}
+                  </h4>
+                  <p className="text-[10px] opacity-80 font-cairo text-slate-400">
+                    {language === 'ar' ? 'اختر الصوت المفضل وتوقيت التذكير التلقائي' : 'Choose your preferred voice & interval'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Reciter Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                {SALAWAT_VOICES.map((v) => {
+                  const isSelected = v.id === selectedVoiceId;
+                  const isThisVoicePlaying = isSalawatPlaying && isSelected;
+                  return (
+                    <div
+                      key={v.id}
+                      className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 ${
+                        isSelected
+                          ? 'border-amber-400 bg-amber-500/15 text-amber-100'
+                          : 'border-white/5 bg-slate-900/40 hover:bg-white/5 text-slate-300'
+                      }`}
+                    >
+                      <button
+                        onClick={() => handleVoiceChange(v)}
+                        className="flex items-center gap-2 flex-1 text-right min-w-0 cursor-pointer"
+                      >
+                        <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${isSelected ? 'bg-amber-400 shadow-sm shadow-amber-400/50' : 'bg-slate-600'}`} />
+                        <div className="min-w-0">
+                          <span className="text-xs font-bold font-cairo block truncate">
+                            {language === 'ar' ? v.nameAr : v.nameEn}
+                          </span>
+                        </div>
+                      </button>
+
+                      {/* Play/Stop Button for each voice */}
+                      <button
+                        onClick={() => {
+                          if (isThisVoicePlaying) {
+                            handleStopSalawat();
+                          } else {
+                            handlePlaySalawat(v.id);
+                          }
+                        }}
+                        className={`p-1.5 rounded-lg shrink-0 transition-colors flex items-center justify-center cursor-pointer ${
+                          isThisVoicePlaying
+                            ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                            : 'bg-amber-500/20 text-amber-400 border border-amber-500/30 hover:bg-amber-500/30'
+                        }`}
+                        title={isThisVoicePlaying ? 'إيقاف' : 'استماع'}
+                      >
+                        {isThisVoicePlaying ? <Square className="w-3 h-3 fill-current" /> : <Play className="w-3 h-3 fill-current ml-0.5" />}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Periodic timer inside modal */}
+              <div className="pt-2 border-t border-white/5 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5">
+                  <Timer className="w-4 h-4 text-amber-400" />
+                  <span className="text-xs font-bold font-cairo">
+                    {language === 'ar' ? 'معدل التكرار التلقائي:' : 'Reminder Interval:'}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1">
+                  {[0, 15, 30, 60].map((mins) => (
+                    <button
+                      key={mins}
+                      onClick={() => handleSetPeriodic(mins)}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-bold font-cairo transition-all cursor-pointer ${
+                        periodicMinutes === mins
+                          ? 'bg-amber-500 text-slate-950 shadow-sm'
+                          : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      {mins === 0 ? (language === 'ar' ? 'معطّل' : 'Off') : `${mins} ${language === 'ar' ? 'دقائق' : 'min'}`}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Reminders List */}
