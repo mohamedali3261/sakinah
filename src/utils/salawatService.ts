@@ -20,11 +20,11 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     nameEn: 'Sheikh Mishary Rashid Alafasy',
     reciterAr: 'مشاري العفاسي (سورة الأحزاب: ٥٦)',
     reciterEn: 'Mishary Alafasy (Al-Ahzab: 56)',
-    audioUrl: 'https://audio.qurancdn.com/Alafasy/mp3/033056.mp3',
+    audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/3589.mp3',
     backupUrls: [
-      'https://cdn.islamic.network/quran/audio/128/ar.alafasy/3589.mp3',
+      'https://everyayah.com/data/Alafasy_128kbps/033056.mp3',
       'https://verses.quran.com/Alafasy/mp3/033056.mp3',
-      'https://everydayayah.com/data/Alafasy_128kbps/033056.mp3'
+      'https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/033056.mp3'
     ],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا • اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ',
     badge: 'خاشع وعذب'
@@ -37,9 +37,9 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     reciterEn: 'Al-Minshawi (Al-Ahzab: 56)',
     audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.minshawi/3589.mp3',
     backupUrls: [
-      'https://audio.qurancdn.com/Minshawi/Murattal/mp3/033056.mp3',
+      'https://everyayah.com/data/Minshawy_Murattal_128kbps/033056.mp3',
       'https://verses.quran.com/Minshawi/Murattal/mp3/033056.mp3',
-      'https://everydayayah.com/data/Minshawy_Murattal_128kbps/033056.mp3'
+      'https://download.quranicaudio.com/quran/mohammed_siddiq_al_minshawi/033056.mp3'
     ],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا',
     badge: 'الخشوع والبكاء'
@@ -52,9 +52,9 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     reciterEn: 'Maher Al-Muaiqly',
     audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.mahermuaiqly/3589.mp3',
     backupUrls: [
-      'https://audio.qurancdn.com/Maher/mp3/033056.mp3',
+      'https://everyayah.com/data/MaherAlMuaiqly128kbps/033056.mp3',
       'https://verses.quran.com/Maher/mp3/033056.mp3',
-      'https://everydayayah.com/data/MaherAlMuaiqly128kbps/033056.mp3'
+      'https://download.quranicaudio.com/quran/maher_al_muaiqly/033056.mp3'
     ],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا',
     badge: 'صوت الحرم المكي'
@@ -67,9 +67,9 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     reciterEn: 'Mahmoud Khalil Al-Husary',
     audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.husary/3589.mp3',
     backupUrls: [
-      'https://audio.qurancdn.com/Hussary/Murattal/mp3/033056.mp3',
+      'https://everyayah.com/data/Husary_128kbps/033056.mp3',
       'https://verses.quran.com/Hussary/Murattal/mp3/033056.mp3',
-      'https://everydayayah.com/data/Husary_128kbps/033056.mp3'
+      'https://download.quranicaudio.com/quran/mahmoud_khalil_al_husary/033056.mp3'
     ],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا',
     badge: 'شيخ عموم المقارئ'
@@ -272,7 +272,8 @@ class SalawatService {
   }
 
   /**
-   * Play Salawat audio with resilient fallback chain (QuranCDN -> Islamic Network -> EveryDayAyah -> Web Speech)
+   * Play Salawat audio with resilient fallback chain (Primary Audio -> Backup URLs -> Web Speech)
+   * Prioritizes real recorded Quranic audio over AI speech synthesis
    */
   public async playSalawat(voiceId?: string, onStart?: () => void, onEnd?: () => void): Promise<boolean> {
     const targetVoiceId = voiceId || this.currentVoiceId;
@@ -285,18 +286,7 @@ class SalawatService {
     this.notify();
     if (onStart) onStart();
 
-    // If explicit spoken synthesizer voice
-    if (selectedVoice.id === 'speech_salawat' || !selectedVoice.audioUrl) {
-      const speechSuccess = await this.speakSalawatViaSpeech(selectedVoice.textAr);
-      if (speechSuccess) {
-        this.hasPlayedOnSession = true;
-        sessionStorage.setItem('sakinah_salawat_played', 'true');
-        if (onEnd) onEnd();
-        return true;
-      }
-    }
-
-    // Try playing genuine Quranic Salawat verse audio files
+    // Try playing genuine Quranic Salawat verse audio files FIRST
     const urlsToTry = [selectedVoice.audioUrl, ...(selectedVoice.backupUrls || [])].filter(Boolean);
 
     for (const url of urlsToTry) {
@@ -308,7 +298,7 @@ class SalawatService {
       }
     }
 
-    // Web Speech API fallback
+    // Only use Web Speech API as last resort fallback
     const speechSuccess = await this.speakSalawatViaSpeech(
       'اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا وَنَبِيِّنَا مُحَمَّدٍ'
     );
