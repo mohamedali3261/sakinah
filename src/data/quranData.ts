@@ -200,12 +200,6 @@ export const RECITERS_LIST: Reciter[] = [
     serverUrl: 'https://server8.mp3quran.net/aqil'
   },
   {
-    id: 'mahmoud_ali',
-    nameAr: 'محمود علي البنا',
-    nameEn: 'Mahmoud Ali Al-Banna',
-    serverUrl: 'https://server8.mp3quran.net/bna'
-  },
-  {
     id: 'ahmed_nuaina',
     nameAr: 'أحمد نعينع',
     nameEn: 'Ahmed Naina',
@@ -228,12 +222,6 @@ export const RECITERS_LIST: Reciter[] = [
     nameAr: 'مصطفى أوزجان',
     nameEn: 'Mustafa Ozcan',
     serverUrl: 'https://server7.mp3quran.net/mustafa'
-  },
-  {
-    id: 'abdurrahmaan_as_sudais',
-    nameAr: 'عبد الرحمن السديس',
-    nameEn: 'Abdurrahmaan As-Sudais',
-    serverUrl: 'https://server11.mp3quran.net/sds'
   }
 ];
 
