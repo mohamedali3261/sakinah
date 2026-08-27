@@ -188,7 +188,7 @@ export const KhatmahTracker: React.FC<KhatmahTrackerProps> = ({
             {activePlan ? activePlan.title : 'خطة الختمة'}
           </h2>
           <p className="text-xs text-slate-400 font-cairo">
-            تتبع وردك القرآني اليومي، واختم كتاب الله بانتظام وتدبر وسكينة
+            تتبع وردك القرآني اليومي، واختم كتاب الله بانتظام وتدبر ويقين
           </p>
         </div>
 

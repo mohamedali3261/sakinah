@@ -81,7 +81,7 @@ class SalawatService {
   private hasPlayedOnSession: boolean = false;
   private isAutoPlayArmed: boolean = false;
   private isPlaying: boolean = false;
-  private currentVoiceId: string = 'mishary';
+  private currentVoiceId: string = 'mishary'; // Default: Sheikh Mishary Rashid Alafasy
   private periodicInterval: number | null = null;
   private periodicMinutes: number = 0;
   private listeners: Array<(isPlaying: boolean, voiceId: string) => void> = [];

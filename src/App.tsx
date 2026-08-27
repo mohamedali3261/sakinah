@@ -24,6 +24,24 @@ const MainContent: React.FC = () => {
   const { activeTab, theme, language, isFocusMode } = useApp();
   const [scrollScale, setScrollScale] = useState(1);
 
+  // Dynamic page title based on active tab
+  useEffect(() => {
+    const titles: Record<string, { ar: string; en: string }> = {
+      home: { ar: 'الرئيسية | يَقِين', en: 'Home | Yaqeen' },
+      quran: { ar: 'المصحف الشريف | يَقِين', en: 'Quran | Yaqeen' },
+      athkar: { ar: 'الأذكار | يَقِين', en: 'Athkar | Yaqeen' },
+      library: { ar: 'المكتبة الإسلامية | يَقِين', en: 'Library | Yaqeen' },
+      index: { ar: 'الفهرس الشامل | يَقِين', en: 'Full Index | Yaqeen' },
+      prayers: { ar: 'مواقيت الصلاة والقبلة | يَقِين', en: 'Prayer Times & Qibla | Yaqeen' },
+      saved: { ar: 'المحفوظات والمفضلة | يَقِين', en: 'Saved Bookmarks | Yaqeen' },
+      sebha: { ar: 'السبحة الإلكترونية | يَقِين', en: 'Digital Tasbih | Yaqeen' },
+      radio: { ar: 'الإذاعات المباشرة | يَقِين', en: 'Live Radio | Yaqeen' },
+    };
+
+    const title = titles[activeTab] || titles.home;
+    document.title = language === 'ar' ? title.ar : title.en;
+  }, [activeTab, language]);
+
   // Smooth background scroll zoom logic
   useEffect(() => {
     const handleScroll = () => {

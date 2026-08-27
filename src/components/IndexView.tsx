@@ -41,42 +41,12 @@ export const IndexView: React.FC = () => {
   );
 
   return (
-    <div id="index-view" className="space-y-6 pb-20">
-      {/* Header Banner - Focused on Quran Surahs Catalog */}
-      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 border backdrop-blur-xl transition-all shadow-xl bg-gradient-to-br from-teal-950/40 via-slate-900/60 to-emerald-950/30 border-teal-500/30">
-        <div className="absolute inset-0 bg-islamic-arabesque opacity-10 pointer-events-none" />
-        
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-500/30 mb-3">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>{language === 'ar' ? 'فهرس سور القرآن الكريم (١١٤ سورة)' : 'Quran Catalog (114 Surahs)'}</span>
-          </div>
-
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-cairo text-slate-100 mb-2">
-            {language === 'ar' ? 'فهرس سور المصحف الشريف' : 'Holy Quran Surahs Index'}
-          </h1>
-          <p className="text-sm text-slate-300 max-w-xl leading-relaxed">
-            {language === 'ar'
-              ? 'دليلك الشامل للوصول السريع وقراءة سور القرآن الكريم في وضع ملء الشاشة المستقل بلمسة واحدة.'
-              : 'Your comprehensive directory to quickly open any Surah in standalone, distraction-free full-screen mode.'}
-          </p>
-
-          {/* Catalog Statistics */}
-          <div className="grid grid-cols-3 gap-3 mt-6 pt-4 border-t border-slate-700/40">
-            <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800 text-center">
-              <span className="text-xl sm:text-2xl font-bold font-cairo text-emerald-400 block">١١٤</span>
-              <span className="text-[10px] sm:text-xs text-slate-400">{language === 'ar' ? 'سورة مباركة' : 'Total Surahs'}</span>
-            </div>
-            <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800 text-center">
-              <span className="text-xl sm:text-2xl font-bold font-cairo text-teal-400 block">٦٠٤</span>
-              <span className="text-[10px] sm:text-xs text-slate-400">{language === 'ar' ? 'صفحة مرقمة' : 'Pages'}</span>
-            </div>
-            <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800 text-center">
-              <span className="text-xl sm:text-2xl font-bold font-cairo text-amber-400 block">٣٠</span>
-              <span className="text-[10px] sm:text-xs text-slate-400">{language === 'ar' ? 'جزءاً شريفاً' : 'Ajza’'}</span>
-            </div>
-          </div>
-        </div>
+    <div id="index-view" className="space-y-6 pb-20 pt-4">
+      {/* Page Title */}
+      <div className="text-center">
+        <h1 className="text-2xl sm:text-3xl font-extrabold font-cairo text-slate-100 mb-2">
+          {language === 'ar' ? 'فهرس سور المصحف الشريف' : 'Holy Quran Surahs Index'}
+        </h1>
       </div>
 
       {/* Search Input */}
@@ -123,9 +93,6 @@ export const IndexView: React.FC = () => {
               {/* 2. Surah Name - Enlarged and centered */}
               <span className="font-quran font-extrabold text-2xl sm:text-3xl text-slate-100 block my-1">
                 {s.nameAr}
-              </span>
-              <span className="text-xs text-slate-400 font-sans block mb-3">
-                {s.nameEn}
               </span>
 
               {/* 3. Number of Verses at the bottom */}

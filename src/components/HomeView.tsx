@@ -255,11 +255,11 @@ export const HomeView: React.FC = () => {
   const getGreeting = () => {
     const hours = new Date().getHours();
     if (hours < 12) {
-      return language === 'ar' ? 'صباح السكينة والطمأنينة ☀️' : 'Good Morning & Peace ☀️';
+      return language === 'ar' ? 'صباح اليقين والطمأنينة ☀️' : 'Good Morning & Peace ☀️';
     } else if (hours < 18) {
       return language === 'ar' ? 'مساء النور والبركة 🌤️' : 'Good Afternoon & Blessings 🌤️';
     } else {
-      return language === 'ar' ? 'مساء السكينة والذكر 🌙' : 'Peaceful Evening 🌙';
+      return language === 'ar' ? 'مساء اليقين والذكر 🌙' : 'Peaceful Evening 🌙';
     }
   };
 
