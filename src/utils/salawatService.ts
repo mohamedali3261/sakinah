@@ -20,12 +20,8 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     nameEn: 'Sheikh Mishary Rashid Alafasy',
     reciterAr: 'مشاري العفاسي (سورة الأحزاب: ٥٦)',
     reciterEn: 'Mishary Alafasy (Al-Ahzab: 56)',
-    audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/3589.mp3',
-    backupUrls: [
-      'https://everyayah.com/data/Alafasy_128kbps/033056.mp3',
-      'https://verses.quran.com/Alafasy/mp3/033056.mp3',
-      'https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/033056.mp3'
-    ],
+    audioUrl: '/audio/salawat/alafasy_033056.mp3',
+    backupUrls: [],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا • اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ',
     badge: 'خاشع وعذب'
   },
@@ -35,12 +31,8 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     nameEn: 'Sheikh Mohamed Siddiq Al-Minshawi',
     reciterAr: 'محمد صديق المنشاوي (سورة الأحزاب: ٥٦)',
     reciterEn: 'Al-Minshawi (Al-Ahzab: 56)',
-    audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.minshawi/3589.mp3',
-    backupUrls: [
-      'https://everyayah.com/data/Minshawy_Murattal_128kbps/033056.mp3',
-      'https://verses.quran.com/Minshawi/Murattal/mp3/033056.mp3',
-      'https://download.quranicaudio.com/quran/mohammed_siddiq_al_minshawi/033056.mp3'
-    ],
+    audioUrl: '/audio/salawat/minshawi_033056.mp3',
+    backupUrls: [],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا',
     badge: 'الخشوع والبكاء'
   },
@@ -50,12 +42,8 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     nameEn: 'Sheikh Maher Al-Muaiqly',
     reciterAr: 'ماهر المعيقلي (إمام الحرم المكي)',
     reciterEn: 'Maher Al-Muaiqly',
-    audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.mahermuaiqly/3589.mp3',
-    backupUrls: [
-      'https://everyayah.com/data/MaherAlMuaiqly128kbps/033056.mp3',
-      'https://verses.quran.com/Maher/mp3/033056.mp3',
-      'https://download.quranicaudio.com/quran/maher_al_muaiqly/033056.mp3'
-    ],
+    audioUrl: '/audio/salawat/muaiqly_033056.mp3',
+    backupUrls: [],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا',
     badge: 'صوت الحرم المكي'
   },
@@ -65,12 +53,8 @@ export const SALAWAT_VOICES: SalawatVoice[] = [
     nameEn: 'Sheikh Mahmoud Khalil Al-Husary',
     reciterAr: 'محمود خليل الحصري (سورة الأحزاب: ٥٦)',
     reciterEn: 'Mahmoud Khalil Al-Husary',
-    audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.husary/3589.mp3',
-    backupUrls: [
-      'https://everyayah.com/data/Husary_128kbps/033056.mp3',
-      'https://verses.quran.com/Hussary/Murattal/mp3/033056.mp3',
-      'https://download.quranicaudio.com/quran/mahmoud_khalil_al_husary/033056.mp3'
-    ],
+    audioUrl: '/audio/salawat/husary_033056.mp3',
+    backupUrls: [],
     textAr: 'إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا',
     badge: 'شيخ عموم المقارئ'
   }
