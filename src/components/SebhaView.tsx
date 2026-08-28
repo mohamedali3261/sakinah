@@ -126,6 +126,7 @@ export const SebhaView: React.FC = () => {
   const [newPresetTextAr, setNewPresetTextAr] = useState('');
   const [newPresetTextEn, setNewPresetTextEn] = useState('');
   const [newPresetTarget, setNewPresetTarget] = useState(33);
+  const [showPresets, setShowPresets] = useState(false);
 
   // Streak/Consistency States
   const [streak, setStreak] = useState(0);
@@ -497,46 +498,58 @@ export const SebhaView: React.FC = () => {
       </AnimatePresence>
 
       {/* Main Header / Title Block */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-3xl border border-slate-200/40 dark:border-white/5 bg-slate-900/40 backdrop-blur-sm text-center sm:text-right">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-3xl border border-emerald-500/20 bg-gradient-to-r from-emerald-950/30 via-slate-900/40 to-slate-950/30 backdrop-blur-xl text-center sm:text-right shadow-2xl">
         <div>
-          <div className="flex items-center justify-center sm:justify-start gap-2 mb-1.5">
-            <span className="p-1 px-2.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold font-cairo flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+            <span className="p-1.5 px-3 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold font-cairo flex items-center gap-1.5 shadow-lg shadow-emerald-500/10">
+              <Sparkles className="w-4 h-4" />
               {language === 'ar' ? 'المسبحة الروحية المطورة' : 'Interactive Spiritual Sebha'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold font-cairo tracking-tight text-slate-100">
+          <h2 className="text-3xl sm:text-4xl font-bold font-cairo tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 drop-shadow-lg">
             {language === 'ar' ? 'المِسْبَحَة الذكية' : 'Smart Sebha'}
           </h2>
         </div>
 
-        {/* Streak and Focus widgets */}
-        <div className="flex items-center justify-center gap-2.5">
-          <div className="flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-2xl p-2.5 px-3.5 shadow-sm">
-            <Flame className="w-4.5 h-4.5 text-amber-500" />
+        {/* Stats Widgets */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center gap-2.5 bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 rounded-2xl p-3 px-4 shadow-lg shadow-amber-500/10">
+            <Flame className="w-5 h-5 text-amber-400" />
             <div className="text-right">
-              <span className="text-[9px] font-cairo font-bold block opacity-60 text-amber-400">
-                {language === 'ar' ? 'المواظبة اليومية' : 'Daily Streak'}
+              <span className="text-[10px] font-cairo font-bold block opacity-70 text-amber-300">
+                {language === 'ar' ? 'المواظبة' : 'Streak'}
               </span>
-              <span className="text-xs font-bold font-mono text-amber-400">
-                {streak} {language === 'ar' ? 'يوم' : 'Days'}
+              <span className="text-sm font-bold font-mono text-amber-400">
+                {streak} {language === 'ar' ? 'يوم' : 'D'}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2.5 bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/30 rounded-2xl p-3 px-4 shadow-lg shadow-emerald-500/10">
+            <Award className="w-5 h-5 text-emerald-400" />
+            <div className="text-right">
+              <span className="text-[10px] font-cairo font-bold block opacity-70 text-emerald-300">
+                {language === 'ar' ? 'المجموع' : 'Total'}
+              </span>
+              <span className="text-sm font-bold font-mono text-emerald-400">
+                {totalCount.toLocaleString()}
               </span>
             </div>
           </div>
 
           <button
             onClick={() => setIsImmersiveMode(true)}
-            className="flex items-center gap-2 p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-all cursor-pointer"
+            className="flex items-center gap-2 p-3 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-slate-300 border border-slate-700 transition-all cursor-pointer shadow-lg hover:shadow-xl"
             title={language === 'ar' ? 'نمط التركيز الكامل' : 'Immersive Focus Mode'}
           >
-            <Maximize2 className="w-4.5 h-4.5" />
+            <Maximize2 className="w-5 h-5" />
           </button>
         </div>
       </div>
 
       {/* Center/Right Side: Interactive Beads & Counter (Single Column layout) */}
       <div className="space-y-6">
-        <div className="flex flex-col items-center justify-center p-6 sm:p-8 bg-slate-900/60 border border-slate-800/80 rounded-3xl shadow-xl backdrop-blur-md">
+        <div className="flex flex-col items-center justify-center p-8 sm:p-10 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 border border-emerald-500/20 rounded-3xl shadow-2xl backdrop-blur-xl">
           
           {/* Header displaying current dhikr */}
           <div className="text-center w-full max-w-md mb-6">
@@ -638,16 +651,21 @@ export const SebhaView: React.FC = () => {
             {/* Main Counter Tap Button with spring scaling and physical vibration shake */}
             <motion.button
               animate={isVisualShaking ? {
-                x: [0, -3, 3, -3, 3, -2, 2, 0],
-                y: [0, 2, -2, 2, -2, 1, -1, 0],
+                x: [0, -4, 4, -4, 4, -2, 2, 0],
+                y: [0, 3, -3, 3, -3, 1, -1, 0],
+                rotate: [0, -2, 2, -2, 2, -1, 1, 0]
               } : {}}
-              transition={{ duration: 0.12 }}
+              transition={{ duration: 0.15 }}
               whileTap={{ 
-                scale: 0.96,
-                boxShadow: 'inset 0 10px 25px rgba(0,0,0,0.15)'
+                scale: 0.92,
+                boxShadow: 'inset 0 15px 35px rgba(0,0,0,0.25), 0 5px 20px rgba(16,185,129,0.3)'
+              }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: '0 20px 50px rgba(16,185,129,0.3), inset 0 2px 15px rgba(255,255,255,0.08)'
               }}
               onClick={handleTap}
-              className="relative z-10 w-[200px] h-[200px] sm:w-[230px] sm:h-[230px] rounded-full flex flex-col items-center justify-center border-4 border-emerald-500/20 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 shadow-[0_15px_35px_-10px_rgba(16,185,129,0.2),inset_0_2px_15px_rgba(255,255,255,0.05)] hover:border-emerald-500/30 transition-all cursor-pointer select-none overflow-hidden"
+              className="relative z-10 w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] rounded-full flex flex-col items-center justify-center border-4 border-emerald-500/30 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 shadow-[0_20px 50px_-10px_rgba(16,185,129,0.25),inset_0_2px_15px_rgba(255,255,255,0.08)] hover:border-emerald-500/50 transition-all cursor-pointer select-none overflow-hidden backdrop-blur-sm"
             >
               {/* Absolute ripples list for tap feedbacks */}
               {ripples.map(ripple => (
@@ -683,46 +701,97 @@ export const SebhaView: React.FC = () => {
           </div>
 
           {/* Quick Actions Tray */}
-          <div className="flex items-center justify-between w-full max-w-md mt-8 border-t border-slate-800 pt-5 gap-3.5">
+          <div className="flex items-center justify-between w-full max-w-md mt-8 border-t border-emerald-500/20 pt-6 gap-3.5">
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-all cursor-pointer text-xs font-bold font-cairo"
+              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-slate-300 border border-slate-700 transition-all cursor-pointer text-xs font-bold font-cairo shadow-lg hover:shadow-xl"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-4 h-4" />
               <span>{language === 'ar' ? 'تصفير' : 'Reset'}</span>
             </button>
 
             <button
               onClick={changeTarget}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-all cursor-pointer text-xs font-bold font-cairo"
+              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-br from-emerald-800/50 to-emerald-900/50 hover:from-emerald-700/50 hover:to-emerald-800/50 text-emerald-300 border border-emerald-600/30 transition-all cursor-pointer text-xs font-bold font-cairo shadow-lg shadow-emerald-500/10 hover:shadow-emerald-500/20"
             >
-              <Edit3 className="w-3.5 h-3.5" />
+              <Edit3 className="w-4 h-4" />
               <span>{language === 'ar' ? `الهدف: ${currentTarget}` : `Target: ${currentTarget}`}</span>
             </button>
 
-            <div className="flex flex-col items-end px-3.5 py-1.5 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">
-              <span className="text-[9px] font-cairo text-emerald-400 font-bold uppercase tracking-wider">
-                {language === 'ar' ? 'المجموع الكلي' : 'Total Count'}
-              </span>
-              <span className="text-sm font-bold font-mono text-emerald-400">
-                {totalCount.toLocaleString()}
-              </span>
-            </div>
+            <button
+              onClick={() => setShowPresets(!showPresets)}
+              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-br from-amber-800/50 to-amber-900/50 hover:from-amber-700/50 hover:to-amber-800/50 text-amber-300 border border-amber-600/30 transition-all cursor-pointer text-xs font-bold font-cairo shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>{language === 'ar' ? 'الأذكار' : 'Dhikr'}</span>
+            </button>
           </div>
 
         </div>
 
-        {/* Device Settings Tray (Compact, centering vibration) */}
-        <div className="p-5 rounded-3xl bg-slate-900/40 border border-slate-800/80 shadow-md space-y-5">
+        {/* Presets Section */}
+        <AnimatePresence>
+          {showPresets && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="p-6 rounded-3xl bg-gradient-to-br from-amber-950/30 via-slate-900/40 to-amber-950/20 border border-amber-500/20 shadow-2xl backdrop-blur-xl space-y-4"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <span className="text-sm font-bold font-cairo text-slate-200">
+                    {language === 'ar' ? 'الأذكار الجاهزة' : 'Ready Dhikr Presets'}
+                  </span>
+                </div>
+                <button
+                  onClick={() => setShowPresets(false)}
+                  className="text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  <Plus className="w-5 h-5 rotate-45" />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {presets.map(preset => (
+                  <button
+                    key={preset.id}
+                    onClick={() => {
+                      setActivePreset(preset);
+                      setCount(0);
+                      setCustomTarget(null);
+                      setShowPresets(false);
+                    }}
+                    className={`p-4 rounded-2xl border text-center transition-all cursor-pointer ${
+                      activePreset.id === preset.id
+                        ? 'bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-amber-500/40 text-amber-300 font-bold shadow-lg shadow-amber-500/10'
+                        : 'bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 hover:border-slate-600 text-slate-400 hover:text-slate-300'
+                    }`}
+                  >
+                    <div className="text-xs font-cairo mb-1 truncate">
+                      {language === 'ar' ? preset.textAr : preset.textEn}
+                    </div>
+                    <div className="text-[10px] opacity-60">
+                      {preset.defaultTarget}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Device Settings Tray */}
+        <div className="p-6 rounded-3xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 border border-emerald-500/20 shadow-2xl backdrop-blur-xl space-y-6">
           {/* Material & Sound Customization */}
-          <div className="space-y-2.5 pb-4 border-b border-slate-800/80">
+          <div className="space-y-3 pb-5 border-b border-emerald-500/20">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold font-cairo text-slate-200">
+              <span className="text-sm font-bold font-cairo text-slate-200">
                 {language === 'ar' ? 'خامة المسبحة وصوت الخرز' : 'Bead Material & Click Sound'}
               </span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               {BEAD_THEMES.map(t => {
                 const isActive = t.id === selectedThemeId;
                 return (
@@ -731,13 +800,12 @@ export const SebhaView: React.FC = () => {
                     onClick={() => {
                       setSelectedThemeId(t.id);
                       localStorage.setItem('sebha_bead_theme', t.id);
-                      soundEngine.playClick(t.soundType);
-                      if (vibrationEnabled) triggerHaptic(25);
+                      if (soundEnabled) soundEngine.playClick();
                     }}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-2xl border text-right font-cairo transition-all cursor-pointer ${
+                    className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl border text-right font-cairo transition-all cursor-pointer ${
                       isActive 
-                        ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400 font-bold' 
-                        : 'bg-slate-900/40 border-slate-800 hover:border-slate-700 text-slate-400'
+                        ? 'bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border-emerald-500/40 text-emerald-300 font-bold shadow-lg shadow-emerald-500/10' 
+                        : 'bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 hover:border-slate-600 text-slate-400 hover:text-slate-300'
                     }`}
                   >
                     {/* Small color indicator sphere representing the bead */}

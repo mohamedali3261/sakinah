@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { salawatService } from './utils/salawatService';
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 import { HomeView } from './components/HomeView';
 import { QuranView } from './components/QuranView';
 import { AthkarView } from './components/AthkarView';
@@ -17,6 +18,7 @@ import { NotificationSettingsModal } from './components/NotificationSettingsModa
 import { ToastNotification } from './components/ToastNotification';
 import { GlobalAdhanPlayer } from './components/GlobalAdhanPlayer';
 import { QuranRepeatPage } from './components/QuranRepeatPage';
+import { QuranVideoCreatorWrapper } from './components/QuranVideoCreatorWrapper';
 import { motion, AnimatePresence } from 'motion/react';
 // @ts-ignore
 import bgImage from './assets/Ghh.jpg';
@@ -37,6 +39,7 @@ const MainContent: React.FC = () => {
       saved: { ar: 'المحفوظات والمفضلة | يَقِين', en: 'Saved Bookmarks | Yaqeen' },
       sebha: { ar: 'السبحة الإلكترونية | يَقِين', en: 'Digital Tasbih | Yaqeen' },
       radio: { ar: 'الإذاعات المباشرة | يَقِين', en: 'Live Radio | Yaqeen' },
+      'video-creator': { ar: 'صانع الفيديو القرآني | يَقِين', en: 'Quran Video Creator | Yaqeen' },
     };
 
     const title = titles[activeTab] || titles.home;
@@ -62,15 +65,8 @@ const MainContent: React.FC = () => {
   }, []);
 
   const getThemeBackground = () => {
-    switch (theme) {
-      case 'light':
-        return 'bg-gradient-to-br from-slate-100/90 via-emerald-50/20 to-teal-100/30 text-slate-800';
-      case 'sepia':
-        return 'bg-gradient-to-br from-[#1a120c]/90 via-[#24170f]/90 to-[#150d08]/95 text-amber-50';
-      case 'dark':
-      default:
-        return 'bg-gradient-to-br from-slate-950/90 via-[#06181b]/92 to-slate-950/90 text-slate-100';
-    }
+    // Always dark mode
+    return 'bg-gradient-to-br from-slate-950/90 via-[#06181b]/92 to-slate-950/90 text-slate-100';
   };
 
   return (
@@ -132,6 +128,7 @@ const MainContent: React.FC = () => {
             {activeTab === 'saved' && <BookmarksView />}
             {activeTab === 'sebha' && <SebhaView />}
             {activeTab === 'radio' && <RadioView />}
+            {activeTab === 'video-creator' && <QuranVideoCreatorWrapper />}
           </motion.div>
         </AnimatePresence>
       </main>
@@ -143,6 +140,9 @@ const MainContent: React.FC = () => {
       <NotificationSettingsModal />
       <ToastNotification />
       <GlobalAdhanPlayer />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

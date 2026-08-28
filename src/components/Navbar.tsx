@@ -19,7 +19,8 @@ import {
   Home,
   Compass,
   Clock,
-  Radio
+  Radio,
+  Video
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { soundEngine, triggerHaptic } from '../utils/audio';
@@ -96,13 +97,12 @@ export const Navbar: React.FC = () => {
           {[
             { id: 'home', labelAr: 'الرئيسية', labelEn: 'Home', icon: <Home className="w-3.5 h-3.5" />, activeClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
             { id: 'quran', labelAr: 'المصحف', labelEn: 'Quran', icon: <BookOpen className="w-3.5 h-3.5" />, activeClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
-            { id: 'index', labelAr: 'الفهرس', labelEn: 'Index', icon: <Layers className="w-3.5 h-3.5" />, activeClass: 'bg-teal-500/15 text-teal-400 border-teal-500/25' },
             { id: 'athkar', labelAr: 'الأذكار', labelEn: 'Athkar', icon: <Sparkles className="w-3.5 h-3.5" />, activeClass: 'bg-amber-500/15 text-amber-400 border-amber-500/25' },
             { id: 'library', labelAr: 'المكتبة', labelEn: 'Library', icon: <Compass className="w-3.5 h-3.5" />, activeClass: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/25' },
             { id: 'prayers', labelAr: 'المواقيت', labelEn: 'Prayers', icon: <Clock className="w-3.5 h-3.5" />, activeClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
             { id: 'radio', labelAr: 'إذاعة', labelEn: 'Radio', icon: <Radio className="w-3.5 h-3.5" />, activeClass: 'bg-teal-500/15 text-teal-400 border-teal-500/25' },
             { id: 'sebha', labelAr: 'المسبحة', labelEn: 'Sebha', icon: <CircleDot className="w-3.5 h-3.5" />, activeClass: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/25' },
-            { id: 'saved', labelAr: 'المفضلة', labelEn: 'Saved', icon: <BookmarkIcon className="w-3.5 h-3.5" />, activeClass: 'bg-amber-500/15 text-amber-400 border-amber-500/25' },
+            { id: 'video-creator', labelAr: 'صانع الفيديو', labelEn: 'Video Creator', icon: <Video className="w-3.5 h-3.5" />, activeClass: 'bg-purple-500/15 text-purple-400 border-purple-500/25' },
           ].map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -138,32 +138,6 @@ export const Navbar: React.FC = () => {
 
           {/* Buttons hidden on Tablet/Mobile but visible on Large Desktop lg:flex */}
           <div className="hidden lg:flex items-center gap-1.5">
-            {/* Bookmarks Icon */}
-            <button
-              onClick={() => handleLinkClick('saved')}
-              className="relative p-2 rounded-xl hover:bg-white/10 text-slate-300 transition-all cursor-pointer"
-              title={language === 'ar' ? 'المحفوظات' : 'Bookmarks'}
-            >
-              <BookmarkIcon className="w-4.5 h-4.5 text-amber-400" />
-              {bookmarks.length > 0 && (
-                <span className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-emerald-500 text-[8px] font-bold flex items-center justify-center text-slate-950">
-                  {bookmarks.length}
-                </span>
-              )}
-            </button>
-
-            {/* Paper Themes */}
-            <button
-              onClick={() => {
-                if (soundEnabled) soundEngine.playClick();
-                setIsPaperThemeModalOpen(true);
-              }}
-              className="p-2 rounded-xl hover:bg-white/10 text-amber-300 transition-all cursor-pointer"
-              title={language === 'ar' ? 'ألوان ورق المصحف' : 'Paper Themes'}
-            >
-              <Palette className="w-4.5 h-4.5" />
-            </button>
-
             {/* Font Settings */}
             <button
               onClick={() => {
@@ -186,21 +160,6 @@ export const Navbar: React.FC = () => {
               title={language === 'ar' ? 'التنبيهات' : 'Reminders'}
             >
               <Bell className="w-4 h-4 text-amber-300" />
-            </button>
-
-            {/* Theme Quick Toggle */}
-            <button
-              onClick={cycleTheme}
-              className="p-2 rounded-xl hover:bg-white/10 text-slate-300 transition-all cursor-pointer"
-              title={language === 'ar' ? 'المظهر' : 'Theme'}
-            >
-              {theme === 'dark' ? (
-                <Moon className="w-4.5 h-4.5 text-emerald-400" />
-              ) : theme === 'sepia' ? (
-                <Flame className="w-4.5 h-4.5 text-amber-400" />
-              ) : (
-                <Sun className="w-4.5 h-4.5 text-amber-500" />
-              )}
             </button>
 
             {/* Language Toggle */}
@@ -296,13 +255,12 @@ export const Navbar: React.FC = () => {
                 {[
                   { id: 'home', labelAr: 'الرئيسية', labelEn: 'Home', icon: <Home className="w-5 h-5 text-amber-400" /> },
                   { id: 'quran', labelAr: 'المصحف الشريف', labelEn: 'Holy Quran', icon: <BookOpen className="w-5 h-5 text-emerald-400" /> },
-                  { id: 'index', labelAr: 'الفهرس الشامل', labelEn: 'Full Index', icon: <Layers className="w-5 h-5 text-teal-300" /> },
                   { id: 'athkar', labelAr: 'الأذكار والتحصين', labelEn: 'Daily Athkar', icon: <Sparkles className="w-5 h-5 text-amber-300" /> },
                   { id: 'library', labelAr: 'المكتبة الإسلامية', labelEn: 'Islamic Library', icon: <Compass className="w-5 h-5 text-cyan-300" /> },
                   { id: 'radio', labelAr: 'إذاعة القرآن', labelEn: 'Quran Radio', icon: <Radio className="w-5 h-5 text-teal-400" /> },
                   { id: 'prayers', labelAr: 'مواقيت الصلاة', labelEn: 'Prayer Times', icon: <Clock className="w-5 h-5 text-emerald-300" /> },
                   { id: 'sebha', labelAr: 'المسبحة الإلكترونية', labelEn: 'Digital Sebha', icon: <CircleDot className="w-5 h-5 text-indigo-400" /> },
-                  { id: 'saved', labelAr: 'المحفوظات والمفضلة', labelEn: 'Bookmarks', icon: <BookmarkIcon className="w-5 h-5 text-yellow-400" /> }
+                  { id: 'video-creator', labelAr: 'صانع الفيديو', labelEn: 'Video Creator', icon: <Video className="w-5 h-5 text-purple-400" /> }
                 ].map((item) => {
                   const isActive = activeTab === item.id;
                   return (
@@ -328,32 +286,6 @@ export const Navbar: React.FC = () => {
 
               {/* Settings triggers and actions */}
               <div className="space-y-2">
-                {/* Bookmarks */}
-                <button
-                  onClick={() => handleLinkClick('saved')}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 flex items-center justify-between text-xs font-bold transition-all cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <BookmarkIcon className="w-4 h-4 text-amber-400 fill-amber-400/20" />
-                    <span>{language === 'ar' ? 'المحفوظات والعلامات المرجعية' : 'Bookmarks & Saved Pages'}</span>
-                  </div>
-                  <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md text-[10px] font-mono">
-                    {bookmarks.length}
-                  </span>
-                </button>
-
-                {/* Paper Themes */}
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsPaperThemeModalOpen(true);
-                  }}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 flex items-center gap-2.5 text-xs font-bold transition-all cursor-pointer"
-                >
-                  <Palette className="w-4 h-4 text-amber-300" />
-                  <span>{language === 'ar' ? 'تغيير ألوان ورق المصحف' : 'Change Paper Themes'}</span>
-                </button>
-
                 {/* Font settings */}
                 <button
                   onClick={() => {
@@ -379,37 +311,13 @@ export const Navbar: React.FC = () => {
                 </button>
               </div>
 
-              {/* Quick Preferences Toggles */}
-              <div className="grid grid-cols-2 gap-2 pt-2">
-                {/* Theme toggle */}
-                <button
-                  onClick={cycleTheme}
-                  className="p-3 rounded-xl border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 flex items-center justify-center gap-2 text-xs font-bold cursor-pointer transition-all"
-                >
-                  {theme === 'dark' ? (
-                    <>
-                      <Moon className="w-4 h-4 text-emerald-400" />
-                      <span>{language === 'ar' ? 'مظهر ليلي' : 'Dark Theme'}</span>
-                    </>
-                  ) : theme === 'sepia' ? (
-                    <>
-                      <Flame className="w-4 h-4 text-amber-400" />
-                      <span>{language === 'ar' ? 'مظهر دافئ' : 'Sepia Theme'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Sun className="w-4 h-4 text-amber-500" />
-                      <span>{language === 'ar' ? 'مظهر نهاري' : 'Light Theme'}</span>
-                    </>
-                  )}
-                </button>
-
-                {/* Language Toggle */}
+              {/* Language Toggle */}
+              <div className="pt-2">
                 <button
                   onClick={() => {
                     setLanguage(language === 'ar' ? 'en' : 'ar');
                   }}
-                  className="p-3 rounded-xl border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 flex items-center justify-center gap-2 text-xs font-bold cursor-pointer transition-all"
+                  className="w-full p-3 rounded-xl border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 flex items-center justify-center gap-2 text-xs font-bold cursor-pointer transition-all"
                 >
                   <Globe className="w-4 h-4 text-emerald-400" />
                   <span>{language === 'ar' ? 'English Language' : 'اللغة العربية'}</span>

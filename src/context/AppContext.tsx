@@ -117,7 +117,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [theme, setThemeState] = useState<ThemeMode>(() => {
-    return (localStorage.getItem('sakinah_theme') as ThemeMode) || 'dark';
+    return 'dark'; // Always dark mode
   });
 
   const [fontFamily, setFontFamilyState] = useState<ArabicFont>(() => {
