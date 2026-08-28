@@ -49,14 +49,14 @@ export const RenderProgressModal: React.FC<RenderProgressModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-md bg-neutral-900 border border-emerald-800/60 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden flex flex-col items-center text-center space-y-5"
+        className="relative w-full max-w-md bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden flex flex-col items-center text-center space-y-5"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button if completed */}
         {!isRendering && (
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+            className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-gradient-to-br from-slate-800 to-slate-900 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -112,7 +112,7 @@ export const RenderProgressModal: React.FC<RenderProgressModalProps> = ({
             </div>
 
             {/* Subtle indeterminate pulse bar */}
-            <div className="w-full h-1.5 rounded-full bg-neutral-800 overflow-hidden">
+            <div className="w-full h-1.5 rounded-full bg-gradient-to-br from-slate-900 to-slate-950 overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500 transition-all duration-300 rounded-full"
                 style={{ width: `${progressPercent}%` }}
@@ -136,7 +136,7 @@ export const RenderProgressModal: React.FC<RenderProgressModalProps> = ({
             </div>
 
             {/* Video File Specs */}
-            <div className="w-full grid grid-cols-3 gap-2 py-3 px-4 rounded-2xl bg-neutral-950/80 border border-neutral-800 text-xs">
+            <div className="w-full grid grid-cols-3 gap-2 py-3 px-4 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm border border-emerald-500/20 text-xs">
               <div className="flex flex-col items-center">
                 <span className="text-neutral-500 text-[10px] flex items-center gap-1">
                   <Film className="w-3 h-3" />

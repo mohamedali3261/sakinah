@@ -200,17 +200,17 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white transition-all"
+            className="p-2 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-slate-300 hover:text-white transition-all"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Media Type Tabs & Category Tag Buttons */}
-        <div className="p-3 bg-neutral-950/60 border-b border-neutral-800/80 space-y-2.5 shrink-0">
+        <div className="p-4 bg-gradient-to-br from-slate-900/30 via-slate-800/20 to-slate-900/30 border-b border-emerald-500/20 space-y-2.5 shrink-0">
           
           {/* Tabs: Video vs Photos */}
-          <div className="flex p-1 rounded-xl bg-neutral-950 border border-neutral-800 max-w-sm mx-auto">
+          <div className="flex p-1 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 max-w-sm mx-auto">
             <button
               type="button"
               onClick={() => handleMediaTypeChange('video')}
@@ -236,7 +236,7 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
               <ImageIcon className="w-3.5 h-3.5" />
               <span>{isAr ? 'ألبوم صور' : 'Photos'}</span>
               {selectedImageUrls.length > 0 && (
-                <span className="px-1.5 py-0.2 rounded-full bg-neutral-950 text-amber-300 text-[10px] font-extrabold">
+                <span className="px-1.5 py-0.2 rounded-full bg-gradient-to-br from-slate-900 to-slate-950 text-amber-300 text-[10px] font-extrabold border border-emerald-500/20">
                   {selectedImageUrls.length}
                 </span>
               )}
@@ -252,10 +252,10 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
               <select
                 value={searchQuery}
                 onChange={(e) => handleTagClick(e.target.value)}
-                className="w-full px-4 py-2.5 bg-neutral-900 border border-neutral-800 text-center text-xs text-amber-400 font-extrabold rounded-xl appearance-none cursor-pointer focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50"
+                className="w-full px-4 py-2.5 bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 text-center text-xs text-amber-400 font-extrabold rounded-xl appearance-none cursor-pointer focus:outline-none focus:border-emerald-500/40 focus:ring-1 focus:ring-emerald-500/20"
               >
                 {PRESET_TAGS.map((tag) => (
-                  <option key={tag.ar} value={tag.ar} className="bg-neutral-950 text-white font-bold py-2">
+                  <option key={tag.ar} value={tag.ar} className="bg-gradient-to-br from-slate-900 to-slate-950 text-white font-bold py-2">
                     {isAr ? tag.ar : tag.en}
                   </option>
                 ))}
@@ -295,7 +295,7 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
                         className={`group relative rounded-xl overflow-hidden aspect-[9/16] border cursor-pointer transition-all ${
                           isSelected
                             ? 'border-amber-400 ring-2 ring-amber-400/60 scale-[1.02] shadow-lg'
-                            : 'border-neutral-800 hover:border-amber-400/60'
+                            : 'bg-gradient-to-br from-slate-900 to-slate-950 border-emerald-500/20 hover:border-amber-400/60'
                         }`}
                       >
                         <img
@@ -331,7 +331,7 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
                     type="button"
                     disabled={isLoadingMore}
                     onClick={handleLoadMore}
-                    className="px-6 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-amber-300 hover:text-amber-200 font-bold text-xs border border-amber-400/30 transition-all flex items-center gap-2 disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-amber-300 hover:text-amber-200 font-bold text-xs border border-emerald-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
                   >
                     {isLoadingMore ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
@@ -362,7 +362,7 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
                         className={`group relative rounded-lg overflow-hidden aspect-[9/16] border cursor-pointer transition-all ${
                           isSelected
                             ? 'border-amber-400 ring-2 ring-amber-400/60 scale-[1.02] shadow-lg'
-                            : 'border-neutral-800 hover:border-amber-400/60'
+                            : 'bg-gradient-to-br from-slate-900 to-slate-950 border-emerald-500/20 hover:border-amber-400/60'
                         }`}
                       >
                         <img
@@ -396,7 +396,7 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
                     type="button"
                     disabled={isLoadingMore}
                     onClick={handleLoadMore}
-                    className="px-6 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-amber-300 hover:text-amber-200 font-bold text-xs border border-amber-400/30 transition-all flex items-center gap-2 disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-amber-300 hover:text-amber-200 font-bold text-xs border border-emerald-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
                   >
                     {isLoadingMore ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
@@ -411,8 +411,8 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
         </div>
 
         {/* Modal Footer Bar & Apply Action */}
-        <div className="p-3 sm:p-4 border-t border-neutral-800 bg-neutral-950 flex flex-col sm:flex-row items-center justify-between gap-2.5 shrink-0">
-          <div className="text-xs text-neutral-300 flex items-center gap-1.5">
+        <div className="p-4 sm:p-5 border-t border-emerald-500/20 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-2.5 shrink-0">
+          <div className="text-xs text-slate-300 flex items-center gap-1.5">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
             {mediaType === 'video' ? (
               <span>
@@ -439,7 +439,7 @@ export const PexelsMediaModal: React.FC<PexelsMediaModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 text-xs font-bold transition-all"
+              className="px-4 py-2 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-slate-300 text-xs font-bold transition-all border border-emerald-500/20"
             >
               إلغاء
             </button>

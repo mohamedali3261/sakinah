@@ -104,7 +104,7 @@ export const SurahModal: React.FC<SurahModalProps> = ({
                   className={`w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between group ${
                     isSelected
                       ? 'bg-emerald-950/70 border-amber-400/60 shadow-md shadow-emerald-950/40'
-                      : 'bg-neutral-950/40 hover:bg-neutral-800/60 border-neutral-800/80 hover:border-neutral-700'
+                      : 'bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 hover:from-slate-800/40 hover:via-slate-700/30 hover:to-slate-800/40 border-emerald-500/20 hover:border-emerald-500/40'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -113,7 +113,7 @@ export const SurahModal: React.FC<SurahModalProps> = ({
                       className={`w-9 h-9 rounded-full flex items-center justify-center font-mono text-xs font-semibold shrink-0 transition-colors ${
                         isSelected
                           ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40'
-                          : 'bg-neutral-900 text-neutral-400 border border-neutral-800 group-hover:border-neutral-700'
+                          : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-400 border border-emerald-500/20 group-hover:border-emerald-500/40'
                       }`}
                     >
                       {surah.number}

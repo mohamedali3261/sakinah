@@ -448,7 +448,7 @@ export const SebhaView: React.FC = () => {
                 transition={{ duration: 0.15 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleTap}
-                className="relative z-10 w-[240px] h-[240px] rounded-full flex flex-col items-center justify-center border-4 border-emerald-500/20 bg-slate-900/80 shadow-[0_20px_50px_rgba(16,185,129,0.15),inset_0_2px_15px_rgba(255,255,255,0.05)] cursor-pointer select-none"
+                className="relative z-10 w-[240px] h-[240px] rounded-full flex flex-col items-center justify-center border-4 border-emerald-500/20 bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(16,185,129,0.15),inset_0_2px_15px_rgba(255,255,255,0.05)] cursor-pointer select-none"
               >
                 {ripples.map(ripple => (
                   <motion.span
@@ -826,7 +826,7 @@ export const SebhaView: React.FC = () => {
 
           <div className="space-y-4">
             {/* Sounds Switch */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-slate-800/40">
+            <div className="flex items-center justify-between pb-3.5 border-b border-emerald-500/20">
               <div className="flex items-center gap-2.5">
                 <Volume2 className="w-4 h-4 text-emerald-400" />
                 <div>
@@ -908,9 +908,9 @@ export const SebhaView: React.FC = () => {
       </div>
 
       {/* Suggested Dhikr & Custom Dhikr Creator (Bottom Module) */}
-      <div className="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-5 sm:p-6 space-y-6 shadow-md">
+      <div className="bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 rounded-3xl p-5 sm:p-6 space-y-6 shadow-xl shadow-emerald-500/10">
         
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-emerald-500/20 pb-4">
           <h4 className="text-base sm:text-lg font-bold font-cairo flex items-center justify-center sm:justify-start gap-2 text-slate-200">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
             {language === 'ar' ? 'أذكار وأوراد المسبحة' : 'Suggested Dhikr & Tasks'}
@@ -934,7 +934,7 @@ export const SebhaView: React.FC = () => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               onSubmit={handleCreatePreset}
-              className="p-4.5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4 overflow-hidden"
+              className="p-4.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm border border-emerald-500/20 space-y-4 overflow-hidden"
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-1.5 text-right">
@@ -947,7 +947,7 @@ export const SebhaView: React.FC = () => {
                     placeholder="مثال: سبحان الله وبحمده"
                     value={newPresetTextAr}
                     onChange={(e) => setNewPresetTextAr(e.target.value)}
-                    className="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 focus:border-emerald-500 focus:outline-none font-amiri text-lg text-right"
+                    className="w-full px-3.5 py-2 text-sm rounded-xl border border-emerald-500/20 bg-gradient-to-br from-slate-900 to-slate-950 text-slate-100 focus:border-emerald-500/40 focus:outline-none font-amiri text-lg text-right"
                   />
                 </div>
 
@@ -960,7 +960,7 @@ export const SebhaView: React.FC = () => {
                     placeholder="e.g. SubhanAllahi wa bihamdih"
                     value={newPresetTextEn}
                     onChange={(e) => setNewPresetTextEn(e.target.value)}
-                    className="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3.5 py-2 text-sm rounded-xl border border-emerald-500/20 bg-gradient-to-br from-slate-900 to-slate-950 text-slate-100 focus:border-emerald-500/40 focus:outline-none"
                   />
                 </div>
 
@@ -971,7 +971,7 @@ export const SebhaView: React.FC = () => {
                   <select
                     value={newPresetTarget}
                     onChange={(e) => setNewPresetTarget(parseInt(e.target.value, 10))}
-                    className="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3.5 py-2 text-sm rounded-xl border border-emerald-500/20 bg-gradient-to-br from-slate-900 to-slate-950 text-slate-100 focus:border-emerald-500/40 focus:outline-none"
                   >
                     <option value={33}>33 {language === 'ar' ? 'مرة' : 'Times'}</option>
                     <option value={100}>100 {language === 'ar' ? 'مرة' : 'Times'}</option>
@@ -1010,7 +1010,7 @@ export const SebhaView: React.FC = () => {
                 className={`relative p-4.5 rounded-2xl border text-center transition-all flex flex-col items-center justify-center gap-2.5 min-h-[105px] cursor-pointer ${
                   activePreset.id === preset.id
                     ? 'border-emerald-400 bg-emerald-500/10 shadow-md ring-1 ring-emerald-500/30'
-                    : 'border-slate-800 bg-slate-900/30 hover:border-emerald-500/30 hover:bg-slate-900/50'
+                    : 'border-emerald-500/20 bg-gradient-to-br from-slate-900/30 via-slate-800/20 to-slate-900/30 hover:border-emerald-500/40 hover:bg-gradient-to-br from-slate-800/40 via-slate-700/30 to-slate-800/40'
                 }`}
               >
                 {/* Delete button for custom presets */}

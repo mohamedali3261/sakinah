@@ -114,11 +114,11 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-4xl bg-neutral-900 border border-emerald-800/60 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-4xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-neutral-800 flex items-center justify-between bg-neutral-950/70">
+        <div className="p-5 sm:p-6 border-b border-emerald-500/20 flex items-center justify-between bg-gradient-to-br from-emerald-950/30 via-slate-900/40 to-emerald-950/20">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-amber-400/30 flex items-center justify-center text-amber-400">
               <Film className="w-5 h-5" />
@@ -140,26 +140,26 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+            className="p-2 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-slate-300 hover:text-white transition-all"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Navigation Switcher */}
-        <div className="px-4 pt-3 pb-2.5 border-b border-neutral-800 flex flex-wrap gap-2 bg-neutral-950/40">
+        <div className="px-5 pt-4 pb-3 border-b border-emerald-500/20 flex flex-wrap gap-2 bg-gradient-to-br from-slate-900/30 via-slate-800/20 to-slate-900/30">
           <button
             type="button"
             onClick={() => setActiveTab('videos')}
             className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeTab === 'videos'
                 ? 'bg-emerald-900/70 text-emerald-100 border border-emerald-600/60 shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-gradient-to-br from-slate-800/40 to-slate-900/40'
             }`}
           >
             <Video className="w-4 h-4 text-amber-400" />
             <span>{t.tabVideos}</span>
-            <span className="px-1.5 py-0.2 rounded bg-neutral-800 text-[10px] text-amber-300">
+            <span className="px-1.5 py-0.2 rounded bg-gradient-to-br from-slate-900 to-slate-950 text-[10px] text-amber-300 border border-emerald-500/20">
               {NATURE_VIDEOS.length}
             </span>
           </button>
@@ -170,12 +170,12 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
             className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeTab === 'images'
                 ? 'bg-emerald-900/70 text-emerald-100 border border-emerald-600/60 shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-gradient-to-br from-slate-800/40 to-slate-900/40'
             }`}
           >
             <Image className="w-4 h-4 text-emerald-400" />
             <span>{t.tabImages}</span>
-            <span className="px-1.5 py-0.2 rounded bg-neutral-800 text-[10px] text-emerald-300">
+            <span className="px-1.5 py-0.2 rounded bg-gradient-to-br from-slate-900 to-slate-950 text-[10px] text-emerald-300 border border-emerald-500/20">
               {NATURE_IMAGES.length}
             </span>
           </button>
@@ -186,7 +186,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
             className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeTab === 'url'
                 ? 'bg-emerald-900/70 text-emerald-100 border border-emerald-600/60 shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-gradient-to-br from-slate-800/40 to-slate-900/40'
             }`}
           >
             <Link2 className="w-4 h-4 text-amber-400" />
@@ -199,7 +199,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
             className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeTab === 'upload'
                 ? 'bg-emerald-900/70 text-emerald-100 border border-emerald-600/60 shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-gradient-to-br from-slate-800/40 to-slate-900/40'
             }`}
           >
             <Upload className="w-4 h-4 text-amber-400" />
@@ -208,7 +208,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-4 sm:p-5 overflow-y-auto flex-1 bg-neutral-900/50">
+        <div className="p-5 sm:p-6 overflow-y-auto flex-1 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50">
           {/* TAB 1: PEXELS NATURE VIDEOS */}
           {activeTab === 'videos' && (
             <div className="space-y-4">
@@ -252,10 +252,10 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                       className={`relative rounded-xl overflow-hidden border text-left group transition-all flex flex-col ${
                         isSelected
                           ? 'border-amber-400 ring-2 ring-amber-400/40 shadow-xl shadow-emerald-950/60 bg-emerald-950/40'
-                          : 'border-neutral-800 hover:border-neutral-700 bg-neutral-950'
+                          : 'bg-gradient-to-br from-slate-900 to-slate-950 border-emerald-500/20 hover:border-emerald-500/40'
                       }`}
                     >
-                      <div className="relative aspect-video w-full overflow-hidden bg-neutral-950">
+                      <div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-slate-900 to-slate-950">
                         <img
                           src={video.thumbnailUrl}
                           alt={isAr ? video.titleAr : video.titleEn}
@@ -278,7 +278,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                         )}
                       </div>
 
-                      <div className="p-3 bg-neutral-950/90 flex-1 flex flex-col justify-between">
+                      <div className="p-3 bg-gradient-to-br from-slate-900/90 to-slate-950/90 backdrop-blur-sm flex-1 flex flex-col justify-between">
                         <h3 className="text-xs sm:text-sm font-semibold text-white group-hover:text-amber-200 transition-colors">
                           {isAr ? video.titleAr : video.titleEn}
                         </h3>
@@ -336,10 +336,10 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                       className={`relative rounded-xl overflow-hidden border text-left group transition-all flex flex-col ${
                         isSelected
                           ? 'border-emerald-400 ring-2 ring-emerald-400/40 shadow-xl shadow-emerald-950/60 bg-emerald-950/40'
-                          : 'border-neutral-800 hover:border-neutral-700 bg-neutral-950'
+                          : 'bg-gradient-to-br from-slate-900 to-slate-950 border-emerald-500/20 hover:border-emerald-500/40'
                       }`}
                     >
-                      <div className="relative aspect-video w-full overflow-hidden bg-neutral-950">
+                      <div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-slate-900 to-slate-950">
                         <img
                           src={img.thumbnailUrl}
                           alt={isAr ? img.titleAr : img.titleEn}
@@ -362,7 +362,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                         )}
                       </div>
 
-                      <div className="p-3 bg-neutral-950/90 flex-1 flex flex-col justify-between">
+                      <div className="p-3 bg-gradient-to-br from-slate-900/90 to-slate-950/90 backdrop-blur-sm flex-1 flex flex-col justify-between">
                         <h3 className="text-xs sm:text-sm font-semibold text-white group-hover:text-emerald-200 transition-colors">
                           {isAr ? img.titleAr : img.titleEn}
                         </h3>
@@ -393,7 +393,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                     href="https://www.pexels.com/search/videos/nature/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-amber-300 hover:text-white border border-neutral-700 text-xs font-semibold inline-flex items-center gap-1.5 transition-all"
+                    className="px-3 py-1.5 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-amber-300 hover:text-white border border-emerald-500/20 text-xs font-semibold inline-flex items-center gap-1.5 transition-all"
                   >
                     <span>{t.openPexelsVideos}</span>
                     <ExternalLink className="w-3 h-3" />
@@ -402,7 +402,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                     href="https://www.pexels.com/search/nature/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-emerald-300 hover:text-white border border-neutral-700 text-xs font-semibold inline-flex items-center gap-1.5 transition-all"
+                    className="px-3 py-1.5 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-emerald-300 hover:text-white border border-emerald-500/20 text-xs font-semibold inline-flex items-center gap-1.5 transition-all"
                   >
                     <span>{t.openPexelsPhotos}</span>
                     <ExternalLink className="w-3 h-3" />
@@ -422,7 +422,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                     className={`p-3 rounded-xl border text-center font-semibold text-xs transition-all flex items-center justify-center gap-2 ${
                       urlMediaType === 'video'
                         ? 'bg-amber-400 text-neutral-950 border-amber-400 shadow-md'
-                        : 'bg-neutral-950 text-neutral-300 border-neutral-800 hover:border-neutral-700'
+                        : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 border-emerald-500/20 hover:border-emerald-500/40'
                     }`}
                   >
                     <Video className="w-4 h-4" />
@@ -435,7 +435,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                     className={`p-3 rounded-xl border text-center font-semibold text-xs transition-all flex items-center justify-center gap-2 ${
                       urlMediaType === 'image'
                         ? 'bg-emerald-400 text-neutral-950 border-emerald-400 shadow-md'
-                        : 'bg-neutral-950 text-neutral-300 border-neutral-800 hover:border-neutral-700'
+                        : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 border-emerald-500/20 hover:border-emerald-500/40'
                     }`}
                   >
                     <Image className="w-4 h-4" />
@@ -455,7 +455,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                     value={urlInput}
                     onChange={(e) => setUrlInput(e.target.value)}
                     placeholder={t.videoUrlPlaceholder}
-                    className="flex-1 px-4 py-3 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-400 text-white text-xs sm:text-sm placeholder:text-neutral-500 outline-none transition-colors"
+                    className="flex-1 px-4 py-3 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 focus:border-emerald-500/40 text-white text-xs sm:text-sm placeholder:text-neutral-500 outline-none transition-colors"
                   />
                   <button
                     type="button"
@@ -494,7 +494,7 @@ export const VideoPickerModal: React.FC<VideoPickerModalProps> = ({
                 className={`w-full max-w-lg p-8 sm:p-12 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
                   dragActive
                     ? 'border-amber-400 bg-amber-400/10'
-                    : 'border-neutral-700 hover:border-amber-400/60 bg-neutral-950/40 hover:bg-neutral-950/80'
+                    : 'border-emerald-500/20 hover:border-emerald-500/60 bg-gradient-to-br from-slate-900/40 to-slate-950/40 hover:from-slate-900/60 hover:to-slate-950/60'
                 }`}
               >
                 <div className="w-14 h-14 rounded-2xl bg-emerald-950/80 border border-amber-400/30 flex items-center justify-center text-amber-400 mb-4 shadow-inner">

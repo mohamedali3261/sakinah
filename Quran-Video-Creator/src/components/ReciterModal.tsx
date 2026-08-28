@@ -159,14 +159,14 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+            className="p-2 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-slate-300 hover:text-white transition-all"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search Bar & Category Tags */}
-        <div className="p-4 border-b border-neutral-800 bg-neutral-950/40 space-y-3">
+        <div className="p-4 border-b border-emerald-500/20 bg-gradient-to-br from-slate-900/30 via-slate-800/20 to-slate-900/30 space-y-3">
           {/* Search Input */}
           <div className="relative">
             <Search className="absolute top-1/2 -translate-y-1/2 left-3.5 rtl:left-auto rtl:right-3.5 w-4 h-4 text-neutral-400" />
@@ -175,7 +175,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isAr ? 'ابحث باسم الشيخ أو القارئ (مثل: العفاسي، المنشاوي، المعيقلي...)' : 'Search reciter by name...'}
-              className="w-full py-2.5 px-10 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-400 text-white text-xs sm:text-sm placeholder:text-neutral-500 outline-none transition-colors"
+              className="w-full py-2.5 px-10 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 focus:border-emerald-500/40 text-white text-xs sm:text-sm placeholder:text-slate-500 outline-none transition-colors"
             />
             {searchQuery && (
               <button
@@ -195,7 +195,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 filterTag === 'all'
                   ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
-                  : 'bg-neutral-950 text-neutral-300 hover:bg-neutral-800 border border-neutral-800'
+                  : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 hover:from-slate-800 hover:to-slate-900 border border-emerald-500/20'
               }`}
             >
               {isAr ? 'جميع القراء (36)' : 'All Reciters (36)'}
@@ -207,7 +207,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 filterTag === 'haramain'
                   ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
-                  : 'bg-neutral-950 text-neutral-300 hover:bg-neutral-800 border border-neutral-800'
+                  : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 hover:from-slate-800 hover:to-slate-900 border border-emerald-500/20'
               }`}
             >
               🕌 {isAr ? 'أئمة الحرمين الشريفين' : 'Imams of Haramain'}
@@ -219,7 +219,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 filterTag === 'egypt'
                   ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
-                  : 'bg-neutral-950 text-neutral-300 hover:bg-neutral-800 border border-neutral-800'
+                  : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 hover:from-slate-800 hover:to-slate-900 border border-emerald-500/20'
               }`}
             >
               ⭐ {isAr ? 'عمالقة القراءات المصرية' : 'Egyptian Masters'}
@@ -231,7 +231,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 filterTag === 'mujawwad'
                   ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
-                  : 'bg-neutral-950 text-neutral-300 hover:bg-neutral-800 border border-neutral-800'
+                  : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 hover:from-slate-800 hover:to-slate-900 border border-emerald-500/20'
               }`}
             >
               🎶 {isAr ? 'المصحف المجود' : 'Mujawwad Recitations'}
@@ -240,7 +240,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
         </div>
 
         {/* Reciters Grid */}
-        <div className="p-4 sm:p-5 overflow-y-auto flex-1 bg-neutral-900/50 space-y-3">
+        <div className="p-4 sm:p-5 overflow-y-auto flex-1 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 space-y-3">
           {/* Audio Testing Tip */}
           <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs flex items-center gap-2">
             <Volume2 className="w-4 h-4 text-amber-400 shrink-0" />
@@ -279,7 +279,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
                     className={`p-3 sm:p-3.5 rounded-2xl border text-right ltr:text-left transition-all flex items-center justify-between gap-2.5 cursor-pointer select-none group outline-none ${
                       isSelected
                         ? 'bg-emerald-950/80 border-amber-400 ring-2 ring-amber-400/40 shadow-xl shadow-emerald-950/60'
-                        : 'bg-neutral-950/80 hover:bg-neutral-900 border-neutral-800/80 hover:border-amber-400/40'
+                        : 'bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 hover:from-slate-800/40 hover:via-slate-700/30 hover:to-slate-800/40 border-emerald-500/20 hover:border-emerald-500/40'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0 flex-1">
@@ -287,7 +287,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
                         className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-xs transition-colors shrink-0 ${
                           isSelected
                             ? 'bg-amber-400 text-neutral-950 font-extrabold shadow-md'
-                            : 'bg-neutral-900 text-neutral-400 group-hover:text-amber-300 group-hover:bg-neutral-850'
+                            : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-400 group-hover:text-amber-300 group-hover:from-slate-800 group-hover:to-slate-900 border border-emerald-500/20'
                         }`}
                       >
                         <User className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -321,7 +321,7 @@ export const ReciterModal: React.FC<ReciterModalProps> = ({
                             ? 'bg-emerald-500 text-neutral-950 font-bold shadow-lg shadow-emerald-500/30 ring-2 ring-emerald-400'
                             : failedReciterIds.has(reciter.id)
                             ? 'bg-rose-950/80 text-rose-400 border border-rose-800/80 hover:bg-rose-900/80'
-                            : 'bg-neutral-900 text-neutral-300 hover:text-amber-300 hover:bg-neutral-850 border border-neutral-800'
+                            : 'bg-gradient-to-br from-slate-900 to-slate-950 text-slate-300 hover:text-amber-300 hover:from-slate-800 hover:to-slate-900 border border-emerald-500/20'
                         }`}
                       >
                         {audioLoadingId === reciter.id ? (

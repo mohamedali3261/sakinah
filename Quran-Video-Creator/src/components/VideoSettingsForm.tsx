@@ -83,35 +83,35 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
           <button
             type="button"
             onClick={() => handleQuickPick(1, 1, 7)}
-            className="px-2.5 py-1 rounded-lg bg-neutral-950/80 hover:bg-emerald-950/60 text-neutral-300 hover:text-white border border-neutral-800 hover:border-emerald-700/60 text-xs transition-all active:scale-95"
+            className="px-2.5 py-1 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-slate-300 hover:text-white border border-emerald-500/20 hover:border-emerald-500/40 text-xs transition-all active:scale-95"
           >
             {t.quickPickFatihah}
           </button>
           <button
             type="button"
             onClick={() => handleQuickPick(2, 255, 1)}
-            className="px-2.5 py-1 rounded-lg bg-neutral-950/80 hover:bg-emerald-950/60 text-neutral-300 hover:text-white border border-neutral-800 hover:border-emerald-700/60 text-xs transition-all active:scale-95"
+            className="px-2.5 py-1 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-slate-300 hover:text-white border border-emerald-500/20 hover:border-emerald-500/40 text-xs transition-all active:scale-95"
           >
             {t.quickPickKursi}
           </button>
           <button
             type="button"
             onClick={() => handleQuickPick(67, 1, 5)}
-            className="px-2.5 py-1 rounded-lg bg-neutral-950/80 hover:bg-emerald-950/60 text-neutral-300 hover:text-white border border-neutral-800 hover:border-emerald-700/60 text-xs transition-all active:scale-95"
+            className="px-2.5 py-1 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-slate-300 hover:text-white border border-emerald-500/20 hover:border-emerald-500/40 text-xs transition-all active:scale-95"
           >
             {t.quickPickMulk}
           </button>
           <button
             type="button"
             onClick={() => handleQuickPick(55, 1, 13)}
-            className="px-2.5 py-1 rounded-lg bg-neutral-950/80 hover:bg-emerald-950/60 text-neutral-300 hover:text-white border border-neutral-800 hover:border-emerald-700/60 text-xs transition-all active:scale-95"
+            className="px-2.5 py-1 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-slate-300 hover:text-white border border-emerald-500/20 hover:border-emerald-500/40 text-xs transition-all active:scale-95"
           >
             {t.quickPickRahman}
           </button>
           <button
             type="button"
             onClick={() => handleQuickPick(112, 1, 4)}
-            className="px-2.5 py-1 rounded-lg bg-neutral-950/80 hover:bg-emerald-950/60 text-neutral-300 hover:text-white border border-neutral-800 hover:border-emerald-700/60 text-xs transition-all active:scale-95"
+            className="px-2.5 py-1 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-slate-300 hover:text-white border border-emerald-500/20 hover:border-emerald-500/40 text-xs transition-all active:scale-95"
           >
             {t.quickPickIkhlas}
           </button>
@@ -188,7 +188,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                       ayahCount: Math.max(1, newMaxCount)
                     });
                   }}
-                  className="w-full h-1.5 rounded bg-neutral-800 accent-amber-400 cursor-pointer"
+                  className="w-full h-1.5 rounded bg-gradient-to-br from-slate-800 to-slate-900 accent-amber-400 cursor-pointer"
                 />
               </div>
 
@@ -209,7 +209,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                     const val = parseInt(e.target.value, 10);
                     onChange({ ...config, ayahCount: val });
                   }}
-                  className="w-full h-1.5 rounded bg-neutral-800 accent-amber-400 cursor-pointer"
+                  className="w-full h-1.5 rounded bg-gradient-to-br from-slate-800 to-slate-900 accent-amber-400 cursor-pointer"
                 />
               </div>
             </div>
@@ -266,7 +266,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Column 1: Background Media Mode, Slow-Mo Speed, & Pexels Button */}
-          <div className="p-3.5 rounded-2xl bg-neutral-950/80 border border-neutral-800 space-y-3">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                 <Gauge className="w-3.5 h-3.5 text-amber-400" />
@@ -278,7 +278,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                 <button
                   type="button"
                   onClick={onOpenPexelsModal}
-                  className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-amber-400/40 text-amber-300 hover:text-white text-[11px] font-bold transition-all flex items-center gap-1 active:scale-95"
+                  className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-emerald-500/20 text-amber-300 hover:text-white text-[11px] font-bold transition-all flex items-center gap-1 active:scale-95"
                 >
                   <Search className="w-3 h-3 text-amber-400" />
                   <span>{isAr ? 'مكتبة الصور والفيديو' : 'Media Library'}</span>
@@ -328,12 +328,12 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
             </div>
 
             {/* Local Upload Section (User explicitly wants local files from device) */}
-            <div className="pt-2 border-t border-neutral-900/60 flex flex-col gap-2">
+            <div className="pt-2 border-t border-emerald-500/20 flex flex-col gap-2">
               <span className="text-[10px] text-neutral-400 block font-bold uppercase tracking-wide">
                 {isAr ? '📂 استخدام ملف مخصص من جهازك (لوكل):' : '📂 Use local files from your device:'}
               </span>
               <div className="grid grid-cols-2 gap-2">
-                <label className="flex items-center justify-center gap-1.5 p-2 bg-neutral-900 hover:bg-neutral-850 border border-dashed border-neutral-800 hover:border-amber-400/50 rounded-xl cursor-pointer text-center transition-all active:scale-95">
+                <label className="flex items-center justify-center gap-1.5 p-2 bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 border border-dashed border-emerald-500/20 hover:border-emerald-500/40 rounded-xl cursor-pointer text-center transition-all active:scale-95">
                   <Upload className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                   <span className="text-xs font-extrabold text-neutral-200">
                     {isAr ? 'رفع فيديو من جهازك' : 'Upload Video'}
@@ -358,7 +358,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                   />
                 </label>
 
-                <label className="flex items-center justify-center gap-1.5 p-2 bg-neutral-900 hover:bg-neutral-850 border border-dashed border-neutral-800 hover:border-amber-400/50 rounded-xl cursor-pointer text-center transition-all active:scale-95">
+                <label className="flex items-center justify-center gap-1.5 p-2 bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 border border-dashed border-emerald-500/20 hover:border-emerald-500/40 rounded-xl cursor-pointer text-center transition-all active:scale-95">
                   <ImageIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <span className="text-xs font-extrabold text-neutral-200">
                     {isAr ? 'رفع صور من جهازك' : 'Upload Photos'}
@@ -387,7 +387,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
 
               {/* Status Indicator */}
               {config.customMediaUrl && config.customMediaUrl.startsWith('blob:') && (
-                <div className="p-2 rounded-xl bg-emerald-950/40 border border-emerald-900/40 flex items-center justify-between text-[11px]">
+                <div className="p-2 rounded-xl bg-gradient-to-br from-emerald-950/40 to-slate-900/40 backdrop-blur-sm border border-emerald-500/20 flex items-center justify-between text-[11px]">
                   <span className="text-emerald-300 font-bold flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     {isAr ? 'تم تفعيل الملف المحلي بنجاح' : 'Local file loaded successfully'}
@@ -413,7 +413,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
           </div>
 
           {/* Column 2: Quran Font Size & Verses Scaling */}
-          <div className="p-3.5 rounded-2xl bg-neutral-950/80 border border-neutral-800 space-y-3">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 space-y-3">
             <label className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
               <Type className="w-3.5 h-3.5 text-amber-400" />
               <span>{isAr ? 'حجم الخط القرآني وتكبير/تصغير الآيات' : 'Quran Verses Font Size'}</span>
@@ -430,7 +430,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                     className={`py-2 px-1 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-1 ${
                       isSelected
                         ? 'bg-emerald-950/90 border-amber-400 text-amber-300 ring-1 ring-amber-400/40'
-                        : 'bg-neutral-900 hover:bg-neutral-800 border-neutral-800 text-neutral-300'
+                        : 'bg-gradient-to-br from-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 border-emerald-500/20 text-slate-400'
                     }`}
                   >
                     <span className="text-[11px] font-bold block">{isAr ? opt.labelAr : opt.labelEn}</span>
@@ -453,7 +453,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Video Format (9:16, 16:9, 1:1) */}
-          <div className="p-3.5 rounded-2xl bg-neutral-950/80 border border-neutral-800 space-y-2">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 space-y-2">
             <label className="text-xs font-bold uppercase tracking-wider text-amber-400 block">
               {t.formatLabel}
             </label>
@@ -472,7 +472,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                     className={`p-2 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-1 ${
                       isSelected
                         ? 'bg-emerald-950 border-amber-400 text-amber-300 ring-1 ring-amber-400/40'
-                        : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white'
+                        : 'bg-gradient-to-br from-slate-900 to-slate-950 border-emerald-500/20 text-slate-400 hover:text-white hover:from-slate-800 hover:to-slate-900'
                     }`}
                   >
                     <span className="text-xs font-bold">{fmt.label}</span>
@@ -484,13 +484,13 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
           </div>
 
           {/* Video Toggles */}
-          <div className="p-3.5 rounded-2xl bg-neutral-950/80 border border-neutral-800 space-y-2">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 space-y-2">
             <label className="text-xs font-bold uppercase tracking-wider text-amber-400 block">
               {isAr ? 'عناصر الشاشة والتأثيرات' : 'Display Toggles'}
             </label>
 
             <div className="grid grid-cols-2 gap-2">
-              <label className="p-2 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-between cursor-pointer text-xs">
+              <label className="p-2 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 flex items-center justify-between cursor-pointer text-xs">
                 <span className="text-neutral-300 text-[11px]">{t.subtitlesLabel}</span>
                 <input
                   type="checkbox"
@@ -500,7 +500,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                 />
               </label>
 
-              <label className="p-2 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-between cursor-pointer text-xs">
+              <label className="p-2 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 flex items-center justify-between cursor-pointer text-xs">
                 <span className="text-neutral-300 text-[11px]">{isAr ? 'شريط السورة' : 'Header'}</span>
                 <input
                   type="checkbox"
@@ -510,7 +510,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                 />
               </label>
 
-              <label className="p-2 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-between cursor-pointer text-xs col-span-2">
+              <label className="p-2 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 flex items-center justify-between cursor-pointer text-xs col-span-2">
                 <span className="text-neutral-300 text-[11px]">{t.particlesLabel}</span>
                 <input
                   type="checkbox"
@@ -523,7 +523,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
           </div>
 
           {/* Verse Display Style selection */}
-          <div className="col-span-1 md:col-span-2 p-3.5 rounded-2xl bg-neutral-950/80 border border-neutral-800 space-y-3">
+          <div className="col-span-1 md:col-span-2 p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 space-y-3">
             <label className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
               <Palette className="w-3.5 h-3.5 text-amber-400" />
               <span>{isAr ? 'تصميم وشكل عرض آيات القرآن الكريم في الفيديو' : 'Quran Verse Display Style'}</span>
@@ -546,7 +546,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                     className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
                       isSelected
                         ? 'bg-emerald-950 border-amber-400 text-amber-300 ring-1 ring-amber-400/40'
-                        : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-850'
+                        : 'bg-gradient-to-br from-slate-900 to-slate-950 border-emerald-500/20 text-slate-400 hover:text-white hover:bg-gradient-to-br hover:from-slate-800 hover:to-slate-900'
                     }`}
                   >
                     <span className="text-xs font-bold">{isAr ? styleOpt.labelAr : styleOpt.labelEn}</span>
@@ -558,7 +558,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
           </div>
 
           {/* Logo Overlay Customization */}
-          <div className="col-span-1 md:col-span-2 p-3.5 rounded-2xl bg-neutral-950/80 border border-neutral-800 space-y-3">
+          <div className="col-span-1 md:col-span-2 p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl border border-emerald-500/20 space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                 <Upload className="w-3.5 h-3.5 text-amber-400" />
@@ -572,12 +572,12 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                   onChange={(e) => onChange({ ...config, showLogo: e.target.checked })}
                   className="sr-only peer"
                 />
-                <div className="w-9 h-5 bg-neutral-850 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-neutral-400 after:border-neutral-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-400 peer-checked:after:bg-neutral-950"></div>
+                <div className="w-9 h-5 bg-gradient-to-br from-slate-800 to-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-emerald-500"></div>
               </label>
             </div>
 
             {config.showLogo && (
-              <div className="space-y-3 pt-3 border-t border-neutral-900/80">
+              <div className="space-y-3 pt-3 border-t border-emerald-500/20">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {/* File Upload Box */}
                   <div className="space-y-2">
@@ -586,7 +586,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                     </span>
                     
                     <div className="flex items-center gap-2">
-                      <label className="flex-1 flex flex-col items-center justify-center h-20 px-3 py-1 bg-neutral-900 border border-dashed border-neutral-800 rounded-xl cursor-pointer hover:bg-neutral-850 hover:border-amber-400/40 transition-all text-center">
+                      <label className="flex-1 flex flex-col items-center justify-center h-20 px-3 py-1 bg-gradient-to-br from-slate-900 to-slate-950 border border-dashed border-emerald-500/20 rounded-xl cursor-pointer hover:from-slate-800 hover:to-slate-900 hover:border-emerald-500/40 transition-all text-center">
                         <Upload className="w-5 h-5 text-amber-400/80 mb-1" />
                         <span className="text-[10px] text-neutral-400 font-medium">
                           {isAr ? 'اضغط لرفع الشعار' : 'Click to Upload'}
@@ -612,7 +612,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                       </label>
 
                       {config.logoUrl && (
-                        <div className="w-20 h-20 bg-neutral-900 border border-neutral-850 rounded-xl p-1.5 flex flex-col items-center justify-between relative group shrink-0">
+                        <div className="w-20 h-20 bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 rounded-xl p-1.5 flex flex-col items-center justify-between relative group shrink-0">
                           <img
                             src={config.logoUrl}
                             alt="Logo preview"
@@ -674,7 +674,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
                       />
                     </div>
 
-                    <div className="p-2 rounded-xl bg-neutral-900/60 border border-neutral-900 text-[10px] text-neutral-400 leading-relaxed">
+                    <div className="p-2 rounded-xl bg-gradient-to-br from-slate-900/60 to-slate-950/60 backdrop-blur-sm border border-emerald-500/20 text-[10px] text-neutral-400 leading-relaxed">
                       💡 {isAr 
                         ? 'سيتم ملاءمة حجم وموضع الشعار تلقائياً في أعلى اليمين ليناسب كل قياس فيديو (سواء كان رأسي ريلز، أفقي يوتيوب، أو مربع بوست).'
                         : 'Logo dimensions and positioning at the top-right auto-scale proportionally to match vertical, landscape, and square screen aspect ratios.'}
@@ -698,7 +698,7 @@ export const VideoSettingsForm: React.FC<VideoSettingsFormProps> = ({
           >
             {isGenerating ? (
               <>
-                <div className="w-4 h-4 border-2 border-neutral-950 border-t-transparent rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
                 <span>{t.generatingBtn}</span>
               </>
             ) : (

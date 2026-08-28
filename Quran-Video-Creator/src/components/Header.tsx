@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, onToggleLang }) => {
   const isAr = lang === 'ar';
 
   return (
-    <header className="relative z-30 border-b border-emerald-900/40 bg-neutral-950/80 backdrop-blur-md">
+    <header className="relative z-30 border-b border-emerald-500/20 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl">
       {/* Subtle gold top border highlight */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-400/80 to-transparent" />
 
@@ -42,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, onToggleLang }) => {
 
         {/* Right actions: Language switcher and peaceful badge */}
         <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900/80 border border-neutral-800 text-xs text-neutral-300">
+          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 border border-emerald-500/20 text-xs text-slate-300">
             <Moon className="w-3.5 h-3.5 text-amber-400" />
             <span>{isAr ? 'الرسم العثماني المعتمد' : 'Authentic Uthmani Script'}</span>
           </div>
