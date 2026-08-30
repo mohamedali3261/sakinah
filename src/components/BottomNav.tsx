@@ -11,7 +11,8 @@ import {
   Layers,
   MoreHorizontal,
   X,
-  Compass
+  Compass,
+  Radio
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { soundEngine, triggerHaptic } from '../utils/audio';
@@ -30,7 +31,9 @@ export const BottomNav: React.FC = () => {
   const secondaryNavItems: { id: ActiveTab; labelAr: string; labelEn: string; icon: React.ReactNode; descAr: string }[] = [
     { id: 'index', labelAr: 'الفهرس الشامل', labelEn: 'Full Index', icon: <Layers className="w-5 h-5 text-emerald-400" />, descAr: 'فهرس السور والأجزاء والصفحات' },
     { id: 'prayers', labelAr: 'مواقيت الصلاة والقبلة', labelEn: 'Prayer Times & Qibla', icon: <Clock className="w-5 h-5 text-teal-400" />, descAr: 'المواقيت الدقيقة وبوصلة القبلة' },
-    { id: 'saved', labelAr: 'المحفوظات والمفضلة', labelEn: 'Saved Bookmarks', icon: <Bookmark className="w-5 h-5 text-amber-400" />, descAr: 'الآيات والأذكار والكتب المحفوظة' }
+    { id: 'saved', labelAr: 'المحفوظات والمفضلة', labelEn: 'Saved Bookmarks', icon: <Bookmark className="w-5 h-5 text-amber-400" />, descAr: 'الآيات والأذكار والكتب المحفوظة' },
+    { id: 'tasbih', labelAr: 'السبحة الإلكترونية', labelEn: 'Digital Tasbih', icon: <CircleDot className="w-5 h-5 text-rose-400" />, descAr: 'سبحة تفاعلية ثلاثية الأبعاد' },
+    { id: 'radio', labelAr: 'الإذاعات المباشرة', labelEn: 'Live Radio', icon: <Radio className="w-5 h-5 text-indigo-400" />, descAr: 'إذاعات القرآن الكريم المباشرة' }
   ];
 
   const handleTabClick = (tabId: ActiveTab) => {
@@ -40,7 +43,7 @@ export const BottomNav: React.FC = () => {
     setIsMoreSheetOpen(false);
   };
 
-  const isSecondaryActive = ['index', 'prayers', 'saved'].includes(activeTab);
+  const isSecondaryActive = ['index', 'prayers', 'saved', 'tasbih', 'radio'].includes(activeTab);
 
   return (
     <>

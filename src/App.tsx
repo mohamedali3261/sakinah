@@ -11,6 +11,7 @@ import { IndexView } from './components/IndexView';
 import { PrayerTimesWidget } from './components/PrayerTimesWidget';
 import { BookmarksView } from './components/BookmarksView';
 import { RadioView } from './components/RadioView';
+import { TasbihView } from './components/TasbihView';
 import { SmartSearchModal } from './components/SmartSearchModal';
 import { FontSettingsModal } from './components/FontSettingsModal';
 import { NotificationSettingsModal } from './components/NotificationSettingsModal';
@@ -37,6 +38,7 @@ const MainContent: React.FC = () => {
       prayers: { ar: 'مواقيت الصلاة والقبلة | يَقِين', en: 'Prayer Times & Qibla | Yaqeen' },
       saved: { ar: 'المحفوظات والمفضلة | يَقِين', en: 'Saved Bookmarks | Yaqeen' },
       radio: { ar: 'الإذاعات المباشرة | يَقِين', en: 'Live Radio | Yaqeen' },
+      tasbih: { ar: 'السبحة الإلكترونية | يَقِين', en: 'Digital Tasbih | Yaqeen' },
       'video-creator': { ar: 'صانع الفيديو القرآني | يَقِين', en: 'Quran Video Creator | Yaqeen' },
     };
 
@@ -125,6 +127,7 @@ const MainContent: React.FC = () => {
             {activeTab === 'prayers' && <PrayerTimesWidget />}
             {activeTab === 'saved' && <BookmarksView />}
             {activeTab === 'radio' && <RadioView />}
+            {activeTab === 'tasbih' && <TasbihView />}
             {activeTab === 'video-creator' && <QuranVideoCreatorWrapper />}
           </motion.div>
         </AnimatePresence>

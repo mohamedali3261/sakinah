@@ -8,7 +8,7 @@ export type FontSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export type QuranPaperThemeId = 'cream' | 'antique' | 'dark' | 'emerald' | 'pure_white' | 'warm_amber';
 
-export type ActiveTab = 'home' | 'quran' | 'athkar' | 'library' | 'index' | 'prayers' | 'saved' | 'sebha' | 'radio' | 'video-creator';
+export type ActiveTab = 'home' | 'quran' | 'athkar' | 'library' | 'index' | 'prayers' | 'saved' | 'sebha' | 'tasbih' | 'radio' | 'video-creator';
 
 export interface QuranVerse {
   id: number;
