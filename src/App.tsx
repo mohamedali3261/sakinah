@@ -10,7 +10,6 @@ import { LibraryView } from './components/LibraryView';
 import { IndexView } from './components/IndexView';
 import { PrayerTimesWidget } from './components/PrayerTimesWidget';
 import { BookmarksView } from './components/BookmarksView';
-import { SebhaView } from './components/SebhaView';
 import { RadioView } from './components/RadioView';
 import { SmartSearchModal } from './components/SmartSearchModal';
 import { FontSettingsModal } from './components/FontSettingsModal';
@@ -37,7 +36,6 @@ const MainContent: React.FC = () => {
       index: { ar: 'الفهرس الشامل | يَقِين', en: 'Full Index | Yaqeen' },
       prayers: { ar: 'مواقيت الصلاة والقبلة | يَقِين', en: 'Prayer Times & Qibla | Yaqeen' },
       saved: { ar: 'المحفوظات والمفضلة | يَقِين', en: 'Saved Bookmarks | Yaqeen' },
-      sebha: { ar: 'السبحة الإلكترونية | يَقِين', en: 'Digital Tasbih | Yaqeen' },
       radio: { ar: 'الإذاعات المباشرة | يَقِين', en: 'Live Radio | Yaqeen' },
       'video-creator': { ar: 'صانع الفيديو القرآني | يَقِين', en: 'Quran Video Creator | Yaqeen' },
     };
@@ -126,7 +124,6 @@ const MainContent: React.FC = () => {
             {activeTab === 'index' && <IndexView />}
             {activeTab === 'prayers' && <PrayerTimesWidget />}
             {activeTab === 'saved' && <BookmarksView />}
-            {activeTab === 'sebha' && <SebhaView />}
             {activeTab === 'radio' && <RadioView />}
             {activeTab === 'video-creator' && <QuranVideoCreatorWrapper />}
           </motion.div>

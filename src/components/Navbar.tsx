@@ -101,7 +101,6 @@ export const Navbar: React.FC = () => {
             { id: 'library', labelAr: 'المكتبة', labelEn: 'Library', icon: <Compass className="w-3.5 h-3.5" />, activeClass: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/25' },
             { id: 'prayers', labelAr: 'المواقيت', labelEn: 'Prayers', icon: <Clock className="w-3.5 h-3.5" />, activeClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
             { id: 'radio', labelAr: 'إذاعة', labelEn: 'Radio', icon: <Radio className="w-3.5 h-3.5" />, activeClass: 'bg-teal-500/15 text-teal-400 border-teal-500/25' },
-            { id: 'sebha', labelAr: 'المسبحة', labelEn: 'Sebha', icon: <CircleDot className="w-3.5 h-3.5" />, activeClass: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/25' },
             { id: 'video-creator', labelAr: 'صانع الفيديو', labelEn: 'Video Creator', icon: <Video className="w-3.5 h-3.5" />, activeClass: 'bg-purple-500/15 text-purple-400 border-purple-500/25' },
           ].map((item) => {
             const isActive = activeTab === item.id;
@@ -259,7 +258,6 @@ export const Navbar: React.FC = () => {
                   { id: 'library', labelAr: 'المكتبة الإسلامية', labelEn: 'Islamic Library', icon: <Compass className="w-5 h-5 text-cyan-300" /> },
                   { id: 'radio', labelAr: 'إذاعة القرآن', labelEn: 'Quran Radio', icon: <Radio className="w-5 h-5 text-teal-400" /> },
                   { id: 'prayers', labelAr: 'مواقيت الصلاة', labelEn: 'Prayer Times', icon: <Clock className="w-5 h-5 text-emerald-300" /> },
-                  { id: 'sebha', labelAr: 'المسبحة الإلكترونية', labelEn: 'Digital Sebha', icon: <CircleDot className="w-5 h-5 text-indigo-400" /> },
                   { id: 'video-creator', labelAr: 'صانع الفيديو', labelEn: 'Video Creator', icon: <Video className="w-5 h-5 text-purple-400" /> }
                 ].map((item) => {
                   const isActive = activeTab === item.id;

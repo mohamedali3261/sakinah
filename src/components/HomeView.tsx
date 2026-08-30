@@ -569,34 +569,6 @@ export const HomeView: React.FC = () => {
           </div>
         </button>
 
-        {/* Sebha */}
-        <button
-          onClick={() => setActiveTab('sebha')}
-          className={`p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border transition-all flex flex-col items-center justify-center gap-2 sm:gap-2.5 cursor-pointer group text-center shadow-sm hover:shadow-lg hover:-translate-y-1 ${
-            theme === 'light'
-              ? 'bg-gradient-to-b from-white to-indigo-50/30 border-indigo-100 hover:border-indigo-300'
-              : theme === 'sepia'
-              ? 'bg-gradient-to-b from-[#150d08] to-indigo-950/20 border-indigo-900/30 hover:border-indigo-700/50'
-              : 'bg-gradient-to-b from-slate-900 to-slate-800 border-indigo-500/20 hover:border-indigo-500/40'
-          }`}
-        >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform duration-300">
-            <CircleDot className="w-5 h-5 sm:w-6 sm:h-6" />
-          </div>
-          <div>
-            <span className={`text-xs sm:text-sm font-bold font-cairo block mb-1 ${
-              theme === 'light' ? 'text-indigo-950' : 'text-indigo-300'
-            }`}>
-              {language === 'ar' ? 'المسبحة الذكية' : 'Smart Sebha'}
-            </span>
-            <span className={`text-[10px] sm:text-[11px] block ${
-              theme === 'light' ? 'text-slate-500' : 'text-slate-400'
-            }`}>
-              {language === 'ar' ? 'عداد التسبيح' : 'Tasbeeh Counter'}
-            </span>
-          </div>
-        </button>
-
         {/* Library */}
         <button
           onClick={() => setActiveTab('library')}
